@@ -7,69 +7,69 @@ public class Kassapaate {
     private int edulliset;
     private int maukkaat;
 
-<span class="nc" id="L10">    public Kassapaate() {</span>
-<span class="nc" id="L11">        this.kassassaRahaa = 100000;</span>
-<span class="nc" id="L12">    }</span>
+<span class="fc" id="L10">    public Kassapaate() {</span>
+<span class="fc" id="L11">        this.kassassaRahaa = 100000;</span>
+<span class="fc" id="L12">    }</span>
 
     public int syoEdullisesti(int maksu) {
-<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (maksu &gt;= 240) {</span>
-<span class="nc" id="L16">            this.kassassaRahaa = kassassaRahaa + 240;</span>
-<span class="nc" id="L17">            ++this.edulliset;</span>
-<span class="nc" id="L18">            return maksu - 240;</span>
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        if (maksu &gt;= 240) {</span>
+<span class="fc" id="L16">            this.kassassaRahaa = kassassaRahaa + 240;</span>
+<span class="fc" id="L17">            ++this.edulliset;</span>
+<span class="fc" id="L18">            return maksu - 240;</span>
         } else {
-<span class="nc" id="L20">            return maksu;</span>
+<span class="fc" id="L20">            return maksu;</span>
         }
     }
 
     public int syoMaukkaasti(int maksu) {
-<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (maksu &gt;= 400) {</span>
-<span class="nc" id="L26">            this.kassassaRahaa = kassassaRahaa + 400;</span>
-<span class="nc" id="L27">            this.maukkaat++;</span>
-<span class="nc" id="L28">            return maksu - 400;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (maksu &gt;= 400) {</span>
+<span class="fc" id="L26">            this.kassassaRahaa = kassassaRahaa + 400;</span>
+<span class="fc" id="L27">            this.maukkaat++;</span>
+<span class="fc" id="L28">            return maksu - 400;</span>
         } else {
-<span class="nc" id="L30">            return maksu;</span>
+<span class="fc" id="L30">            return maksu;</span>
         }
     }
 
     public boolean syoEdullisesti(Maksukortti kortti) {
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (kortti.saldo() &gt;= 240) {</span>
-<span class="nc" id="L36">            kortti.otaRahaa(240);</span>
-<span class="nc" id="L37">            this.edulliset++;</span>
-<span class="nc" id="L38">            return true;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (kortti.saldo() &gt;= 240) {</span>
+<span class="fc" id="L36">            kortti.otaRahaa(240);</span>
+<span class="fc" id="L37">            this.edulliset++;</span>
+<span class="fc" id="L38">            return true;</span>
         } else {
-<span class="nc" id="L40">            return false;</span>
+<span class="fc" id="L40">            return false;</span>
         }
     }
 
     public boolean syoMaukkaasti(Maksukortti kortti) {
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (kortti.saldo() &gt;= 400) {</span>
-<span class="nc" id="L46">            kortti.otaRahaa(400);</span>
-<span class="nc" id="L47">            this.maukkaat++;</span>
-<span class="nc" id="L48">            return true;</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (kortti.saldo() &gt;= 400) {</span>
+<span class="fc" id="L46">            kortti.otaRahaa(400);</span>
+<span class="fc" id="L47">            this.maukkaat++;</span>
+<span class="fc" id="L48">            return true;</span>
         } else {
-<span class="nc" id="L50">            return false;</span>
+<span class="fc" id="L50">            return false;</span>
         }
     }
 
     public void lataaRahaaKortille(Maksukortti kortti, int summa) {
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (summa &gt;= 0) {</span>
-<span class="nc" id="L56">            kortti.lataaRahaa(summa);</span>
-<span class="nc" id="L57">            this.kassassaRahaa += summa;</span>
-<span class="nc" id="L58">        } else {</span>
-<span class="nc" id="L59">            return;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (summa &gt;= 0) {</span>
+<span class="fc" id="L56">            kortti.lataaRahaa(summa);</span>
+<span class="fc" id="L57">            this.kassassaRahaa += summa;</span>
+        } else {
+<span class="fc" id="L59">            return;</span>
         }
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L61">    }</span>
 
     public int kassassaRahaa() {
-<span class="nc" id="L64">        return kassassaRahaa;</span>
+<span class="fc" id="L64">        return kassassaRahaa;</span>
     }
 
     public int maukkaitaLounaitaMyyty() {
-<span class="nc" id="L68">        return maukkaat;</span>
+<span class="fc" id="L68">        return maukkaat;</span>
     }
 
     public int edullisiaLounaitaMyyty() {
-<span class="nc" id="L72">        return edulliset;</span>
+<span class="fc" id="L72">        return edulliset;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
