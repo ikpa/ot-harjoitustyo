@@ -1,4 +1,7 @@
 # Ohjelmistotekniikka, harjoitustyö
+## Dokumentointi
+[maarittelydokumentti.md](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
+[tyoaikakirjanpito.md](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
 ## Tehtävät
 ### Viikko 1
 [gitlog.txt](https://github.com/ikpa/ot-harjoitustyo/blob/master/laskarit/gitlog.txt)  
