@@ -18,6 +18,7 @@ import javafx.geometry.*;
 import java.util.*;
 
 import labyrintti.chars.*;
+import object.*;
 
 public class Main extends Application {
 
@@ -34,12 +35,21 @@ public class Main extends Application {
         BorderPane set = new BorderPane();
         set.setCenter(buttons);
         
+        BorderPane lvlset = new BorderPane();
+        
         Pane testlvl = new Pane();
         testlvl.setPrefSize(1000, 1000);
+        wallConstructor wc = new wallConstructor();
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        walls.add(wc.hWall(600, 200, 200));
+        walls.add(wc.vWall(600, 205, 200));
+        
+        walls.forEach(w -> testlvl.getChildren().add(w));
         mainChara c = new mainChara(500,500,10,1,1);
         testlvl.getChildren().add(c.getChara());
+        lvlset.setCenter(testlvl);
         
-        Scene lvl = new Scene(testlvl);
+        Scene lvl = new Scene(lvlset);
         Scene menu = new Scene(set);
         
         Map<KeyCode, Boolean> buttonPress = new HashMap();
@@ -57,7 +67,14 @@ public class Main extends Application {
             
             @Override
             public void handle(long now) {
-                c.move(buttonPress);
+                
+                if (c.arrayCollision(walls)) {
+                    c.collisionMove(buttonPress, walls);
+                } else {
+                    c.move(buttonPress);
+                }
+                
+                
             }
         }.start();
         
