@@ -1,11 +1,9 @@
 # Ohjelmistotekniikka, harjoitustyö
-## Dokumentointi
-[maarittelydokumentti.md](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
-[tyoaikakirjanpito.md](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
-## Tehtävät
-### Viikko 1
-[gitlog.txt](https://github.com/ikpa/ot-harjoitustyo/blob/master/laskarit/gitlog.txt)  
-[komentorivi.txt](https://github.com/ikpa/ot-harjoitustyo/blob/master/laskarit/komentorivi.txt)
+## Labyrintti  
+Labyrintti on 2D, ylhäältäkuvattu videopeli, missä pelaajan on tarkoitus navigoida erilaisia kenttia vältellen esteitä ja
+etsien aarteita.
 
-### Viikko 2
-[testikattavuus.png](https://github.com/ikpa/ot-harjoitustyo/blob/master/laskarit/viikko2/testikattavuus.png)
+## Dokumentointi
+[Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
+[Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
+[Käyttöohje] (https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)
