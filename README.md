@@ -14,15 +14,23 @@ Kaikki maven-komentorivikomennot tehdään polussa `/ot-harjoitustyo/labyrintti_
 `mvn compile exec:java -Dexec.mainClass=com.mycompany.labyrintti_harjoitustyo.realMain`
 ### Testaus
 Testit suoritetaan komennolla  
+
 `mvn test`  
+
 Testikattavuusraportti generoidaan komennolla  
+
 `mvn test jacoco:report`  
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jacoco/index.html
+
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto `target/site/jacoco/index.html`
 ### Jar
 Komento  
+
 `mvn.package`  
+
 generoi hakemistoon *target* suoritettavan jar-tiedoston *labyrintti_harjoitustyo-1.0-SNAPSHOT.jar*
 ### Checkstyle
 Checkstyle-raportti generoidaan komennolla  
+
 `mvn jxr:jxr checkstyle:checkstyle`  
+
 Raporttia voi tarkastella polusta `target/site/checkstyle.html`.
