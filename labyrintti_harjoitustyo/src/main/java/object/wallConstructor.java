@@ -12,7 +12,8 @@ import javafx.scene.shape.*;
  * @author ikpa
  */
 public class wallConstructor {
-    private int width=5;
+    private int width = 5;
+    
     public Rectangle vWall(int x, int y, int length) {
         Rectangle wall = new Rectangle();
         wall.setWidth(width);

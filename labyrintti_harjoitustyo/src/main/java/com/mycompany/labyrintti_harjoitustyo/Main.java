@@ -19,6 +19,7 @@ import java.util.*;
 
 import labyrintti.chars.*;
 import object.*;
+import levels.*;
 
 public class Main extends Application {
 
@@ -37,17 +38,10 @@ public class Main extends Application {
         
         BorderPane lvlset = new BorderPane();
         
-        Pane testlvl = new Pane();
-        testlvl.setPrefSize(1000, 1000);
-        wallConstructor wc = new wallConstructor();
-        ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wc.hWall(600, 200, 200));
-        walls.add(wc.vWall(600, 205, 200));
+        lvlconstructor lc = new lvlconstructor();
+        level testlvl = lc.testlvl();
         
-        walls.forEach(w -> testlvl.getChildren().add(w));
-        mainChara c = new mainChara(500,500,10,1,1);
-        testlvl.getChildren().add(c.getChara());
-        lvlset.setCenter(testlvl);
+        lvlset.setCenter(testlvl.getStg());
         
         Scene lvl = new Scene(lvlset);
         Scene menu = new Scene(set);
@@ -68,12 +62,7 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 
-                if (c.arrayCollision(walls)) {
-                    c.collisionMove(buttonPress, walls);
-                } else {
-                    c.move(buttonPress);
-                }
-                
+                testlvl.update(buttonPress);
                 
             }
         }.start();
