@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.labyrintti_harjoitustyo;
+package labyrintti.ui;
 
 /**
  *
  * @author ikpa
  */
-public class realMain {
+public class RealMain {
     public static void main(String[] args) {
         Main.main(args);
     }

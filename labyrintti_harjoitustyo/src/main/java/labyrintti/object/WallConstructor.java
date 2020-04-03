@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package object;
+package labyrintti.object;
 
 import javafx.geometry.*;
 import javafx.scene.shape.*;
@@ -11,7 +11,7 @@ import javafx.scene.shape.*;
  *
  * @author ikpa
  */
-public class wallConstructor {
+public class WallConstructor {
     private int width = 5;
     
     public Rectangle vWall(int x, int y, int length) {

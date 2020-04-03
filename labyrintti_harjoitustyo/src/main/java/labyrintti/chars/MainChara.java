@@ -8,28 +8,64 @@ package labyrintti.chars;
 import javafx.geometry.*;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
+import javafx.scene.paint.*;
+import labyrintti.object.*;
 
 import java.util.*;
 /**
  *
  * @author ikpa
  */
-public class mainChara {
+public class MainChara {
     private Circle chara;
     private Point2D mvmnt;
+    private int lives;
+    private boolean dead;
     
-    public mainChara(int x, int y, int r, int mvmnty, int mvmntx) {
-        chara = new Circle(x, y, r);
+    public MainChara(int x, int y, int r, int mvmnty, int mvmntx) {
+        chara = new Circle(x, y, r, Color.PURPLE);
         mvmnt = new Point2D(mvmntx, mvmnty);
+        lives = 3;
+        dead = false;
     }
     
     public Circle getChara() {
         return chara;
     }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+    
+    public void addLife() {
+        lives++;
+    }
+    
+    public void removeLife() {
+        lives--;
+    }
     
     public boolean collision(Shape s) {
         Shape sec = Shape.intersect(s, chara);
         return sec.getBoundsInLocal().getWidth() > 1;
+    }
+    
+    public void checkHit(ArrayList<Spike> spikes) {
+        spikes.forEach(s -> {
+            if (collision(s.getP())) {
+                removeLife();
+                chara.setTranslateX(0);
+                chara.setTranslateY(0);
+            }
+        });
+        
+        if (lives < 0) {
+            dead = true;
+        }
     }
     
     public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr) {
@@ -106,5 +142,12 @@ public class mainChara {
     
     public void moveLEFT() {
         chara.setTranslateX(chara.getTranslateX() - mvmnt.getX());
+    }
+    
+    public void resetChara() {
+        chara.setCenterX(0);
+        chara.setCenterY(0);
+        chara.setTranslateX(0);
+        chara.setTranslateY(0);
     }
 }

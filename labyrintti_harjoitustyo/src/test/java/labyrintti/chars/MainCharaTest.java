@@ -19,10 +19,10 @@ import static org.junit.Assert.*;
  *
  * @author ikpa
  */
-public class mainCharaTest {
-    mainChara c;
+public class MainCharaTest {
+    MainChara c;
     
-    public mainCharaTest() {
+    public MainCharaTest() {
     }
     
     @BeforeClass
@@ -35,7 +35,7 @@ public class mainCharaTest {
     
     @Before
     public void setUp() {
-        c = new mainChara(250,250,10,1,1);
+        c = new MainChara(250,250,10,1,1);
     }
     
     @After
@@ -54,9 +54,31 @@ public class mainCharaTest {
     }
     
     @Test
-    public void testCollision() {
+    public void testCollisionWhenIsCollided() {
         Circle test = new Circle(245,245,10);
         assertTrue(c.collision(test));
+    }
+    
+    @Test
+    public void testCollisionWhenNotCollided() {
+        Circle test = new Circle(600,600,10);
+        assertFalse(c.collision(test));
+    }
+    
+    @Test
+    public void testGetLives() {
+        assertEquals(c.getLives(),3);
+    }
+    
+    @Test
+    public void testAddLife() {
+        c.addLife();
+        assertEquals(c.getLives(),4);
+    }
+    
+    public void testRemoveLife() {
+        c.removeLife();
+        assertEquals(c.getLives(),2);
     }
     
     @Test

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.labyrintti_harjoitustyo;
+package labyrintti.ui;
 
+import labyrintti.levels.LvlConstructor;
+import labyrintti.levels.Level;
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.shape.*;
@@ -18,8 +20,6 @@ import javafx.geometry.*;
 import java.util.*;
 
 import labyrintti.chars.*;
-import object.*;
-import levels.*;
 
 public class Main extends Application {
 
@@ -27,24 +27,31 @@ public class Main extends Application {
     public void start(Stage stage) {
         Button start = new Button("Aloita peli");
         Button exit = new Button("Poistu");
+        Button lvlslct = new Button("Tasovalikko");
         VBox buttons = new VBox();
-        buttons.setSpacing(20);
+        buttons.setSpacing(10);
         
         buttons.getChildren().add(start);
+        //buttons.getChildren().add(lvlslct);
         buttons.getChildren().add(exit);
         
         BorderPane set = new BorderPane();
         set.setCenter(buttons);
         
+        BorderPane slct = new BorderPane();
+        Button test = new Button("Testikenttä");
+        VBox lvlbuttons = new VBox();
+        lvlbuttons.getChildren().add(test);
+        slct.setCenter(lvlbuttons);
+        
         BorderPane lvlset = new BorderPane();
-        
-        lvlconstructor lc = new lvlconstructor();
-        level testlvl = lc.testlvl();
-        
+        LvlConstructor lc = new LvlConstructor();
+        Level testlvl = lc.testlvl();
         lvlset.setCenter(testlvl.getStg());
         
         Scene lvl = new Scene(lvlset);
         Scene menu = new Scene(set);
+        Scene lvlselect = new Scene(slct);
         
         Map<KeyCode, Boolean> buttonPress = new HashMap();
         
@@ -57,18 +64,18 @@ public class Main extends Application {
         });
         
         
-        new AnimationTimer() {
-            
-            @Override
-            public void handle(long now) {
-                
-                testlvl.update(buttonPress);
-                
-            }
-        }.start();
+        
         
         exit.setOnAction(e-> Platform.exit());
-        start.setOnAction(e -> stage.setScene(lvl));
+        start.setOnAction(e -> {
+            stage.setScene(lvl);
+            testlvl.play(buttonPress);
+        });
+        /**lvlslct.setOnAction(e -> stage.setScene(lvlselect));
+        test.setOnAction(e -> {
+            stage.setScene(lvl);
+            testlvl.play(buttonPress);
+        });*/
         
         stage.setTitle("Labyrintti");
         stage.setScene(menu);
