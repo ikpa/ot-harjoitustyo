@@ -3,7 +3,7 @@
 Labyrintti on 2D, ylhäältäkuvattu videopeli, missä pelaajan on tarkoitus navigoida erilaisia kenttia vältellen esteitä ja
 etsien aarteita.
 ## Tämänhetkiset ominaisuudet
-Pelihahmoa pystyy liikuttamaan, seinät lisätty. Seinät toimivat kuin pitää
+Pelihahmoa pystyy liikuttamaan, ja sillä on elämät. Elämien loputtua peli päättyy. Seinät lisätty ja toimivat. Tason maali lisätty ja toimiva (ei kuitenkaan vielä tee mitään). Piikkieste lisätty ja toimiva (poistaa elämän).
 ## Dokumentointi
 [Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
 [Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)  
