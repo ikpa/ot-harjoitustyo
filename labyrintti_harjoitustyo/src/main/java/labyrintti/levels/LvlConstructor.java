@@ -15,34 +15,46 @@ import labyrintti.object.*;
  */
 public class LvlConstructor {
     private WallConstructor wc;
-    private MainChara c;
     
     public LvlConstructor() {
         wc = new WallConstructor();
-        c = new MainChara(0, 0, 10, 1, 1);
     }
     
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wc.hWall(600, 200, 200));
+        walls.add(wc.vWall(795, 205, 200));
         walls.add(wc.vWall(600, 205, 200));
         
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new Spike(700, 700));
         
-        c.getChara().setCenterX(500);
-        c.getChara().setCenterY(500);
-        
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 500, 500, c, walls, spikes, g);
+        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes, g);
         return lvl;
     }
     
+    public Level testlvl2() {
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        walls.add(wc.hWall(600, 700, 200));
+        walls.add(wc.vWall(600, 705, 200));
+        
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new Spike(200, 800));
+        
+        Goal g = new Goal(100, 100, 15);
 
-    public MainChara getC() {
-        return c;
+        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes, g);
+        return lvl;
     }
     
+    public ArrayList<Level> allLvls() {
+        ArrayList<Level> arr = new ArrayList<>();
+        arr.add(testlvl());
+        arr.add(testlvl2());
+        
+        return arr;
+    }
     
 }

@@ -68,11 +68,16 @@ public class MainChara {
         }
     }
     
-    public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr) {
+    public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             dirs.add(Boolean.TRUE);
         }
+        
+        Boolean up = true;
+        Boolean down = true;
+        Boolean left = true;
+        Boolean right = true;
         
         for (Rectangle r: arr) {
             if (collision(r)) {
@@ -80,22 +85,27 @@ public class MainChara {
                 double xloc = sec.getBoundsInLocal().getCenterX()
                         - (chara.getTranslateX() + chara.getCenterX());
                 double yloc = sec.getBoundsInLocal().getCenterY()
-                        - (chara.getTranslateY() + chara.getCenterY());
+                        - (chara.getTranslateY() + chara.getCenterY()) - voffset;
                 
-                if (yloc < -8) {
+                
+                if (yloc < -8 && up) {
                     dirs.add(0, Boolean.FALSE);
+                    up = false;
                 }
                 
-                if (xloc > 0) {
+                if (xloc > 0 && right) {
                     dirs.add(1, Boolean.FALSE);
+                    right = false;
                 }
                 
-                if (yloc > 8) {
+                if (yloc > 6 && down) {
                     dirs.add(2, Boolean.FALSE);
+                    down = false;
                 }
                 
-                if (xloc < 0) {
+                if (xloc < 0 && left) {
                     dirs.add(3, Boolean.FALSE);
+                    left = false;
                 }
             }
         }
@@ -104,8 +114,8 @@ public class MainChara {
     }
     
     public void move(Map<KeyCode, Boolean> buttonPress,
-            ArrayList<Rectangle> a) {
-        ArrayList<Boolean> allowed = allowedDirs(a);
+            ArrayList<Rectangle> a, double voffset) {
+        ArrayList<Boolean> allowed = allowedDirs(a, voffset);
         
         if (buttonPress.getOrDefault(KeyCode.UP, Boolean.FALSE)
                 && allowed.get(0)) {
@@ -145,8 +155,6 @@ public class MainChara {
     }
     
     public void resetChara() {
-        chara.setCenterX(0);
-        chara.setCenterY(0);
         chara.setTranslateX(0);
         chara.setTranslateY(0);
     }

@@ -5,6 +5,7 @@
  */
 package labyrintti.chars;
 
+import labyrintti.object.*;
 import java.util.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.*;
@@ -21,6 +22,7 @@ import static org.junit.Assert.*;
  */
 public class MainCharaTest {
     MainChara c;
+    ArrayList<Spike> spikes;
     
     public MainCharaTest() {
     }
@@ -36,6 +38,7 @@ public class MainCharaTest {
     @Before
     public void setUp() {
         c = new MainChara(250,250,10,1,1);
+        spikes = new ArrayList<>();
     }
     
     @After
@@ -76,9 +79,51 @@ public class MainCharaTest {
         assertEquals(c.getLives(),4);
     }
     
+    @Test
     public void testRemoveLife() {
         c.removeLife();
         assertEquals(c.getLives(),2);
+    }
+    
+    @Test
+    public void testCheckHitWhenNotHit() {
+        Spike s = new Spike(10,10);
+        spikes.add(s);
+        c.checkHit(spikes);
+        assertEquals(c.getLives(), 3);
+    }
+    
+    @Test
+    public void testCheckHitWhenHit() {
+        Spike s = new Spike(250,250);
+        spikes.add(s);
+        c.checkHit(spikes);
+        assertEquals(c.getLives(),2);
+    }
+    
+    @Test
+    public void testDeadWhenNotDead() {
+        assertFalse(c.isDead());
+    }
+    
+    @Test
+    public void testDeadWhenHitOnce() {
+        Spike s = new Spike(250,250);
+        spikes.add(s);
+        c.checkHit(spikes);
+        assertEquals(c.getLives(),2);
+        assertFalse(c.isDead());
+    }
+    
+    @Test
+    public void testDeadWhenHitFourTimes() {
+        Spike s = new Spike(250,250);
+        spikes.add(s);
+        c.checkHit(spikes);
+        c.checkHit(spikes);
+        c.checkHit(spikes);
+        c.checkHit(spikes);
+        assertTrue(c.isDead());
     }
     
     @Test
@@ -110,7 +155,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle up = new Rectangle(245,238,10,5);
         arr.add(up);
-        ArrayList<Boolean> bool = c.allowedDirs(arr);
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
         assertFalse(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -122,7 +167,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle right = new Rectangle(258,245,5,10);
         arr.add(right);
-        ArrayList<Boolean> bool = c.allowedDirs(arr);
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
         assertTrue(bool.get(0));
         assertFalse(bool.get(1));
         assertTrue(bool.get(2));
@@ -134,7 +179,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle down = new Rectangle(245,258,10,5);
         arr.add(down);
-        ArrayList<Boolean> bool = c.allowedDirs(arr);
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertFalse(bool.get(2));
@@ -146,7 +191,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle left = new Rectangle(237,245,5,10);
         arr.add(left);
-        ArrayList<Boolean> bool = c.allowedDirs(arr);
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -164,11 +209,32 @@ public class MainCharaTest {
         arr.add(right);
         arr.add(down);
         arr.add(left);
-        ArrayList<Boolean> bool = c.allowedDirs(arr);
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
         assertFalse(bool.get(0));
         assertFalse(bool.get(1));
         assertFalse(bool.get(2));
         assertFalse(bool.get(3));
+    }
+    
+    @Test
+    public void testAllowedDirsWhenNotBlocked() {
+        ArrayList<Rectangle> arr = new ArrayList<>();
+        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        assertTrue(bool.get(0));
+        assertTrue(bool.get(1));
+        assertTrue(bool.get(2));
+        assertTrue(bool.get(3));
+    }
+    
+    @Test
+    public void testResetChara() {
+        c.moveDOWN();
+        c.moveDOWN();
+        c.moveLEFT();
+        c.moveLEFT();
+        c.resetChara();
+        assertEquals(c.getChara().getTranslateX(),0,0.01);
+        assertEquals(c.getChara().getTranslateY(),0,0.01);
     }
     
 }

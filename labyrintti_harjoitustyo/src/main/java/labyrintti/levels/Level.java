@@ -21,14 +21,13 @@ import java.util.*;
  */
 public class Level {
     private Pane stg;
-    private MainChara c;
     private ArrayList<Rectangle> walls;
     private ArrayList<Spike> spikes;
     private Goal g;
     private int startx;
     private int starty;
     
-    public Level(int width, int height, int x, int y, MainChara ch,
+    public Level(int width, int height, int x, int y,
             ArrayList<Rectangle> arr, ArrayList<Spike> sp, Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
@@ -48,17 +47,10 @@ public class Level {
         
         g = go;
         stg.getChildren().add(g.getArea());
-        
-        c = ch;
-        stg.getChildren().add(ch.getChara());
     }
 
     public Pane getStg() {
         return stg;
-    }
-
-    public MainChara getC() {
-        return c;
     }
 
     public ArrayList<Rectangle> getWalls() {
@@ -69,26 +61,16 @@ public class Level {
         return g;
     }
     
-    public void update(Map<KeyCode, Boolean> buttonPress) {
-        c.move(buttonPress, walls);
-        c.checkHit(spikes);
-    }
-    
-    public void play(Map<KeyCode, Boolean> buttonPress) {
+    public void initialise(MainChara c) {
+        c.resetChara();
         c.getChara().setCenterX(startx);
         c.getChara().setCenterY(starty);
-        new AnimationTimer() {
-            
-            @Override
-            public void handle(long now) {
-                if (!c.isDead()) {
-                    update(buttonPress);
-                } else {
-                    stop();
-                }
-            }
-        }.start();
-        
+        stg.getChildren().add(c.getChara());
     }
     
+    public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
+        c.move(buttonPress, walls, voffset);
+        c.checkHit(spikes);
+    }
+     
 }
