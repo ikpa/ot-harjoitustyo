@@ -71,6 +71,10 @@ public class Level {
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
         c.move(buttonPress, walls, voffset);
         c.checkHit(spikes);
+        
+        spikes.forEach((s) -> {
+            s.move();
+        });
     }
      
 }

@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  * @author ikpa
  */
 public class Spike {
-    private Polygon p;
+    public Polygon p;
     
     public Spike(double x, double y) {
         p = new Polygon();
@@ -38,5 +38,9 @@ public class Spike {
 
     public Polygon getP() {
         return p;
+    }
+    
+    public void move() {
+        
     }
 }

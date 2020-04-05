@@ -28,6 +28,8 @@ public class LvlConstructor {
         
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new Spike(700, 700));
+        spikes.add(new MovingSpike(100, 200, true, 1, 900));
+        spikes.add(new MovingSpike(100, 900, false, 2, 900));
         
         Goal g = new Goal(100, 100, 15);
 
