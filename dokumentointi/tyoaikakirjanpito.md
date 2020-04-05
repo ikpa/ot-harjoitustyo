@@ -7,5 +7,6 @@
 | 2.4   | 3          | Pelihahmon luokkaa hiottu, testikattavuutta lisätty, level ja lvlconstructor luokat luotu, checkstyle:n lisäys |
 | 3.4   | 3          | Piikkieste ja maali lisätty, muutamia testejä luotu |
 | 4.4   | 3          | Käyttöliittymän hiomista, testejä |
-| | yht. 17.5 |
+| 5.4   | 2          | Liikkuva piikkieste lisätty, testejä |
+| | yht. 19.5 |
 
