@@ -10,10 +10,10 @@ ja Level kuvaa yhtä tasoa, joita Main-ohjelmalla on useita. Kukin Level-olio ot
 kun kyseistä tasoa pelataan.  
 
 Level sisältää useita erilaisia objekteja, joiden kanssa pelihahmo voi vuorovaikuttaa. Nämä voidaan jaotella luokkiin  
--Goal  
--Hostile  
--Item  
--Door  
+- Goal  
+- Hostile  
+- Item  
+- Door  
 
 Goal-olio on kunkin tason maali, johon pelaaja pyrkii. Jokainen taso vaatii yhden maalin. Maali vie pelaajan seuraavaan
 kenttään.  
