@@ -1,7 +1,7 @@
 # Arkitehtuurikuvaus
 ## Luokkakaavio
 
-<img src="https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/alustavaluokkakaavio.svg" width="160">
+<img src="https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/alustavaluokkakaavio.svg" width="300">
 
 ## Sovelluslogiikka
 
