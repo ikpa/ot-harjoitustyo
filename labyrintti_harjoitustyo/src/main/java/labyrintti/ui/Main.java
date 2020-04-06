@@ -25,6 +25,7 @@ import labyrintti.chars.*;
 public class Main extends Application {
     private int i=0;
     private int max=2;
+    private MainChara c;
 
     @Override
     public void start(Stage stage) {
@@ -34,7 +35,7 @@ public class Main extends Application {
         VBox buttons = new VBox();
         buttons.setSpacing(10);
         
-        MainChara c = new MainChara(0, 0, 10, 1, 1);
+        c = new MainChara(0, 0, 10, 1, 1);
         
         buttons.getChildren().add(start);
         buttons.getChildren().add(lvlslct);
