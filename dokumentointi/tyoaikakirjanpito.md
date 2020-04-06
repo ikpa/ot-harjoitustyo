@@ -8,5 +8,6 @@
 | 3.4   | 3          | Piikkieste ja maali lisätty, muutamia testejä luotu |
 | 4.4   | 3          | Käyttöliittymän hiomista, testejä |
 | 5.4   | 2          | Liikkuva piikkieste lisätty, testejä |
-| | yht. 19.5 |
+| 6.4   | 1          | Dokumentoinnin parantaminen |
+| | yht. 20.5 |
 
