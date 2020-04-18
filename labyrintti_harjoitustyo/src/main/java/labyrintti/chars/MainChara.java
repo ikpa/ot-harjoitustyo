@@ -20,6 +20,7 @@ public class MainChara {
     private Circle chara;
     private Point2D mvmnt;
     private int lives;
+    private int points;
     private boolean dead;
     
     public MainChara(int x, int y, int r, int mvmnty, int mvmntx) {
@@ -35,6 +36,14 @@ public class MainChara {
 
     public int getLives() {
         return lives;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+    
+    public void addPoints(int i) {
+        points = points + i;
     }
 
     public boolean isDead() {
@@ -54,6 +63,11 @@ public class MainChara {
         return sec.getBoundsInLocal().getWidth() > 1;
     }
     
+    public boolean get(Item i) {
+        Shape sec = Shape.intersect(chara, i.getS());
+        return sec.getBoundsInLocal().getWidth() >= 10;
+    }
+    
     public void checkHit(ArrayList<Spike> spikes) {
         spikes.forEach(s -> {
             if (collision(s.getP())) {
@@ -67,7 +81,7 @@ public class MainChara {
             dead = true;
         }
     }
-    
+      
     public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

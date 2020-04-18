@@ -5,13 +5,9 @@
  */
 package labyrintti.levels;
 
-import javafx.geometry.*;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.animation.*;
 import labyrintti.chars.*;
 import labyrintti.object.*;
 import java.util.*;
@@ -23,12 +19,14 @@ public class Level {
     private Pane stg;
     private ArrayList<Rectangle> walls;
     private ArrayList<Spike> spikes;
+    private ArrayList<Item> items;
     private Goal g;
     private int startx;
     private int starty;
     
     public Level(int width, int height, int x, int y,
-            ArrayList<Rectangle> arr, ArrayList<Spike> sp, Goal go) {
+             ArrayList<Rectangle> arr, ArrayList<Spike> sp, ArrayList<Item> i,
+             Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
         
@@ -38,9 +36,18 @@ public class Level {
         });
         
         spikes = sp;
-        spikes.forEach((s) -> {
-            stg.getChildren().add(s.getP());
-        });
+        if (!(spikes.isEmpty())) {
+            spikes.forEach((s) -> {
+                stg.getChildren().add(s.getP());
+            });
+        }
+        
+        items = i;
+        if (!(items.isEmpty())) {
+            items.forEach(s -> {
+                stg.getChildren().add(s.getS());
+            });
+        }
         
         startx = x;
         starty = y;
@@ -68,9 +75,31 @@ public class Level {
         stg.getChildren().add(c.getChara());
     }
     
+    public void checkGet(ArrayList<Item> items, MainChara c) {
+        items.forEach(s -> {
+            if (c.get(s)) {
+                if (s.getType() == 0) {
+                    c.addLife();
+                }
+                
+                if (s.getType() == 1) {
+                    c.addPoints(50);
+                }
+                
+                items.remove(s);
+                stg.getChildren().remove(s.getS());
+            }
+        });
+    }
+    
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
         c.move(buttonPress, walls, voffset);
-        c.checkHit(spikes);
+        if (!(spikes.isEmpty())) {
+            c.checkHit(spikes);
+        }
+        if (!(items.isEmpty())) {
+            checkGet(items, c);
+        }
         
         spikes.forEach((s) -> {
             s.move();

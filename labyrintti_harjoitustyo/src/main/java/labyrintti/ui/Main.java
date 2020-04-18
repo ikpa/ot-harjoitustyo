@@ -26,6 +26,7 @@ public class Main extends Application {
     private int i=0;
     private int max=2;
     private MainChara c;
+    private boolean select = false;
 
     @Override
     public void start(Stage stage) {
@@ -59,8 +60,10 @@ public class Main extends Application {
         Circle l = new Circle(5, 5, 10, Color.PURPLE);
         pic.getChildren().add(l);
         infodisp.getChildren().add(l);
-        Label lives = new Label("" + c.getLives());
+        Label lives = new Label("" + c.getLives() + " elämää");
         infodisp.getChildren().add(lives);
+        Label points = new Label("0 pistettä");
+        infodisp.getChildren().add(points);
         lvlset.setTop(infodisp);
         infodisp.setSpacing(10);
         
@@ -96,7 +99,7 @@ public class Main extends Application {
                 if (lvls.get(i).getG().inGoal(c)) {
                     i++;
                     
-                    if (i == max) {
+                    if (i == max || select) {
                         Platform.exit();
                         return;
                     }
@@ -105,7 +108,8 @@ public class Main extends Application {
                     lvlset.setCenter(lvls.get(i).getStg());
                 }
                 
-                lives.setText("" + c.getLives());
+                lives.setText("" + c.getLives() + " elämää");
+                points.setText("" + c.getPoints() + " pistettä");
             }
         }.start();
         
@@ -116,8 +120,20 @@ public class Main extends Application {
             stage.setScene(lvl);
         });
         lvlslct.setOnAction(e -> stage.setScene(lvlselect));
-        test.setOnAction(e -> i=0);
-        test2.setOnAction(e -> i=1);
+        test.setOnAction(e -> {
+            lvls.get(1).initialise(c);
+            lvlset.setCenter(lvls.get(1).getStg());
+            stage.setScene(lvl);
+            i = 1;
+            select = true;
+        });
+        test2.setOnAction(e -> {
+            lvls.get(2).initialise(c);
+            lvlset.setCenter(lvls.get(2).getStg());
+            stage.setScene(lvl);
+            i = 2;
+            select = true;
+        });
         
         stage.setTitle("Labyrintti");
         stage.setScene(menu);
