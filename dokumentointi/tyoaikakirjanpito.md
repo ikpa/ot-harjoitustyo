@@ -9,5 +9,6 @@
 | 4.4   | 3          | Käyttöliittymän hiomista, testejä |
 | 5.4   | 2          | Liikkuva piikkieste lisätty, testejä |
 | 6.4   | 1          | Dokumentoinnin parantaminen |
-| | yht. 20.5 |
+| 18.4  | 3          | Esineet lisätty, ensimmäinen oikea taso tehty |
+| | yht. 23.5 |
 
