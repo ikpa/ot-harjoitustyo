@@ -24,7 +24,6 @@ import labyrintti.chars.*;
 
 public class Main extends Application {
     private int i=0;
-    private int max=2;
     private MainChara c;
     private boolean select = false;
 
@@ -69,6 +68,7 @@ public class Main extends Application {
         
         LvlConstructor lc = new LvlConstructor();
         ArrayList<Level> lvls = lc.allLvls();
+        int max = lvls.size();
         
         Scene lvl = new Scene(lvlset);
         Scene menu = new Scene(set);
@@ -115,23 +115,24 @@ public class Main extends Application {
         
         exit.setOnAction(e-> Platform.exit());
         start.setOnAction(e -> {
-            lvls.get(0).initialise(c);
-            lvlset.setCenter(lvls.get(0).getStg());
+            lvls.get(2).initialise(c);
+            lvlset.setCenter(lvls.get(2).getStg());
             stage.setScene(lvl);
+            i = 2;
         });
         lvlslct.setOnAction(e -> stage.setScene(lvlselect));
         test.setOnAction(e -> {
             lvls.get(1).initialise(c);
             lvlset.setCenter(lvls.get(1).getStg());
             stage.setScene(lvl);
-            i = 1;
+            i = 0;
             select = true;
         });
         test2.setOnAction(e -> {
             lvls.get(2).initialise(c);
             lvlset.setCenter(lvls.get(2).getStg());
             stage.setScene(lvl);
-            i = 2;
+            i = 1;
             select = true;
         });
         

@@ -49,6 +49,41 @@ public class LvlConstructor {
         return lvl;
     }
     
+    public Level level2() {
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        walls.add(wc.hWall(250, 50, 400));
+        walls.add(wc.vWall(645, 55, 900));
+        walls.add(wc.hWall(250, 950, 400));
+        walls.add(wc.vWall(250, 55, 900));
+
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new MovingSpike(635, 330, false, 2, 260));
+        spikes.add(new MovingSpike(260, 350, false, 2, 635));
+        
+        spikes.add(new MovingSpike(635, 480, false, 2, 260));
+        spikes.add(new MovingSpike(260, 500, false, 2, 635));
+        
+        spikes.add(new MovingSpike(635, 630, false, 2, 260));
+        spikes.add(new MovingSpike(260, 650, false, 2, 635));
+        
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item(260, 330, 1));
+        items.add(new Item(635, 330, 1));
+        
+        items.add(new Item(260, 490, 1));
+        items.add(new Item(635, 490, 1));
+        
+        items.add(new Item(260, 640, 1));
+        items.add(new Item(635, 640, 1));
+        
+        items.add(new Item(450, 490, 0));
+        
+        Goal g = new Goal(450, 910, 15);
+        
+        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes, items, g);
+        return lvl;
+    }
+    
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wc.hWall(600, 200, 200));
@@ -88,9 +123,11 @@ public class LvlConstructor {
     
     public ArrayList<Level> allLvls() {
         ArrayList<Level> arr = new ArrayList<>();
-        arr.add(level1());
         arr.add(testlvl());
         arr.add(testlvl2());
+        
+        arr.add(level1());
+        arr.add(level2());
         
         return arr;
     }

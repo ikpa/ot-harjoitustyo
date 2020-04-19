@@ -67,6 +67,14 @@ public class Level {
     public Goal getG() {
         return g;
     }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public ArrayList<Spike> getSpikes() {
+        return spikes;
+    }
     
     public void initialise(MainChara c) {
         c.resetChara();
@@ -75,7 +83,18 @@ public class Level {
         stg.getChildren().add(c.getChara());
     }
     
+    public void removeItems(ArrayList<Integer> ids) {
+        if (!(ids.isEmpty())) {
+            ids.forEach(i -> {
+                Item item = items.get(i);
+                items.remove(item);
+                stg.getChildren().remove(item.getS());
+            });
+        }
+    }
+    
     public void checkGet(ArrayList<Item> items, MainChara c) {
+        ArrayList<Integer> ids = new ArrayList<>();
         items.forEach(s -> {
             if (c.get(s)) {
                 if (s.getType() == 0) {
@@ -86,10 +105,11 @@ public class Level {
                     c.addPoints(50);
                 }
                 
-                items.remove(s);
-                stg.getChildren().remove(s.getS());
+                ids.add(items.indexOf(s));
             }
         });
+        
+        removeItems(ids);
     }
     
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
