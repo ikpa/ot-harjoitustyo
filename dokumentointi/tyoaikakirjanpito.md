@@ -10,5 +10,6 @@
 | 5.4   | 2          | Liikkuva piikkieste lisätty, testejä |
 | 6.4   | 1          | Dokumentoinnin parantaminen |
 | 18.4  | 3          | Esineet lisätty, ensimmäinen oikea taso tehty |
-| | yht. 23.5 |
+| 19.4  | 1          | Toinen oikea taso tehty, testejä lisätty |
+| | yht. 24.5 |
 
