@@ -122,15 +122,15 @@ public class Main extends Application {
         });
         lvlslct.setOnAction(e -> stage.setScene(lvlselect));
         test.setOnAction(e -> {
-            lvls.get(1).initialise(c);
-            lvlset.setCenter(lvls.get(1).getStg());
+            lvls.get(0).initialise(c);
+            lvlset.setCenter(lvls.get(0).getStg());
             stage.setScene(lvl);
             i = 0;
             select = true;
         });
         test2.setOnAction(e -> {
-            lvls.get(2).initialise(c);
-            lvlset.setCenter(lvls.get(2).getStg());
+            lvls.get(1).initialise(c);
+            lvlset.setCenter(lvls.get(1).getStg());
             stage.setScene(lvl);
             i = 1;
             select = true;
