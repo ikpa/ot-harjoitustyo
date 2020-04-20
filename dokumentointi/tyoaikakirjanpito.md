@@ -11,5 +11,6 @@
 | 6.4   | 1          | Dokumentoinnin parantaminen |
 | 18.4  | 3          | Esineet lisätty, ensimmäinen oikea taso tehty |
 | 19.4  | 1          | Toinen oikea taso tehty, testejä lisätty |
-| | yht. 24.5 |
+| 20.4  | 4          | Dokumentoinnin parantaminen, pistelista tehty |
+| | yht. 28.5 |
 
