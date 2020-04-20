@@ -93,8 +93,6 @@ public class Level {
         }
     }
     
-    
-    
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
         c.move(buttonPress, walls, voffset);
         if (!(spikes.isEmpty())) {
