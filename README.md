@@ -7,7 +7,7 @@ Pelihahmoa pystyy liikuttamaan, ja sillä on elämät. Elämien loputtua peli p�
 ## Dokumentointi
 [Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
 [Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)  
-[Käyttöohje](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)
+[Käyttöohje](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)  
 [Arkkitehtuuri](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/arkitehtuuri.md)
 ## Releaset
 [Viikko 5](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v1.0)
