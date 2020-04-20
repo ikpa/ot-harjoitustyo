@@ -93,24 +93,7 @@ public class Level {
         }
     }
     
-    public void checkGet(ArrayList<Item> items, MainChara c) {
-        ArrayList<Integer> ids = new ArrayList<>();
-        items.forEach(s -> {
-            if (c.get(s)) {
-                if (s.getType() == 0) {
-                    c.addLife();
-                }
-                
-                if (s.getType() == 1) {
-                    c.addPoints(50);
-                }
-                
-                ids.add(items.indexOf(s));
-            }
-        });
-        
-        removeItems(ids);
-    }
+    
     
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
         c.move(buttonPress, walls, voffset);
@@ -118,7 +101,9 @@ public class Level {
             c.checkHit(spikes);
         }
         if (!(items.isEmpty())) {
-            checkGet(items, c);
+            ArrayList<Integer> ids = c.checkGet(items);
+            
+            removeItems(ids);
         }
         
         spikes.forEach((s) -> {

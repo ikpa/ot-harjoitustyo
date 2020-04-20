@@ -81,6 +81,25 @@ public class MainChara {
             dead = true;
         }
     }
+    
+    public ArrayList<Integer> checkGet(ArrayList<Item> items) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        items.forEach(s -> {
+            if (get(s)) {
+                if (s.getType() == 0) {
+                    addLife();
+                }
+                
+                if (s.getType() == 1) {
+                    addPoints(50);
+                }
+                
+                ids.add(items.indexOf(s));
+            }
+        });
+        
+        return ids;
+    }
       
     public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
