@@ -26,3 +26,9 @@ Item-oliot ovat objekteja, jotka pelihahmon ne kerätessä antavat sille joko pi
 Door-oliot ovat ovia, jotka estävät pelihahmon kulun johonkin alueeseen. Door-luokkaan kuuluu eri alaluokkia riippuen siitä,
 miten pelaaja ne voi avata. Esim. EnemyDoor-oven voi avata tuhoamalla kaikki kentän viholliset ja ButtonDoor-oven painamalla
 yhtä tai useampaa kentästä löytyvää nappia.
+
+### Peliruudun päivittäminen
+
+<img src="https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/alustavaluokkakaavio.svg" width="500">
+
+Yllä oleva sekvenssikaavio kuvaa tilannetta, jossa peliruutu päivitetään. Kyseisessä tilanteessa pelaaja painaa oikeaa ja ylempää nuolinäppäintä, mutta pelihahmon oikealla puolella on seinä. Samanaikaisesti pelihahmo kerää yhden kulta-esineen, ja tasossa oleva piikkieste liikkuu.
