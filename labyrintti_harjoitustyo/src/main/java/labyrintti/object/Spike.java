@@ -12,11 +12,11 @@ import javafx.scene.paint.Color;
  * @author ikpa
  */
 public class Spike {
-    public Polygon p;
+    public Polygon polygon;
     
     public Spike(double x, double y) {
-        p = new Polygon();
-        p.getPoints().addAll(new Double[]{
+        polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[]{
             x, y - 10,
             x + 2, y - 5,
             x + 10, y - 10,
@@ -36,8 +36,8 @@ public class Spike {
         });
     }
 
-    public Polygon getP() {
-        return p;
+    public Polygon getPolygon() {
+        return polygon;
     }
     
     public void move() {

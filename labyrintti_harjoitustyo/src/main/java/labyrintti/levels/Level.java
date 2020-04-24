@@ -20,7 +20,7 @@ public class Level {
     private ArrayList<Rectangle> walls;
     private ArrayList<Spike> spikes;
     private ArrayList<Item> items;
-    private Goal g;
+    private Goal goal;
     private int startx;
     private int starty;
     
@@ -38,22 +38,22 @@ public class Level {
         spikes = sp;
         if (!(spikes.isEmpty())) {
             spikes.forEach((s) -> {
-                stg.getChildren().add(s.getP());
+                stg.getChildren().add(s.getPolygon());
             });
         }
         
         items = i;
         if (!(items.isEmpty())) {
             items.forEach(s -> {
-                stg.getChildren().add(s.getS());
+                stg.getChildren().add(s.getCircle());
             });
         }
         
         startx = x;
         starty = y;
         
-        g = go;
-        stg.getChildren().add(g.getArea());
+        goal = go;
+        stg.getChildren().add(goal.getArea());
     }
 
     public Pane getStg() {
@@ -64,8 +64,8 @@ public class Level {
         return walls;
     }
 
-    public Goal getG() {
-        return g;
+    public Goal getGoal() {
+        return goal;
     }
 
     public ArrayList<Item> getItems() {
@@ -76,11 +76,11 @@ public class Level {
         return spikes;
     }
     
-    public void initialise(MainChara c) {
-        c.resetChara();
-        c.getChara().setCenterX(startx);
-        c.getChara().setCenterY(starty);
-        stg.getChildren().add(c.getChara());
+    public void initialise(MainChara chara) {
+        chara.reset();
+        chara.getCircle().setCenterX(startx);
+        chara.getCircle().setCenterY(starty);
+        stg.getChildren().add(chara.getCircle());
     }
     
     public void removeItems(ArrayList<Integer> ids) {
@@ -88,18 +88,20 @@ public class Level {
             ids.forEach(i -> {
                 Item item = items.get(i);
                 items.remove(item);
-                stg.getChildren().remove(item.getS());
+                stg.getChildren().remove(item.getCircle());
             });
         }
     }
     
-    public void update(Map<KeyCode, Boolean> buttonPress, MainChara c, double voffset) {
-        c.move(buttonPress, walls, voffset);
+    public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
+        chara.move(buttonPress, walls, voffset);
+        
         if (!(spikes.isEmpty())) {
-            c.checkHit(spikes);
+            chara.checkHit(spikes);
         }
+        
         if (!(items.isEmpty())) {
-            ArrayList<Integer> ids = c.checkGet(items);
+            ArrayList<Integer> ids = chara.checkGet(items);
             
             removeItems(ids);
         }

@@ -17,21 +17,21 @@ import java.util.*;
  * @author ikpa
  */
 public class MainChara {
-    private Circle chara;
+    private Circle circle;
     private Point2D mvmnt;
     private int lives;
     private int points;
     private boolean dead;
     
     public MainChara(int x, int y, int r, int mvmnty, int mvmntx) {
-        chara = new Circle(x, y, r, Color.PURPLE);
+        circle = new Circle(x, y, r, Color.PURPLE);
         mvmnt = new Point2D(mvmntx, mvmnty);
         lives = 3;
         dead = false;
     }
     
-    public Circle getChara() {
-        return chara;
+    public Circle getCircle() {
+        return circle;
     }
 
     public int getLives() {
@@ -59,21 +59,21 @@ public class MainChara {
     }
     
     public boolean collision(Shape s) {
-        Shape sec = Shape.intersect(s, chara);
+        Shape sec = Shape.intersect(s, circle);
         return sec.getBoundsInLocal().getWidth() > 1;
     }
     
     public boolean get(Item i) {
-        Shape sec = Shape.intersect(chara, i.getS());
+        Shape sec = Shape.intersect(circle, i.getCircle());
         return sec.getBoundsInLocal().getWidth() >= 10;
     }
     
     public void checkHit(ArrayList<Spike> spikes) {
         spikes.forEach(s -> {
-            if (collision(s.getP())) {
+            if (collision(s.getPolygon())) {
                 removeLife();
-                chara.setTranslateX(0);
-                chara.setTranslateY(0);
+                circle.setTranslateX(0);
+                circle.setTranslateY(0);
             }
         });
         
@@ -84,24 +84,24 @@ public class MainChara {
     
     public ArrayList<Integer> checkGet(ArrayList<Item> items) {
         ArrayList<Integer> ids = new ArrayList<>();
-        items.forEach(s -> {
-            if (get(s)) {
-                if (s.getType() == 0) {
+        items.forEach(item -> {
+            if (get(item)) {
+                if (item.getType() == 0) {
                     addLife();
                 }
                 
-                if (s.getType() == 1) {
+                if (item.getType() == 1) {
                     addPoints(50);
                 }
                 
-                ids.add(items.indexOf(s));
+                ids.add(items.indexOf(item));
             }
         });
         
         return ids;
     }
       
-    public ArrayList<Boolean> allowedDirs(ArrayList<Rectangle> arr, double voffset) {
+    public ArrayList<Boolean> allowedDirections(ArrayList<Rectangle> walls, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             dirs.add(Boolean.TRUE);
@@ -112,13 +112,13 @@ public class MainChara {
         Boolean left = true;
         Boolean right = true;
         
-        for (Rectangle r: arr) {
+        for (Rectangle r: walls) {
             if (collision(r)) {
-                Shape sec = Shape.intersect(r, chara);
+                Shape sec = Shape.intersect(r, circle);
                 double xloc = sec.getBoundsInLocal().getCenterX()
-                        - (chara.getTranslateX() + chara.getCenterX());
+                        - (circle.getTranslateX() + circle.getCenterX());
                 double yloc = sec.getBoundsInLocal().getCenterY()
-                        - (chara.getTranslateY() + chara.getCenterY()) - voffset;
+                        - (circle.getTranslateY() + circle.getCenterY()) - voffset;
                 
                 
                 if (yloc < -8 && up) {
@@ -126,7 +126,7 @@ public class MainChara {
                     up = false;
                 }
                 
-                if (xloc > 0 && right) {
+                if (xloc > 1 && right) {
                     dirs.add(1, Boolean.FALSE);
                     right = false;
                 }
@@ -136,7 +136,7 @@ public class MainChara {
                     down = false;
                 }
                 
-                if (xloc < 0 && left) {
+                if (xloc < -7 && left) {
                     dirs.add(3, Boolean.FALSE);
                     left = false;
                 }
@@ -148,7 +148,7 @@ public class MainChara {
     
     public void move(Map<KeyCode, Boolean> buttonPress,
             ArrayList<Rectangle> a, double voffset) {
-        ArrayList<Boolean> allowed = allowedDirs(a, voffset);
+        ArrayList<Boolean> allowed = allowedDirections(a, voffset);
         
         if (buttonPress.getOrDefault(KeyCode.UP, Boolean.FALSE)
                 && allowed.get(0)) {
@@ -172,23 +172,23 @@ public class MainChara {
     }
     
     public void moveUP() {
-        chara.setTranslateY(chara.getTranslateY() - mvmnt.getY());
+        circle.setTranslateY(circle.getTranslateY() - mvmnt.getY());
     }
     
     public void moveDOWN() {
-        chara.setTranslateY(chara.getTranslateY() + mvmnt.getY());
+        circle.setTranslateY(circle.getTranslateY() + mvmnt.getY());
     }
     
     public void moveRIGHT() {
-        chara.setTranslateX(chara.getTranslateX() + mvmnt.getX());
+        circle.setTranslateX(circle.getTranslateX() + mvmnt.getX());
     }
     
     public void moveLEFT() {
-        chara.setTranslateX(chara.getTranslateX() - mvmnt.getX());
+        circle.setTranslateX(circle.getTranslateX() - mvmnt.getX());
     }
     
-    public void resetChara() {
-        chara.setTranslateX(0);
-        chara.setTranslateY(0);
+    public void reset() {
+        circle.setTranslateX(0);
+        circle.setTranslateY(0);
     }
 }

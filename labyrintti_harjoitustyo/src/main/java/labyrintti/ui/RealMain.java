@@ -5,7 +5,6 @@
  */
 package labyrintti.ui;
 
-import labyrintti.highscore.*;
 import java.util.*;
 /**
  *

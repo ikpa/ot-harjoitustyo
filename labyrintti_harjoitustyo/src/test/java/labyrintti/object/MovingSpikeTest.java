@@ -51,100 +51,100 @@ public class MovingSpikeTest {
     @Test
     public void testMoveUP() {
         vert.moveUP();
-        assertEquals(vert.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getP().getTranslateY(), -1, 0.01);
+        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateY(), -1, 0.01);
     }
     
     @Test
     public void testMoveDOWN() {
         vert.moveDOWN();
-        assertEquals(vert.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getP().getTranslateY(), 1, 0.01);
+        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateY(), 1, 0.01);
     }
     
     @Test
     public void testMoveRIGHT() {
         hor.moveRIGHT();
-        assertEquals(hor.getP().getTranslateX(), 1, 0.01);
-        assertEquals(hor.getP().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateX(), 1, 0.01);
+        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveLEFT() {
         hor.moveLEFT();
-        assertEquals(hor.getP().getTranslateX(), -1, 0.01);
-        assertEquals(hor.getP().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateX(), -1, 0.01);
+        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirTrueOnce() {
         hor.horMove();
-        assertEquals(hor.getP().getTranslateX(), 1, 0.01);
-        assertEquals(hor.getP().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateX(), 1, 0.01);
+        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirTrueTwice() {
         hor.horMove();
         hor.horMove();
-        assertEquals(hor.getP().getTranslateX(), 0, 0.01);
-        assertEquals(hor.getP().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirFalseOnce() {
         horf.horMove();
-        assertEquals(horf.getP().getTranslateX(), -1, 0.01);
-        assertEquals(horf.getP().getTranslateY(), 0, 0.01);
+        assertEquals(horf.getPolygon().getTranslateX(), -1, 0.01);
+        assertEquals(horf.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirFalseTwice() {
         horf.horMove();
         horf.horMove();
-        assertEquals(horf.getP().getTranslateX(), 0, 0.01);
-        assertEquals(horf.getP().getTranslateY(), 0, 0.01);
+        assertEquals(horf.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(horf.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirTrueOnce() {
         vert.verMove();
-        assertEquals(vert.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getP().getTranslateY(), 1, 0.01);
+        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateY(), 1, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirTrueTwice() {
         vert.verMove();
         vert.verMove();
-        assertEquals(vert.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getP().getTranslateY(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirFalseOnce() {
         vertf.verMove();
-        assertEquals(vertf.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vertf.getP().getTranslateY(), -1, 0.01);
+        assertEquals(vertf.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vertf.getPolygon().getTranslateY(), -1, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirFalseTwice() {
         vertf.verMove();
         vertf.verMove();
-        assertEquals(vertf.getP().getTranslateX(), 0, 0.01);
-        assertEquals(vertf.getP().getTranslateY(), 0, 0.01);
+        assertEquals(vertf.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vertf.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveWhenVerIsFalse() {
         hor.move();
-        assertEquals(hor.getP().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveWhenVerIsTrue() {
         vert.move();
-        assertEquals(vert.getP().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
     }
 }

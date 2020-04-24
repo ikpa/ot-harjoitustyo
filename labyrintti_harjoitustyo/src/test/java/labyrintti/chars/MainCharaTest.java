@@ -51,9 +51,9 @@ public class MainCharaTest {
     @Test
     public void testGetChara() {
         Circle test = new Circle(250,250,10);
-        assertEquals(c.getChara().getRadius(),test.getRadius(),0.01);
-        assertEquals(c.getChara().getCenterX(),test.getCenterX(),0.01);
-        assertEquals(c.getChara().getCenterY(),test.getCenterY(),0.01);
+        assertEquals(c.getCircle().getRadius(),test.getRadius(),0.01);
+        assertEquals(c.getCircle().getCenterX(),test.getCenterX(),0.01);
+        assertEquals(c.getCircle().getCenterY(),test.getCenterY(),0.01);
     }
     
     @Test
@@ -129,25 +129,25 @@ public class MainCharaTest {
     @Test
     public void testMoveUP() {
         c.moveUP();
-        assertEquals(c.getChara().getTranslateY(),-1,0.01);
+        assertEquals(c.getCircle().getTranslateY(),-1,0.01);
     }
     
     @Test
     public void testMoveDOWN() {
         c.moveDOWN();
-        assertEquals(c.getChara().getTranslateY(),1,0.01);
+        assertEquals(c.getCircle().getTranslateY(),1,0.01);
     }
     
     @Test
     public void testMoveRIGHT() {
         c.moveRIGHT();
-        assertEquals(c.getChara().getTranslateX(),1,0.01);
+        assertEquals(c.getCircle().getTranslateX(),1,0.01);
     }
     
     @Test
     public void testMoveLEFT() {
         c.moveLEFT();
-        assertEquals(c.getChara().getTranslateX(),-1,0.01);
+        assertEquals(c.getCircle().getTranslateX(),-1,0.01);
     }
     
     @Test
@@ -155,7 +155,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle up = new Rectangle(245,238,10,5);
         arr.add(up);
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertFalse(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -167,7 +167,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle right = new Rectangle(258,245,5,10);
         arr.add(right);
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertTrue(bool.get(0));
         assertFalse(bool.get(1));
         assertTrue(bool.get(2));
@@ -179,7 +179,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle down = new Rectangle(245,258,10,5);
         arr.add(down);
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertFalse(bool.get(2));
@@ -191,7 +191,7 @@ public class MainCharaTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle left = new Rectangle(237,245,5,10);
         arr.add(left);
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -209,7 +209,7 @@ public class MainCharaTest {
         arr.add(right);
         arr.add(down);
         arr.add(left);
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertFalse(bool.get(0));
         assertFalse(bool.get(1));
         assertFalse(bool.get(2));
@@ -219,7 +219,7 @@ public class MainCharaTest {
     @Test
     public void testAllowedDirsWhenNotBlocked() {
         ArrayList<Rectangle> arr = new ArrayList<>();
-        ArrayList<Boolean> bool = c.allowedDirs(arr, 0);
+        ArrayList<Boolean> bool = c.allowedDirections(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -232,9 +232,15 @@ public class MainCharaTest {
         c.moveDOWN();
         c.moveLEFT();
         c.moveLEFT();
-        c.resetChara();
-        assertEquals(c.getChara().getTranslateX(),0,0.01);
-        assertEquals(c.getChara().getTranslateY(),0,0.01);
+        c.reset();
+        assertEquals(c.getCircle().getTranslateX(),0,0.01);
+        assertEquals(c.getCircle().getTranslateY(),0,0.01);
+    }
+    
+    @Test
+    public void testAddPoints() {
+        c.addPoints(100);
+        assertEquals(c.getPoints(), 100);
     }
     
 }

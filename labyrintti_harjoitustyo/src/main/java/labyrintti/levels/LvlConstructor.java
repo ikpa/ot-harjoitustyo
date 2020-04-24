@@ -14,23 +14,23 @@ import labyrintti.object.*;
  * @author ikpa
  */
 public class LvlConstructor {
-    private WallConstructor wc;
+    private WallConstructor wallconst;
     
     public LvlConstructor() {
-        wc = new WallConstructor();
+        wallconst = new WallConstructor();
     }
     
     public Level level1() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wc.hWall(200, 300, 700));
-        walls.add(wc.vWall(900, 300, 180));
-        walls.add(wc.hWall(200, 475, 700));
+        walls.add(wallconst.hWall(200, 300, 700));
+        walls.add(wallconst.vWall(900, 300, 180));
+        walls.add(wallconst.hWall(200, 475, 700));
         
-        walls.add(wc.hWall(140, 360, 60));
-        walls.add(wc.vWall(195, 300, 65));
-        walls.add(wc.vWall(195, 415, 65));
-        walls.add(wc.hWall(140, 415, 60));
-        walls.add(wc.vWall(135, 360, 60));
+        walls.add(wallconst.hWall(140, 360, 60));
+        walls.add(wallconst.vWall(195, 300, 65));
+        walls.add(wallconst.vWall(195, 415, 65));
+        walls.add(wallconst.hWall(140, 415, 60));
+        walls.add(wallconst.vWall(135, 360, 60));
         
         ArrayList<Spike> spikes = new ArrayList<>();
         
@@ -51,10 +51,10 @@ public class LvlConstructor {
     
     public Level level2() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wc.hWall(250, 50, 400));
-        walls.add(wc.vWall(645, 55, 900));
-        walls.add(wc.hWall(250, 950, 400));
-        walls.add(wc.vWall(250, 55, 900));
+        walls.add(wallconst.hWall(250, 50, 400));
+        walls.add(wallconst.vWall(645, 55, 900));
+        walls.add(wallconst.hWall(250, 950, 400));
+        walls.add(wallconst.vWall(250, 55, 900));
 
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new MovingSpike(635, 330, false, 2, 260));
@@ -86,9 +86,9 @@ public class LvlConstructor {
     
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wc.hWall(600, 200, 200));
-        walls.add(wc.vWall(795, 205, 200));
-        walls.add(wc.vWall(600, 205, 200));
+        walls.add(wallconst.hWall(600, 200, 200));
+        walls.add(wallconst.vWall(795, 205, 200));
+        walls.add(wallconst.vWall(600, 205, 200));
         
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new Spike(700, 700));
@@ -107,8 +107,8 @@ public class LvlConstructor {
     
     public Level testlvl2() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wc.hWall(600, 700, 200));
-        walls.add(wc.vWall(600, 705, 200));
+        walls.add(wallconst.hWall(600, 700, 200));
+        walls.add(wallconst.vWall(600, 705, 200));
         
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new Spike(200, 800));

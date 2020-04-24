@@ -19,11 +19,11 @@ public class Goal {
         area = new Circle(x, y, r, Color.FORESTGREEN);
     }
     
-    public boolean inGoal(MainChara c) {
-        Shape sec = Shape.intersect(area, c.getChara());
+    public boolean inGoal(MainChara chara) {
+        Shape sec = Shape.intersect(area, chara.getCircle());
         double x = sec.getBoundsInLocal().getWidth();
         
-        return x >= c.getChara().getRadius() * 2;
+        return x >= chara.getCircle().getRadius() * 2;
     }
 
     public Circle getArea() {

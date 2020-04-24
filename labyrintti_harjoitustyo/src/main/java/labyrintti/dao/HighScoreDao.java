@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.highscore;
+package labyrintti.dao;
 
 import java.io.*;
 import java.util.*;
@@ -11,10 +11,10 @@ import java.util.*;
  *
  * @author ikpa
  */
-public class ScoreReader {
+public class HighScoreDao {
     private File f;
     
-    public ScoreReader() {
+    public HighScoreDao() {
         f = new File("high_score.txt");
     }
     

@@ -12,27 +12,27 @@ import javafx.scene.paint.*;
  * @author ikpa
  */
 public class Item {
-    private Circle s;
+    private Circle circle;
     private Integer type;
     
     public Item(int x, int y, int t) {
-        s = new Circle(x, y, 5);
+        circle = new Circle(x, y, 5);
         type = t;
         
         if (type == 0) {
-            s.setFill(Color.PURPLE);
+            circle.setFill(Color.PURPLE);
         }
         
         if (type == 1) {
-            s.setFill(Color.YELLOW);
+            circle.setFill(Color.YELLOW);
         }
     }
 
-    public Circle getS() {
-        return s;
+    public Circle getCircle() {
+        return circle;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
     

@@ -7,7 +7,7 @@ package labyrintti.ui;
 
 import labyrintti.levels.LvlConstructor;
 import labyrintti.levels.Level;
-import labyrintti.highscore.ScoreReader;
+import labyrintti.dao.HighScoreDao;
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.shape.*;
@@ -28,12 +28,12 @@ public class Main extends Application {
     private MainChara c;
     private boolean select = false;
     private boolean over = false;
-    private ScoreReader s;
+    private HighScoreDao s;
 
     @Override
     public void start(Stage stage) {
         c = new MainChara(0, 0, 10, 1, 1);
-        s = new ScoreReader();
+        s = new HighScoreDao();
         
         Button start = new Button("Aloita peli");
         Button exit = new Button("Poistu");
@@ -122,7 +122,7 @@ public class Main extends Application {
                 } else if (! over) {
                     lvls.get(i).update(buttonPress, c, 22.5);
                     
-                    if (lvls.get(i).getG().inGoal(c)) {
+                    if (lvls.get(i).getGoal().inGoal(c)) {
                         i++;
                     
                         if (i == max || select) {
