@@ -12,5 +12,6 @@
 | 18.4  | 3          | Esineet lisätty, ensimmäinen oikea taso tehty |
 | 19.4  | 1          | Toinen oikea taso tehty, testejä lisätty |
 | 20.4  | 4          | Dokumentoinnin parantaminen, pistelista tehty |
-| | yht. 28.5 |
+| 24.4  | 1          | Bugin korjaus, muuttujien ja metodien uudelleennimeystä, muutama testi |
+| | yht. 29.5 |
 
