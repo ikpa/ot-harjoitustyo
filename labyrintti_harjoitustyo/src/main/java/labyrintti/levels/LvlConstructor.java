@@ -87,9 +87,9 @@ public class LvlConstructor {
     public Level level3() {
         ArrayList<Rectangle> walls = new ArrayList<>();
         //740
-        walls.add(wallconst.hWall(190, 80, 250));
+        walls.add(wallconst.hWall(155, 80, 285));
         walls.add(wallconst.hWall(475, 80, 455));
-        walls.add(wallconst.hWall(190, 115, 140));
+        walls.add(wallconst.hWall(155, 115, 175));
         walls.add(wallconst.hWall(365, 115, 565));
         
         walls.add(wallconst.vWall(330, 115, 200));
@@ -97,13 +97,24 @@ public class LvlConstructor {
         walls.add(wallconst.vWall(365, 200, 295));
         walls.add(wallconst.vWall(330, 350, 210));
         
-        walls.add(wallconst.hWall(365, 530, 565));
+        walls.add(wallconst.hWall(365, 530, 268));
+        walls.add(wallconst.hWall(668, 530, 262));
         walls.add(wallconst.hWall(365, 495, 100));
         walls.add(wallconst.hWall(500, 495, 300));
-        walls.add(wallconst.hWall(835, 495, 130));
+        walls.add(wallconst.hWall(835, 495, 135));
         
-        walls.add(wallconst.vWall(965, 530, 385));
-        walls.add(wallconst.hWall(135, 915, 835));
+        walls.add(wallconst.vWall(965, 530, 435));
+        walls.add(wallconst.vWall(925, 535, 80));
+        walls.add(wallconst.vWall(925, 650, 100));
+        walls.add(wallconst.vWall(925, 785, 95));
+        
+        walls.add(wallconst.hWall(135, 915, 795));
+        walls.add(wallconst.hWall(785, 875, 140));
+        walls.add(wallconst.hWall(635, 875, 115));
+        walls.add(wallconst.hWall(485, 875, 115));
+        walls.add(wallconst.hWall(385, 875, 65));
+        walls.add(wallconst.hWall(235, 875, 115));
+        walls.add(wallconst.hWall(135, 875, 65));
         
         
         ArrayList<Spike> spikes = new ArrayList<>();
@@ -112,8 +123,8 @@ public class LvlConstructor {
         spikes.add(new MovingSpike(640, 515, false, 1, 350));
         spikes.add(new MovingSpike(660, 515, false, 1, 950));
         spikes.add(new MovingSpike(950, 530, true, 2, 900));
-        spikes.add(new MovingSpike(935, 900, false, 1, 585));
-        spikes.add(new MovingSpike(150, 900, false, 1, 565));
+        spikes.add(new MovingSpike(935, 900, false, 2, 585));
+        spikes.add(new MovingSpike(150, 900, false, 3, 565));
         
         ArrayList<Item> items = new ArrayList<>();
         
