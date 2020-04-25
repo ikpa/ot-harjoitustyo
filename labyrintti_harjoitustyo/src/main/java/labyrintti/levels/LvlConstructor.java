@@ -84,6 +84,45 @@ public class LvlConstructor {
         return lvl;
     }
     
+    public Level level3() {
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        //740
+        walls.add(wallconst.hWall(190, 80, 250));
+        walls.add(wallconst.hWall(475, 80, 455));
+        walls.add(wallconst.hWall(190, 115, 140));
+        walls.add(wallconst.hWall(365, 115, 565));
+        
+        walls.add(wallconst.vWall(330, 115, 200));
+        walls.add(wallconst.vWall(365, 115, 50));
+        walls.add(wallconst.vWall(365, 200, 295));
+        walls.add(wallconst.vWall(330, 350, 210));
+        
+        walls.add(wallconst.hWall(365, 530, 565));
+        walls.add(wallconst.hWall(365, 495, 100));
+        walls.add(wallconst.hWall(500, 495, 300));
+        walls.add(wallconst.hWall(835, 495, 130));
+        
+        walls.add(wallconst.vWall(965, 530, 385));
+        walls.add(wallconst.hWall(135, 915, 835));
+        
+        
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new MovingSpike(700, 100, false, 2, 200));
+        spikes.add(new MovingSpike(350, 115, true, 2, 500));
+        spikes.add(new MovingSpike(640, 515, false, 1, 350));
+        spikes.add(new MovingSpike(660, 515, false, 1, 950));
+        spikes.add(new MovingSpike(950, 530, true, 2, 900));
+        spikes.add(new MovingSpike(935, 900, false, 1, 585));
+        spikes.add(new MovingSpike(150, 900, false, 1, 565));
+        
+        ArrayList<Item> items = new ArrayList<>();
+        
+        Goal g = new Goal(50, 900, 15);
+        
+        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes, items, g);
+        return lvl;
+    }
+    
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wallconst.hWall(600, 200, 200));
@@ -128,6 +167,7 @@ public class LvlConstructor {
         
         arr.add(level1());
         arr.add(level2());
+        arr.add(level3());
         
         return arr;
     }

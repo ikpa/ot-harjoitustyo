@@ -53,9 +53,11 @@ public class Main extends Application {
         BorderPane slct = new BorderPane();
         Button test = new Button("Testikenttä");
         Button test2 = new Button("Testikenttä 2");
+        Button lvl3 = new Button("Taso 3");
         VBox lvlbuttons = new VBox();
         lvlbuttons.getChildren().add(test);
         lvlbuttons.getChildren().add(test2);
+        lvlbuttons.getChildren().add(lvl3);
         slct.setCenter(lvlbuttons);
         
         BorderPane lvlset = new BorderPane();
@@ -161,6 +163,13 @@ public class Main extends Application {
             lvlset.setCenter(lvls.get(1).getStg());
             stage.setScene(lvl);
             i = 1;
+            select = true;
+        });
+        lvl3.setOnAction(e -> {
+            lvls.get(4).initialise(c);
+            lvlset.setCenter(lvls.get(4).getStg());
+            stage.setScene(lvl);
+            i = 4;
             select = true;
         });
         high.setOnAction(e -> {
