@@ -3,7 +3,7 @@
 Labyrintti on 2D, ylhäältäkuvattu videopeli, missä pelaajan on tarkoitus navigoida erilaisia kenttia vältellen esteitä ja
 etsien aarteita.
 ## Tämänhetkiset ominaisuudet
-Pelihahmoa pystyy liikuttamaan, ja sillä on elämät. Elämien loputtua peli päättyy. Peliruudun yläosassa näkyy jäljellä olevat elämät. Seinät lisätty ja toimivat. Tason maali lisätty ja toimiva (vie seuraavaan tasoon). Liikuva sekä paikallaan oleva piikkieste lisätty ja toimiva (poistaa elämän). Esineet lisätty (elämä ja kulta) ja toimivat. Ensimmäiset kaksi oikeaa tasoa tehty. Tasovalikko lisätty valikkoon (sisältää vain testikentät) ja toimii. Valikosta ja pelin päättyessä voi tarkastella myös pistetilastoja. 
+Pelihahmoa pystyy liikuttamaan, ja sillä on elämät. Elämien loputtua peli päättyy. Peliruudun yläosassa näkyy jäljellä olevat elämät. Seinät lisätty ja toimivat. Tason maali lisätty ja toimiva (vie seuraavaan tasoon). Liikuva sekä paikallaan oleva piikkieste lisätty ja toimiva (poistaa elämän). Esineet lisätty (elämä ja kulta) ja toimivat. Peli sisältää kolme oikeaa tasoa. Tasovalikko lisätty valikkoon (sisältää testikentät ja kolmannen kentän) ja toimii. Valikosta ja pelin päättyessä voi tarkastella myös pistetilastoja. 
 ## Dokumentointi
 [Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
 [Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)  
@@ -14,7 +14,7 @@ Pelihahmoa pystyy liikuttamaan, ja sillä on elämät. Elämien loputtua peli p�
 ## Komentorivikomennot
 Kaikki maven-komentorivikomennot tehdään polussa `/ot-harjoitustyo/labyrintti_harjoitustyo/`.
 ### Ohjelman ajaminen
-`mvn compile exec:java -Dexec.mainClass=labyrintti_harjoitustyo.RealMain`
+`mvn compile exec:java -Dexec.mainClass=labyrintti.ui.RealMain`
 ### Testaus
 Testit suoritetaan komennolla  
 
