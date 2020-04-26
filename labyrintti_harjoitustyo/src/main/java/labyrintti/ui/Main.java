@@ -90,7 +90,7 @@ public class Main extends Application {
         Button ready = new Button("Valmis");
         fields.getChildren().add(ready);
         endscreen.setCenter(fields);
-        endscreen.setTop(new Label("Kirjoita nimesi ja paina 'Valmis"));
+        endscreen.setTop(new Label("Kirjoita nimesi ja paina 'Valmis'"));
         
         LvlConstructor lc = new LvlConstructor();
         ArrayList<Level> lvls = lc.allLvls();
@@ -195,17 +195,21 @@ public class Main extends Application {
             String name = namefield.getText();
             s.writeScore(name, c.getPoints());
             
-            ArrayList<String> scores = s.neatScores();
+            endscreen.setTop(null);
+            endscreen.setCenter(null);
+            VBox newlist = new VBox();
             
-            list.getChildren().clear();
+            ArrayList<String> scores = s.neatScores();
+
             for (String v: scores) {
                 Label h = new Label(v);
-                list.getChildren().add(h);
+                newlist.getChildren().add(h);
             }
             
-            highbuttons.getChildren().clear();
-            highbuttons.getChildren().add(exit);
-            stage.setScene(score);
+            newlist.getChildren().add(exit);
+            endscreen.setCenter(newlist);
+            stage.setHeight(scores.size() * 20 + 60);
+            stage.setWidth(newlist.getWidth());
         });
         
         stage.setTitle("Labyrintti");

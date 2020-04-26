@@ -87,35 +87,55 @@ public class LvlConstructor {
     public Level level3() {
         ArrayList<Rectangle> walls = new ArrayList<>();
         //740
+        
         walls.add(wallconst.hWall(155, 80, 285));
         walls.add(wallconst.hWall(475, 80, 455));
-        walls.add(wallconst.hWall(155, 115, 175));
+        walls.addAll(wallconst.upPocket(440, 80, 35, 35));
+        walls.add(wallconst.hWall(155, 115, 180));
+        walls.add(wallconst.vWall(930, 80, 40));
         walls.add(wallconst.hWall(365, 115, 565));
+        walls.add(wallconst.vWall(150, 80, 40));
         
-        walls.add(wallconst.vWall(330, 115, 200));
+        walls.add(wallconst.vWall(330, 120, 190));
         walls.add(wallconst.vWall(365, 115, 50));
+        walls.addAll(wallconst.rightPocket(365, 165, 35, 35));
         walls.add(wallconst.vWall(365, 200, 295));
-        walls.add(wallconst.vWall(330, 350, 210));
+        walls.add(wallconst.vWall(330, 355, 180));
+        walls.addAll(wallconst.leftPocket(335, 315, 40, 35));
+        walls.addAll(wallconst.downPocket(335, 535, 30, 35));
         
+        walls.addAll(wallconst.downPocket(633, 535, 35, 35));
         walls.add(wallconst.hWall(365, 530, 268));
         walls.add(wallconst.hWall(668, 530, 262));
         walls.add(wallconst.hWall(365, 495, 100));
+        walls.addAll(wallconst.upPocket(465, 495, 370, 80));
         walls.add(wallconst.hWall(500, 495, 300));
         walls.add(wallconst.hWall(835, 495, 135));
         
-        walls.add(wallconst.vWall(965, 530, 435));
-        walls.add(wallconst.vWall(925, 535, 80));
-        walls.add(wallconst.vWall(925, 650, 100));
-        walls.add(wallconst.vWall(925, 785, 95));
+        walls.add(wallconst.vWall(965, 495, 425));
+        walls.add(wallconst.vWall(925, 535, 75));
+        walls.add(wallconst.vWall(925, 655, 90));
+        walls.add(wallconst.vWall(925, 790, 90));
+        walls.addAll(wallconst.leftPocket(930, 615, 40, 35));
+        walls.addAll(wallconst.leftPocket(930, 750, 40, 35));
+        walls.addAll(wallconst.downPocket(930, 920, 35, 35));
         
         walls.add(wallconst.hWall(135, 915, 795));
         walls.add(wallconst.hWall(785, 875, 140));
+        walls.addAll(wallconst.upPocket(750, 875, 35, 35));
         walls.add(wallconst.hWall(635, 875, 115));
+        walls.addAll(wallconst.upPocket(600, 875, 35, 35));
         walls.add(wallconst.hWall(485, 875, 115));
+        walls.addAll(wallconst.upPocket(450, 875, 35, 35));
         walls.add(wallconst.hWall(385, 875, 65));
+        walls.addAll(wallconst.upPocket(350, 875, 35, 35));
         walls.add(wallconst.hWall(235, 875, 115));
+        walls.addAll(wallconst.upPocket(200, 875, 35, 35));
         walls.add(wallconst.hWall(135, 875, 65));
         
+        walls.add(wallconst.vWall(135, 920, 20));
+        walls.addAll(wallconst.leftPocket(140, 855, 110, 85));
+        walls.add(wallconst.vWall(135, 855, 20));
         
         ArrayList<Spike> spikes = new ArrayList<>();
         spikes.add(new MovingSpike(700, 100, false, 2, 200));
@@ -127,6 +147,22 @@ public class LvlConstructor {
         spikes.add(new MovingSpike(150, 900, false, 3, 565));
         
         ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item(160, 100, 1));
+        items.add(new Item(170, 100, 1));
+        items.add(new Item(180, 100, 1));
+        items.add(new Item(350, 555, 1));
+        
+        items.add(new Item(560, 445, 1));
+        items.add(new Item(650, 445, 1));
+        items.add(new Item(740, 445, 1));
+        
+        items.add(new Item(650, 555, 0));
+        
+        items.add(new Item(947, 940, 0));
+        
+        items.add(new Item(80, 900, 1));
+        items.add(new Item(105, 900, 1));
+        items.add(new Item(130, 900, 1));
         
         Goal g = new Goal(50, 900, 15);
         
