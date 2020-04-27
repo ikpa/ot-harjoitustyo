@@ -8,13 +8,18 @@ package labyrintti.object;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 /**
- *
- * @author ikpa
+ * Luokka kuvaa esineitä, joita pelihahmo voi kerätä.
  */
 public class Item {
     private Circle circle;
     private Integer type;
     
+    /**
+     * Luo uuden Item-olion
+     * @param x Esineen x-koordinaatti
+     * @param y Esineen y-koordinaatti
+     * @param t Esineen tyyppi: 0 jos elämä, 1 jos kulta
+     */
     public Item(int x, int y, int t) {
         circle = new Circle(x, y, 5);
         type = t;

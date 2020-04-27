@@ -7,7 +7,7 @@ package labyrintti.object;
 
 import java.util.*;
 /**
- *
+ * Edestakaisin liikkuva Spike-este. Perii Spike-luokan.
  * @author ikpa
  */
 public class MovingSpike extends Spike {
@@ -19,6 +19,14 @@ public class MovingSpike extends Spike {
     private double diffcoordinate2;
     private double speed;
     
+    /**
+     * Luo uuden MovingSpike-olion.
+     * @param x Piikin alku-x-koordinaatti
+     * @param y Piikin alku-y-koordinaatti
+     * @param ver Määrää, onko piikin liike vertikaalista vai horisontaalista
+     * @param s Piikin nopeus
+     * @param endcoordinate Koordinaatti, jossa piikki vaihtaa suuntaa
+     */
     public MovingSpike(int x, int y, Boolean ver, int s, int endcoordinate) {
         super(x, y);
         vert = ver;
@@ -37,6 +45,9 @@ public class MovingSpike extends Spike {
         finaldir = diffcoordinate2 - diffcoordinate1 > 0;
     }
     
+    /**
+     * Liikuttaa piikkiä konstruktorissa määriteltyjen parametrien perusteella.
+     */
     @Override
     public void move() {
         if (vert) {
@@ -46,6 +57,10 @@ public class MovingSpike extends Spike {
         }
     }
     
+    /**
+     * Liikuttaa piikkiä vertikaalisesti, riippuen piikin sijainnista ja 
+     * alku- ja loppukoordinaateista.
+     */
     public void verMove() {
         if (dir) {
             moveDOWN();
@@ -65,6 +80,10 @@ public class MovingSpike extends Spike {
         }
     }
     
+    /**
+     * Liikuttaa piikkiä horisontaalisesti riippuen piikin paikasta ja alku- ja
+     * loppukoordinaateista.
+     */
     public void horMove() {
         if (dir) {
             moveRIGHT();
@@ -83,18 +102,30 @@ public class MovingSpike extends Spike {
         }
     }
     
+    /**
+     * Liikuttaa piikkiä ylöstpäin.
+     */
     public void moveUP() {
         polygon.setTranslateY(polygon.getTranslateY() - speed);
     }
     
+    /**
+     * Liikuttaa piikkiä alaspäin.
+     */
     public void moveDOWN() {
         polygon.setTranslateY(polygon.getTranslateY() + speed);
     }
     
+    /**
+     * Liikuttaa piikkiä oikealle.
+     */
     public void moveRIGHT() {
         polygon.setTranslateX(polygon.getTranslateX() + speed);
     }
     
+    /**
+     * Liikuttaa piikkiä vasemmalle.
+     */
     public void moveLEFT() {
         polygon.setTranslateX(polygon.getTranslateX() - speed);
     }

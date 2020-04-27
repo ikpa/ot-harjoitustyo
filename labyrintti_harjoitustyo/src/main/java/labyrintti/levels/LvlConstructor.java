@@ -86,7 +86,6 @@ public class LvlConstructor {
     
     public Level level3() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        //740
         
         walls.add(wallconst.hWall(155, 80, 285));
         walls.add(wallconst.hWall(475, 80, 455));

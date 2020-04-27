@@ -8,12 +8,17 @@ package labyrintti.object;
 import javafx.scene.shape.Polygon;
 import javafx.scene.paint.Color;
 /**
- *
+ * Piikkieste, joka vie pelihahmolta elämän ja vie sen tason alkuun.
  * @author ikpa
  */
 public class Spike {
     public Polygon polygon;
     
+    /**
+     * Luo uuden Spike-olion
+     * @param x piikkiesteen x-koordinaatti
+     * @param y piikkiesteen y-koordinaatti
+     */
     public Spike(double x, double y) {
         polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
@@ -40,6 +45,9 @@ public class Spike {
         return polygon;
     }
     
+    /**
+     * Overridatava metodi. Ei tee tässä luokassa mitään.
+     */
     public void move() {
         
     }
