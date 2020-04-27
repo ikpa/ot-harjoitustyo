@@ -15,5 +15,6 @@
 | 24.4  | 1          | Bugin korjaus, muuttujien ja metodien uudelleennimeystä, muutama testi |
 | 25.4  | 3          | Kolmannen tason aloitus |
 | 26.4  | 3          | Kolmas taso valmis, valikkoja hiottu |
-| | yht. 35.5 |
+| 27.4  | 3          | Dokumentointi, JavaDocin aloitus     |
+| | yht. 38.5 |
 
