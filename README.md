@@ -37,3 +37,10 @@ Checkstyle-raportti generoidaan komennolla
 `mvn jxr:jxr checkstyle:checkstyle`  
 
 Raporttia voi tarkastella polusta `target/site/checkstyle.html`.
+
+### JavaDoc
+Generoi JavaDoc komennolla  
+
+`mvn javadoc:javadoc`  
+
+Voit tarkastella JavaDoccia polusta `target/site/apidocs`.
