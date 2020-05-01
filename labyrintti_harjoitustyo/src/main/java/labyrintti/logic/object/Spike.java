@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.object;
+package labyrintti.logic.object;
 
-import javafx.scene.shape.Polygon;
+import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
+import labyrintti.logic.*;
 /**
  * Piikkieste, joka vie pelihahmolta elämän ja vie sen tason alkuun.
  * @author ikpa
  */
-public class Spike {
-    public Polygon polygon;
+public class Spike extends Hostile {
     
     /**
      * Luo uuden Spike-olion
@@ -20,7 +20,8 @@ public class Spike {
      * @param y piikkiesteen y-koordinaatti
      */
     public Spike(double x, double y) {
-        polygon = new Polygon();
+        super();
+        Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
             x, y - 10,
             x + 2, y - 5,
@@ -39,15 +40,15 @@ public class Spike {
             x - 10, y - 10,
             x - 2, y - 5
         });
-    }
-
-    public Polygon getPolygon() {
-        return polygon;
+        
+        setShape(polygon);
+        
     }
     
     /**
      * Overridatava metodi. Ei tee tässä luokassa mitään.
      */
+    @Override
     public void move() {
         
     }

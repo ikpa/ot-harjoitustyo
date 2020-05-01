@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.object;
+package labyrintti.logic.object;
 
-import labyrintti.chars.MainChara;
+import labyrintti.logic.object.MovingSpike;
+import labyrintti.logic.chars.MainChara;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,100 +52,100 @@ public class MovingSpikeTest {
     @Test
     public void testMoveUP() {
         vert.moveUP();
-        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getPolygon().getTranslateY(), -1, 0.01);
+        assertEquals(vert.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateY(), -1, 0.01);
     }
     
     @Test
     public void testMoveDOWN() {
         vert.moveDOWN();
-        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getPolygon().getTranslateY(), 1, 0.01);
+        assertEquals(vert.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateY(), 1, 0.01);
     }
     
     @Test
     public void testMoveRIGHT() {
         hor.moveRIGHT();
-        assertEquals(hor.getPolygon().getTranslateX(), 1, 0.01);
-        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateX(), 1, 0.01);
+        assertEquals(hor.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveLEFT() {
         hor.moveLEFT();
-        assertEquals(hor.getPolygon().getTranslateX(), -1, 0.01);
-        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateX(), -1, 0.01);
+        assertEquals(hor.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirTrueOnce() {
         hor.horMove();
-        assertEquals(hor.getPolygon().getTranslateX(), 1, 0.01);
-        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateX(), 1, 0.01);
+        assertEquals(hor.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirTrueTwice() {
         hor.horMove();
         hor.horMove();
-        assertEquals(hor.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirFalseOnce() {
         horf.horMove();
-        assertEquals(horf.getPolygon().getTranslateX(), -1, 0.01);
-        assertEquals(horf.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(horf.getShape().getTranslateX(), -1, 0.01);
+        assertEquals(horf.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testHorMoveWhenFinaldirFalseTwice() {
         horf.horMove();
         horf.horMove();
-        assertEquals(horf.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(horf.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(horf.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(horf.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirTrueOnce() {
         vert.verMove();
-        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getPolygon().getTranslateY(), 1, 0.01);
+        assertEquals(vert.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateY(), 1, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirTrueTwice() {
         vert.verMove();
         vert.verMove();
-        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vert.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirFalseOnce() {
         vertf.verMove();
-        assertEquals(vertf.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vertf.getPolygon().getTranslateY(), -1, 0.01);
+        assertEquals(vertf.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vertf.getShape().getTranslateY(), -1, 0.01);
     }
     
     @Test
     public void testVerMoveWhenFinaldirFalseTwice() {
         vertf.verMove();
         vertf.verMove();
-        assertEquals(vertf.getPolygon().getTranslateX(), 0, 0.01);
-        assertEquals(vertf.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(vertf.getShape().getTranslateX(), 0, 0.01);
+        assertEquals(vertf.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveWhenVerIsFalse() {
         hor.move();
-        assertEquals(hor.getPolygon().getTranslateY(), 0, 0.01);
+        assertEquals(hor.getShape().getTranslateY(), 0, 0.01);
     }
     
     @Test
     public void testMoveWhenVerIsTrue() {
         vert.move();
-        assertEquals(vert.getPolygon().getTranslateX(), 0, 0.01);
+        assertEquals(vert.getShape().getTranslateX(), 0, 0.01);
     }
 }

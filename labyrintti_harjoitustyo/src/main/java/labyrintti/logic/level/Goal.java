@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.object;
+package labyrintti.logic.level;
 
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
-import labyrintti.chars.MainChara;
+import labyrintti.logic.chars.MainChara;
 /**
  * Maali, johon pelihahmon on pyrittävä. Vie seuraavaan kenttään.
  * @author ikpa

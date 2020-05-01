@@ -5,8 +5,9 @@
  */
 package labyrintti.ui;
 
-import labyrintti.levels.LvlConstructor;
-import labyrintti.levels.Level;
+import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.level.LvlConstructor;
+import labyrintti.logic.level.Level;
 import labyrintti.dao.HighScoreDao;
 import javafx.application.*;
 import javafx.scene.Scene;
@@ -17,11 +18,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.animation.*;
 import javafx.scene.paint.Color;
-import javafx.geometry.*;
 
 import java.util.*;
 
-import labyrintti.chars.*;
 
 public class Main extends Application {
     private int i=0;
@@ -118,6 +117,10 @@ public class Main extends Application {
             public void handle(long now) {
                 
                 if (c.isDead()) {
+                    if (c.getLives() > 0) {
+                        c.addPoints(c.getLives() * 50);
+                    }
+                    
                     stage.setScene(end);
                     over = true;
                     return;
@@ -126,15 +129,25 @@ public class Main extends Application {
                     
                     if (lvls.get(i).getGoal().inGoal(c)) {
                         i++;
+                        
+                        if (!select) {
+                            c.addPoints(200);
+                        }
                     
                         if (i == max || select) {
+                            if (c.getLives() > 0) {
+                                c.addPoints(c.getLives() * 50);
+                            }
+                            
                             stage.setScene(end);
                             over = true;
                             return;
                         }
+                        
+                        
                     
-                    lvls.get(i).initialise(c);
-                    lvlset.setCenter(lvls.get(i).getStg());
+                        lvls.get(i).initialise(c);
+                        lvlset.setCenter(lvls.get(i).getStg());
                     }
                 }
                 

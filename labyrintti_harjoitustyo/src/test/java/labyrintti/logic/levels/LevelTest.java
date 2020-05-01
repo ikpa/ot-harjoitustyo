@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.levels;
+package labyrintti.logic.levels;
 
+import labyrintti.logic.level.Level;
+import labyrintti.logic.level.LvlConstructor;
 import java.util.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import labyrintti.chars.MainChara;
-import labyrintti.object.Goal;
-import labyrintti.object.Item;
-import labyrintti.object.Spike;
+import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.level.Goal;
+import labyrintti.logic.object.Item;
+import labyrintti.logic.object.Spike;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

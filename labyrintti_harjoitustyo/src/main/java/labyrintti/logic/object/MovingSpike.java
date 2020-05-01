@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.object;
+package labyrintti.logic.object;
 
 import java.util.*;
 /**
@@ -65,16 +65,16 @@ public class MovingSpike extends Spike {
         if (dir) {
             moveDOWN();
             
-            if ((polygon.getTranslateY() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
-                    (polygon.getTranslateY() >= 0 && !finaldir)) {
+            if ((shape.getTranslateY() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
+                    (shape.getTranslateY() >= 0 && !finaldir)) {
                 dir = false;
                 
             }
         } else {
             moveUP();
             
-            if ((polygon.getTranslateY() <= 0 && finaldir) ||
-                    (polygon.getTranslateY() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
+            if ((shape.getTranslateY() <= 0 && finaldir) ||
+                    (shape.getTranslateY() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
                 dir = true;
             }
         }
@@ -88,15 +88,15 @@ public class MovingSpike extends Spike {
         if (dir) {
             moveRIGHT();
             
-            if ((polygon.getTranslateX() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
-                    (polygon.getTranslateX() >= 0 && !finaldir)) {
+            if ((shape.getTranslateX() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
+                    (shape.getTranslateX() >= 0 && !finaldir)) {
                 dir = false;
             }
         } else {
             moveLEFT();
             
-            if ((polygon.getTranslateX() <= 0 && finaldir) ||
-                    (polygon.getTranslateX() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
+            if ((shape.getTranslateX() <= 0 && finaldir) ||
+                    (shape.getTranslateX() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
                 dir = true;
             }
         }
@@ -106,27 +106,27 @@ public class MovingSpike extends Spike {
      * Liikuttaa piikkiä ylöstpäin.
      */
     public void moveUP() {
-        polygon.setTranslateY(polygon.getTranslateY() - speed);
+        shape.setTranslateY(shape.getTranslateY() - speed);
     }
     
     /**
      * Liikuttaa piikkiä alaspäin.
      */
     public void moveDOWN() {
-        polygon.setTranslateY(polygon.getTranslateY() + speed);
+        shape.setTranslateY(shape.getTranslateY() + speed);
     }
     
     /**
      * Liikuttaa piikkiä oikealle.
      */
     public void moveRIGHT() {
-        polygon.setTranslateX(polygon.getTranslateX() + speed);
+        shape.setTranslateX(shape.getTranslateX() + speed);
     }
     
     /**
      * Liikuttaa piikkiä vasemmalle.
      */
     public void moveLEFT() {
-        polygon.setTranslateX(polygon.getTranslateX() - speed);
+        shape.setTranslateX(shape.getTranslateX() - speed);
     }
 }

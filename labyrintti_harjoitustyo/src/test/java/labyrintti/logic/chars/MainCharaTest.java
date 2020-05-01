@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.chars;
+package labyrintti.logic.chars;
 
-import labyrintti.object.*;
+import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.*;
+import labyrintti.logic.object.*;
 import java.util.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.*;
@@ -22,7 +24,7 @@ import static org.junit.Assert.*;
  */
 public class MainCharaTest {
     MainChara c;
-    ArrayList<Spike> spikes;
+    ArrayList<Hostile> hostiles;
     
     public MainCharaTest() {
     }
@@ -38,7 +40,7 @@ public class MainCharaTest {
     @Before
     public void setUp() {
         c = new MainChara(250,250,10,1,1);
-        spikes = new ArrayList<>();
+        hostiles = new ArrayList<>();
     }
     
     @After
@@ -88,16 +90,16 @@ public class MainCharaTest {
     @Test
     public void testCheckHitWhenNotHit() {
         Spike s = new Spike(10,10);
-        spikes.add(s);
-        c.checkHit(spikes);
+        hostiles.add(s);
+        c.checkHit(hostiles);
         assertEquals(c.getLives(), 3);
     }
     
     @Test
     public void testCheckHitWhenHit() {
         Spike s = new Spike(250,250);
-        spikes.add(s);
-        c.checkHit(spikes);
+        hostiles.add(s);
+        c.checkHit(hostiles);
         assertEquals(c.getLives(),2);
     }
     
@@ -109,8 +111,8 @@ public class MainCharaTest {
     @Test
     public void testDeadWhenHitOnce() {
         Spike s = new Spike(250,250);
-        spikes.add(s);
-        c.checkHit(spikes);
+        hostiles.add(s);
+        c.checkHit(hostiles);
         assertEquals(c.getLives(),2);
         assertFalse(c.isDead());
     }
@@ -118,11 +120,11 @@ public class MainCharaTest {
     @Test
     public void testDeadWhenHitFourTimes() {
         Spike s = new Spike(250,250);
-        spikes.add(s);
-        c.checkHit(spikes);
-        c.checkHit(spikes);
-        c.checkHit(spikes);
-        c.checkHit(spikes);
+        hostiles.add(s);
+        c.checkHit(hostiles);
+        c.checkHit(hostiles);
+        c.checkHit(hostiles);
+        c.checkHit(hostiles);
         assertTrue(c.isDead());
     }
     

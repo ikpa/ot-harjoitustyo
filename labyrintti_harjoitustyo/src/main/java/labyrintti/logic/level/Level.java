@@ -3,42 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.levels;
+package labyrintti.logic.level;
 
+import labyrintti.logic.*;
+import labyrintti.logic.object.Item;
+import labyrintti.logic.level.Goal;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import labyrintti.chars.*;
-import labyrintti.object.*;
 import java.util.*;
+import labyrintti.logic.object.Item;
+import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.object.Spike;
 /**
- *
+ * Luokka, joka kuvaa yhtä tasoa.
  * @author ikpa
  */
 public class Level {
     private Pane stg;
     private ArrayList<Rectangle> walls;
-    private ArrayList<Spike> spikes;
+    private ArrayList<Hostile> hostiles;
     private ArrayList<Item> items;
     private Goal goal;
     private int startx;
     private int starty;
     
+    /**
+     * Luo uuden Level-olion
+     * @param width Tason leveys pikseleissä
+     * @param height Tason korkeus pikseleissä
+     * @param x Pelihahmon aloitus-x-koordinaatti
+     * @param y Pelihahmon aloitus-y-koordinaatti
+     * @param wall Array, joka sisältää kaikki tason seinät (Rectangle-olioina)
+     * @param host Array, joka sisältää kaikki tason viholliset
+     * @param i Array, joka sisältää kaikki tason kerättävät esineet
+     * @param go Tason maali
+     */
     public Level(int width, int height, int x, int y,
-             ArrayList<Rectangle> arr, ArrayList<Spike> sp, ArrayList<Item> i,
+             ArrayList<Rectangle> wall, ArrayList<Hostile> host, ArrayList<Item> i,
              Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
         
-        walls = arr;
+        walls = wall;
         walls.forEach((r) -> {
             stg.getChildren().add(r);
         });
         
-        spikes = sp;
-        if (!(spikes.isEmpty())) {
-            spikes.forEach((s) -> {
-                stg.getChildren().add(s.getPolygon());
+        hostiles = host;
+        if (!(hostiles.isEmpty())) {
+            hostiles.forEach((s) -> {
+                stg.getChildren().add(s.getShape());
             });
         }
         
@@ -72,10 +87,14 @@ public class Level {
         return items;
     }
 
-    public ArrayList<Spike> getSpikes() {
-        return spikes;
+    public ArrayList<Hostile> getHostiles() {
+        return hostiles;
     }
     
+    /**
+     * Resetoi pelihahmon ja asettaa sen lähtökoordinaatteihinsa
+     * @param chara Käytettävä pelihahmo
+     */
     public void initialise(MainChara chara) {
         chara.reset();
         chara.getCircle().setCenterX(startx);
@@ -83,6 +102,10 @@ public class Level {
         stg.getChildren().add(chara.getCircle());
     }
     
+    /**
+     * Poistaa tasosta kaikki esineet, joiden indeksi löytyy Arraysta
+     * @param ids Array, jossa poistettavien esineiden indeksit
+     */
     public void removeItems(ArrayList<Integer> ids) {
         if (!(ids.isEmpty())) {
             ids.forEach(i -> {
@@ -93,11 +116,17 @@ public class Level {
         }
     }
     
+    /**
+     * Päivittää peliruudun
+     * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
+     * @param chara Käytettävä pelihahmo
+     * @param voffset Luku, joka vaaditaan seinien kanssa törmäysten havaitsemiseen (vain jos peliruutu sisältää infopalkin)
+     */
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
         chara.move(buttonPress, walls, voffset);
         
-        if (!(spikes.isEmpty())) {
-            chara.checkHit(spikes);
+        if (!(hostiles.isEmpty())) {
+            chara.checkHit(hostiles);
         }
         
         if (!(items.isEmpty())) {
@@ -106,7 +135,7 @@ public class Level {
             removeItems(ids);
         }
         
-        spikes.forEach((s) -> {
+        hostiles.forEach((s) -> {
             s.move();
         });
     }

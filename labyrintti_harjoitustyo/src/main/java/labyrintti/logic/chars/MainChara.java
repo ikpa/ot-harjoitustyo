@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package labyrintti.chars;
+package labyrintti.logic.chars;
 
+import labyrintti.logic.*;
+import labyrintti.logic.object.Item;
 import javafx.geometry.*;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
 import javafx.scene.paint.*;
-import labyrintti.object.*;
 
 import java.util.*;
+import labyrintti.logic.object.Spike;
 /**
- *
+ * Pelihahmoa kuvaava olio
  * @author ikpa
  */
 public class MainChara {
@@ -23,6 +25,14 @@ public class MainChara {
     private int points;
     private boolean dead;
     
+    /**
+     * Luo uuden MainChara-olion
+     * @param x Alku-x-koordinaatti
+     * @param y Alku-y-koordinaatti
+     * @param r Säde
+     * @param mvmnty Nopeus y-suunnassa
+     * @param mvmntx Nopeus x-suunnassa
+     */
     public MainChara(int x, int y, int r, int mvmnty, int mvmntx) {
         circle = new Circle(x, y, r, Color.PURPLE);
         mvmnt = new Point2D(mvmntx, mvmnty);
@@ -42,6 +52,10 @@ public class MainChara {
         return points;
     }
     
+    /**
+     * Lisää tietyn määrän pisteitä hahmolle
+     * @param i Pistemäärä
+     */
     public void addPoints(int i) {
         points = points + i;
     }
@@ -50,27 +64,47 @@ public class MainChara {
         return dead;
     }
     
+    /**
+     * Lisää yhden elämän
+     */
     public void addLife() {
         lives++;
     }
     
+    /**
+     * Poistaa yhden elämän
+     */
     public void removeLife() {
         lives--;
     }
     
+    /**
+     * Tarkistaa, onko pelihahmo osunut tiettyyn Shape-olioon
+     * @param s Shape, joka tarkistetaan
+     * @return true jos osuu, false jos ei osu
+     */
     public boolean collision(Shape s) {
         Shape sec = Shape.intersect(s, circle);
         return sec.getBoundsInLocal().getWidth() > 1;
     }
     
+    /**
+     * Tarkistaa, voiko pelihahmo kerätä tietyn esineen
+     * @param i Esine, joka tarkistetaan
+     * @return true jos voi kerätä, false jos ei voi
+     */
     public boolean get(Item i) {
         Shape sec = Shape.intersect(circle, i.getCircle());
         return sec.getBoundsInLocal().getWidth() >= 10;
     }
     
-    public void checkHit(ArrayList<Spike> spikes) {
-        spikes.forEach(s -> {
-            if (collision(s.getPolygon())) {
+    /**
+     * Tarkistaa kaikki osumat kaikkien Arrayn Hostile-olioiden kanssa ja poistaa elämän tarvittaessa. Hahmo merkitään kuolleeksi jos elämät loppuvat.
+     * @param hostiles Array, jossa tarkistettavat Hostile-oliot
+     */
+    public void checkHit(ArrayList<Hostile> hostiles) {
+        hostiles.forEach(s -> {
+            if (collision(s.getShape())) {
                 removeLife();
                 circle.setTranslateX(0);
                 circle.setTranslateY(0);
@@ -82,6 +116,11 @@ public class MainChara {
         }
     }
     
+    /**
+     * Tarkistaa kaikki Arrayn esineet, ja kerää ne tarvittaessa. Lisää kyseisille esineille ominaiset vaikutukset hahmolle, ja palauttaa kerättyjen esineiden indeksit.
+     * @param items Array, jossa tarkistettavat esineet
+     * @return Array, jossa kerättyjen esineiden indeksit
+     */
     public ArrayList<Integer> checkGet(ArrayList<Item> items) {
         ArrayList<Integer> ids = new ArrayList<>();
         items.forEach(item -> {
@@ -101,6 +140,12 @@ public class MainChara {
         return ids;
     }
       
+    /**
+     * Tarkistaa, mihin suuntiin pelihahmo voi liikkua seinien perusteella
+     * @param walls Tarkistettavat seinät
+     * @param voffset Vaaditaan koordinaattien korjaamiseen, jos peliruudussa on infopalkki
+     * @return Array, joka sisältää sallitut suunnat. Indeksi 0 ylös, 1 oikea, 2 alas, 3 vasen; true sallittu suunta, false kielletty suunta.
+     */
     public ArrayList<Boolean> allowedDirections(ArrayList<Rectangle> walls, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -146,9 +191,15 @@ public class MainChara {
         return dirs;
     }
     
+    /**
+     * Liikuttaa hahmoa pelaajan napinpainallusten ja seinien perusteella
+     * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
+     * @param walls Tarkistettavat seinät
+     * @param voffset Koordinaattien korjaamiseen vaadittava luku
+     */
     public void move(Map<KeyCode, Boolean> buttonPress,
-            ArrayList<Rectangle> a, double voffset) {
-        ArrayList<Boolean> allowed = allowedDirections(a, voffset);
+            ArrayList<Rectangle> walls, double voffset) {
+        ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
         
         if (buttonPress.getOrDefault(KeyCode.UP, Boolean.FALSE)
                 && allowed.get(0)) {
@@ -171,22 +222,37 @@ public class MainChara {
         }
     }
     
+    /**
+     * Liikuttaa hahmoa ylös
+     */
     public void moveUP() {
         circle.setTranslateY(circle.getTranslateY() - mvmnt.getY());
     }
     
+    /**
+     * Liikuttaa hahmoa alas
+     */
     public void moveDOWN() {
         circle.setTranslateY(circle.getTranslateY() + mvmnt.getY());
     }
     
+    /**
+     * Liikuttaa hahmoa oikealle
+     */
     public void moveRIGHT() {
         circle.setTranslateX(circle.getTranslateX() + mvmnt.getX());
     }
     
+    /**
+     * Liikuttaa hahmoa vasemmalle
+     */
     public void moveLEFT() {
         circle.setTranslateX(circle.getTranslateX() - mvmnt.getX());
     }
     
+    /**
+     * Palauttaa hahmon koordinaatit ennalleen
+     */
     public void reset() {
         circle.setTranslateX(0);
         circle.setTranslateY(0);
