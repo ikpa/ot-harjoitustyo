@@ -1,14 +1,16 @@
 # Arkitehtuurikuvaus
 ## Rakenne
-Ohjelma sisältää 5 pakkausta: chars, dao, levels, object ja ui.
-### chars
+Ohjelma sisältää 3 pääpakkausta: logic, dao ja ui. Pakkaus logic sisältää lisäksi alapakkaukset chars, level ja object.
+### logic
+Pakkaus sisältää kaikki pelilogiikkaan liittyvät pakkaukset, sekä Hostile-luokan.
+#### logic.chars
 Tämä pakkaus sisältää tällä hetkellä vain MainChara-luokan. Pakkauksen on alustavasti tarkoitus sisältää kaikki useammassa kuin yhdessä suunnassa liikkuvat pelikentän oliot, jotka eivät voi liikkua seinien läpi.
+#### logic.levels
+Tämä pakkaus sisältää Level, LvlConstructor ja Goal-luokat. Pakkaus sisältää siis taso-olion ja taso-olioihin liittyvät luokat.
+#### logic.object
+Tämä pakkaus sisältää pelikenttien esineet ja esteet, joiden kanssa pelihahmo MainChara pystyy vuorovaikuttamaan, ja niiden luomiseen tarvittavat luokat. Pakkaus sisältää Item, MovingSpike, Spike ja WallConstructor-luokat.
 ### dao
 Tämä pakkaus sisältää HighScoreDao-luokan, jonka tarkoitus on lukea high_score.txt-tiedostoa ja säilöä pelin pistetilastot. Mikäli ohjelmaan lisätään muita datatiedostoja, niiden käsittelyn tekevät oliot lisätään tänne.
-### levels
-Tämä pakkaus sisältää Level ja LvlConstructor-luokat. Pakkaus sisältää siis taso-olion ja taso-olioiden luomiseen tarvittavat luokat.
-### object
-Tämä pakkaus sisältää pelikenttien esineet ja esteet, joiden kanssa pelihahmo MainChara pystyy vuorovaikuttamaan, ja niiden luomiseen tarvittavat luokat. Pakkaus sisältää Goal, Item, MovingSpike, Spike ja WallConstructor-luokat.
 ### ui
 Tämä pakkaus sisältää luokat Main ja RealMain, jotka rakentavat itse ajettavan ohjelman.
 ## Luokkakaavio
