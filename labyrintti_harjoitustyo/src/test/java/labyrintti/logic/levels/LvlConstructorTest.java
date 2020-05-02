@@ -50,7 +50,7 @@ public class LvlConstructorTest {
         Level lvl = lc.level1();
         assertEquals(lvl.getWalls().size(), 8);
         assertEquals(lvl.getItems().size(), 6);
-        assertTrue(lvl.getHostiles().isEmpty());
+        assertTrue(lvl.getSpikes().isEmpty());
     }
 
     /**
@@ -61,7 +61,7 @@ public class LvlConstructorTest {
         Level lvl = lc.level2();
         assertEquals(lvl.getWalls().size(), 4);
         assertEquals(lvl.getItems().size(), 7);
-        assertEquals(lvl.getHostiles().size(), 6);
+        assertEquals(lvl.getSpikes().size(), 6);
     }
 
     /**
@@ -72,7 +72,7 @@ public class LvlConstructorTest {
         Level lvl = lc.level3();
         assertEquals(lvl.getWalls().size(), 73);
         assertEquals(lvl.getItems().size(), 12);
-        assertEquals(lvl.getHostiles().size(), 7);
+        assertEquals(lvl.getSpikes().size(), 7);
     }
 
     /**
@@ -83,7 +83,7 @@ public class LvlConstructorTest {
         Level lvl = lc.testlvl();
         assertEquals(lvl.getWalls().size(), 3);
         assertEquals(lvl.getItems().size(), 2);
-        assertEquals(lvl.getHostiles().size(), 3);
+        assertEquals(lvl.getSpikes().size(), 3);
     }
 
     /**
@@ -94,7 +94,7 @@ public class LvlConstructorTest {
         Level lvl = lc.testlvl2();
         assertEquals(lvl.getWalls().size(), 2);
         assertTrue(lvl.getItems().isEmpty());
-        assertEquals(lvl.getHostiles().size(), 1);
+        assertEquals(lvl.getSpikes().size(), 1);
     }
 
     /**

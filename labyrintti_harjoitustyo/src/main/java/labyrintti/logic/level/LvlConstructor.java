@@ -5,7 +5,7 @@
  */
 package labyrintti.logic.level;
 
-import labyrintti.logic.*;
+
 import labyrintti.logic.object.WallConstructor;
 import labyrintti.logic.object.Spike;
 import labyrintti.logic.object.MovingSpike;
@@ -47,7 +47,7 @@ public class LvlConstructor {
         walls.add(wallconst.hWall(140, 415, 60));
         walls.add(wallconst.vWall(135, 360, 60));
         
-        ArrayList<Hostile> hostiles = new ArrayList<>();
+        ArrayList<Spike> spikes = new ArrayList<>();
         
         ArrayList<Item> items = new ArrayList<>();
         items.add(new Item(540, 365, 1));
@@ -60,7 +60,7 @@ public class LvlConstructor {
         //170, 390, 15
         Goal g = new Goal(170, 390, 15);
         
-        Level lvl = new Level(1000, 1000, 875, 390, walls, hostiles, items, g);
+        Level lvl = new Level(1000, 1000, 875, 390, walls, spikes, items, g);
         return lvl;
     }
     
@@ -75,15 +75,15 @@ public class LvlConstructor {
         walls.add(wallconst.hWall(250, 950, 400));
         walls.add(wallconst.vWall(250, 55, 900));
 
-        ArrayList<Hostile> hostiles = new ArrayList<>();
-        hostiles.add(new MovingSpike(635, 330, false, 2, 260));
-        hostiles.add(new MovingSpike(260, 350, false, 2, 635));
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new MovingSpike(635, 330, false, 2, 260));
+        spikes.add(new MovingSpike(260, 350, false, 2, 635));
         
-        hostiles.add(new MovingSpike(635, 480, false, 2, 260));
-        hostiles.add(new MovingSpike(260, 500, false, 2, 635));
+        spikes.add(new MovingSpike(635, 480, false, 2, 260));
+        spikes.add(new MovingSpike(260, 500, false, 2, 635));
         
-        hostiles.add(new MovingSpike(635, 630, false, 2, 260));
-        hostiles.add(new MovingSpike(260, 650, false, 2, 635));
+        spikes.add(new MovingSpike(635, 630, false, 2, 260));
+        spikes.add(new MovingSpike(260, 650, false, 2, 635));
         
         ArrayList<Item> items = new ArrayList<>();
         items.add(new Item(260, 330, 1));
@@ -99,7 +99,7 @@ public class LvlConstructor {
         
         Goal g = new Goal(450, 910, 15);
         
-        Level lvl = new Level(1000, 1000, 450, 80, walls, hostiles, items, g);
+        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes, items, g);
         return lvl;
     }
     
@@ -159,14 +159,14 @@ public class LvlConstructor {
         walls.addAll(wallconst.leftPocket(140, 855, 110, 85));
         walls.add(wallconst.vWall(135, 855, 20));
         
-        ArrayList<Hostile> hostiles = new ArrayList<>();
-        hostiles.add(new MovingSpike(700, 100, false, 2, 200));
-        hostiles.add(new MovingSpike(350, 115, true, 2, 500));
-        hostiles.add(new MovingSpike(640, 515, false, 1, 350));
-        hostiles.add(new MovingSpike(660, 515, false, 1, 950));
-        hostiles.add(new MovingSpike(950, 530, true, 2, 900));
-        hostiles.add(new MovingSpike(935, 900, false, 2, 585));
-        hostiles.add(new MovingSpike(150, 900, false, 3, 565));
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new MovingSpike(700, 100, false, 2, 200));
+        spikes.add(new MovingSpike(350, 115, true, 2, 500));
+        spikes.add(new MovingSpike(640, 515, false, 1, 350));
+        spikes.add(new MovingSpike(660, 515, false, 1, 950));
+        spikes.add(new MovingSpike(950, 530, true, 2, 900));
+        spikes.add(new MovingSpike(935, 900, false, 2, 585));
+        spikes.add(new MovingSpike(150, 900, false, 3, 565));
         
         ArrayList<Item> items = new ArrayList<>();
         items.add(new Item(160, 100, 1));
@@ -188,7 +188,7 @@ public class LvlConstructor {
         
         Goal g = new Goal(50, 900, 15);
         
-        Level lvl = new Level(1000, 1000, 900, 100, walls, hostiles, items, g);
+        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes, items, g);
         return lvl;
     }
     
@@ -202,10 +202,10 @@ public class LvlConstructor {
         walls.add(wallconst.vWall(795, 205, 200));
         walls.add(wallconst.vWall(600, 205, 200));
         
-        ArrayList<Hostile> hostiles = new ArrayList<>();
-        hostiles.add(new Spike(700, 700));
-        hostiles.add(new MovingSpike(100, 200, true, 1, 900));
-        hostiles.add(new MovingSpike(100, 900, false, 2, 900));
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new Spike(700, 700));
+        spikes.add(new MovingSpike(100, 200, true, 1, 900));
+        spikes.add(new MovingSpike(100, 900, false, 2, 900));
         
         ArrayList<Item> items = new ArrayList<>();
         items.add(new Item(650, 300, 0));
@@ -213,7 +213,7 @@ public class LvlConstructor {
         
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 500, 500, walls, hostiles, items, g);
+        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes, items, g);
         return lvl;
     }
     
@@ -226,14 +226,14 @@ public class LvlConstructor {
         walls.add(wallconst.hWall(600, 700, 200));
         walls.add(wallconst.vWall(600, 705, 200));
         
-        ArrayList<Hostile> hostiles = new ArrayList<>();
-        hostiles.add(new Spike(200, 800));
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new Spike(200, 800));
         
         ArrayList<Item> items = new ArrayList<>();
         
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 200, 200, walls, hostiles, items, g);
+        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes, items, g);
         return lvl;
     }
     

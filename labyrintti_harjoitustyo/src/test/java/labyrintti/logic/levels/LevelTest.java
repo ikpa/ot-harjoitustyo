@@ -11,7 +11,7 @@ import java.util.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.freemovers.MainChara;
 import labyrintti.logic.level.Goal;
 import labyrintti.logic.object.Item;
 import labyrintti.logic.object.Spike;
@@ -48,7 +48,7 @@ public class LevelTest {
     public void setUp() {
         lc = new LvlConstructor();
         lvl = lc.testlvl();
-        c = new MainChara(0, 0, 10, 1, 1);
+        c = new MainChara(0, 0, 10, 1);
         map = new HashMap<>();
     }
     

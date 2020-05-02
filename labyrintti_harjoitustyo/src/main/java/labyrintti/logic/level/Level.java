@@ -5,7 +5,6 @@
  */
 package labyrintti.logic.level;
 
-import labyrintti.logic.*;
 import labyrintti.logic.object.Item;
 import labyrintti.logic.level.Goal;
 import javafx.scene.shape.*;
@@ -13,7 +12,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import java.util.*;
 import labyrintti.logic.object.Item;
-import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.freemovers.MainChara;
 import labyrintti.logic.object.Spike;
 /**
  * Luokka, joka kuvaa yhtä tasoa.
@@ -22,7 +21,7 @@ import labyrintti.logic.object.Spike;
 public class Level {
     private Pane stg;
     private ArrayList<Rectangle> walls;
-    private ArrayList<Hostile> hostiles;
+    private ArrayList<Spike> spikes;
     private ArrayList<Item> items;
     private Goal goal;
     private int startx;
@@ -35,12 +34,12 @@ public class Level {
      * @param x Pelihahmon aloitus-x-koordinaatti
      * @param y Pelihahmon aloitus-y-koordinaatti
      * @param wall Array, joka sisältää kaikki tason seinät (Rectangle-olioina)
-     * @param host Array, joka sisältää kaikki tason viholliset
+     * @param spi Array, joka sisältää kaikki tason piikit
      * @param i Array, joka sisältää kaikki tason kerättävät esineet
      * @param go Tason maali
      */
     public Level(int width, int height, int x, int y,
-             ArrayList<Rectangle> wall, ArrayList<Hostile> host, ArrayList<Item> i,
+             ArrayList<Rectangle> wall, ArrayList<Spike> spi, ArrayList<Item> i,
              Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
@@ -50,10 +49,10 @@ public class Level {
             stg.getChildren().add(r);
         });
         
-        hostiles = host;
-        if (!(hostiles.isEmpty())) {
-            hostiles.forEach((s) -> {
-                stg.getChildren().add(s.getShape());
+        spikes = spi;
+        if (!(spikes.isEmpty())) {
+            spikes.forEach((s) -> {
+                stg.getChildren().add(s.getPolygon());
             });
         }
         
@@ -87,8 +86,8 @@ public class Level {
         return items;
     }
 
-    public ArrayList<Hostile> getHostiles() {
-        return hostiles;
+    public ArrayList<Spike> getSpikes() {
+        return spikes;
     }
     
     /**
@@ -125,8 +124,8 @@ public class Level {
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
         chara.move(buttonPress, walls, voffset);
         
-        if (!(hostiles.isEmpty())) {
-            chara.checkHit(hostiles);
+        if (!(spikes.isEmpty())) {
+            chara.excecuteHit(spikes);
         }
         
         if (!(items.isEmpty())) {
@@ -135,7 +134,7 @@ public class Level {
             removeItems(ids);
         }
         
-        hostiles.forEach((s) -> {
+        spikes.forEach((s) -> {
             s.move();
         });
     }

@@ -65,16 +65,16 @@ public class MovingSpike extends Spike {
         if (dir) {
             moveDOWN();
             
-            if ((shape.getTranslateY() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
-                    (shape.getTranslateY() >= 0 && !finaldir)) {
+            if ((polygon.getTranslateY() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
+                    (polygon.getTranslateY() >= 0 && !finaldir)) {
                 dir = false;
                 
             }
         } else {
             moveUP();
             
-            if ((shape.getTranslateY() <= 0 && finaldir) ||
-                    (shape.getTranslateY() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
+            if ((polygon.getTranslateY() <= 0 && finaldir) ||
+                    (polygon.getTranslateY() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
                 dir = true;
             }
         }
@@ -88,15 +88,15 @@ public class MovingSpike extends Spike {
         if (dir) {
             moveRIGHT();
             
-            if ((shape.getTranslateX() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
-                    (shape.getTranslateX() >= 0 && !finaldir)) {
+            if ((polygon.getTranslateX() >= diffcoordinate2 - diffcoordinate1 && finaldir) ||
+                    (polygon.getTranslateX() >= 0 && !finaldir)) {
                 dir = false;
             }
         } else {
             moveLEFT();
             
-            if ((shape.getTranslateX() <= 0 && finaldir) ||
-                    (shape.getTranslateX() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
+            if ((polygon.getTranslateX() <= 0 && finaldir) ||
+                    (polygon.getTranslateX() <= diffcoordinate2 - diffcoordinate1 && !finaldir)) {
                 dir = true;
             }
         }
@@ -106,27 +106,27 @@ public class MovingSpike extends Spike {
      * Liikuttaa piikkiä ylöstpäin.
      */
     public void moveUP() {
-        shape.setTranslateY(shape.getTranslateY() - speed);
+        polygon.setTranslateY(polygon.getTranslateY() - speed);
     }
     
     /**
      * Liikuttaa piikkiä alaspäin.
      */
     public void moveDOWN() {
-        shape.setTranslateY(shape.getTranslateY() + speed);
+        polygon.setTranslateY(polygon.getTranslateY() + speed);
     }
     
     /**
      * Liikuttaa piikkiä oikealle.
      */
     public void moveRIGHT() {
-        shape.setTranslateX(shape.getTranslateX() + speed);
+        polygon.setTranslateX(polygon.getTranslateX() + speed);
     }
     
     /**
      * Liikuttaa piikkiä vasemmalle.
      */
     public void moveLEFT() {
-        shape.setTranslateX(shape.getTranslateX() - speed);
+        polygon.setTranslateX(polygon.getTranslateX() - speed);
     }
 }

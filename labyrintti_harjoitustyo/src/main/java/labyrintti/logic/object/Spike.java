@@ -7,12 +7,12 @@ package labyrintti.logic.object;
 
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
-import labyrintti.logic.*;
 /**
  * Piikkieste, joka vie pelihahmolta elämän ja vie sen tason alkuun.
  * @author ikpa
  */
-public class Spike extends Hostile {
+public class Spike {
+    public Polygon polygon;
     
     /**
      * Luo uuden Spike-olion
@@ -20,9 +20,8 @@ public class Spike extends Hostile {
      * @param y piikkiesteen y-koordinaatti
      */
     public Spike(double x, double y) {
-        super();
-        Polygon polygon = new Polygon();
-        polygon.getPoints().addAll(new Double[]{
+        Polygon poly = new Polygon();
+        poly.getPoints().addAll(new Double[]{
             x, y - 10,
             x + 2, y - 5,
             x + 10, y - 10,
@@ -41,14 +40,17 @@ public class Spike extends Hostile {
             x - 2, y - 5
         });
         
-        setShape(polygon);
+        polygon = poly;
         
+    }
+    
+    public Polygon getPolygon() {
+        return polygon;
     }
     
     /**
      * Overridatava metodi. Ei tee tässä luokassa mitään.
      */
-    @Override
     public void move() {
         
     }

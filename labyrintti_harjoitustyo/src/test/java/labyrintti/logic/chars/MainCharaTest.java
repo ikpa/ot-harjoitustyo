@@ -5,8 +5,7 @@
  */
 package labyrintti.logic.chars;
 
-import labyrintti.logic.chars.MainChara;
-import labyrintti.logic.*;
+import labyrintti.logic.freemovers.MainChara;
 import labyrintti.logic.object.*;
 import java.util.*;
 import javafx.scene.input.KeyCode;
@@ -24,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class MainCharaTest {
     MainChara c;
-    ArrayList<Hostile> hostiles;
+    ArrayList<Spike> spikes;
     
     public MainCharaTest() {
     }
@@ -39,8 +38,8 @@ public class MainCharaTest {
     
     @Before
     public void setUp() {
-        c = new MainChara(250,250,10,1,1);
-        hostiles = new ArrayList<>();
+        c = new MainChara(250,250,10,1);
+        spikes = new ArrayList<>();
     }
     
     @After
@@ -90,16 +89,16 @@ public class MainCharaTest {
     @Test
     public void testCheckHitWhenNotHit() {
         Spike s = new Spike(10,10);
-        hostiles.add(s);
-        c.checkHit(hostiles);
+        spikes.add(s);
+        c.excecuteHit(spikes);
         assertEquals(c.getLives(), 3);
     }
     
     @Test
     public void testCheckHitWhenHit() {
         Spike s = new Spike(250,250);
-        hostiles.add(s);
-        c.checkHit(hostiles);
+        spikes.add(s);
+        c.excecuteHit(spikes);
         assertEquals(c.getLives(),2);
     }
     
@@ -111,8 +110,8 @@ public class MainCharaTest {
     @Test
     public void testDeadWhenHitOnce() {
         Spike s = new Spike(250,250);
-        hostiles.add(s);
-        c.checkHit(hostiles);
+        spikes.add(s);
+        c.excecuteHit(spikes);
         assertEquals(c.getLives(),2);
         assertFalse(c.isDead());
     }
@@ -120,35 +119,35 @@ public class MainCharaTest {
     @Test
     public void testDeadWhenHitFourTimes() {
         Spike s = new Spike(250,250);
-        hostiles.add(s);
-        c.checkHit(hostiles);
-        c.checkHit(hostiles);
-        c.checkHit(hostiles);
-        c.checkHit(hostiles);
+        spikes.add(s);
+        c.excecuteHit(spikes);
+        c.excecuteHit(spikes);
+        c.excecuteHit(spikes);
+        c.excecuteHit(spikes);
         assertTrue(c.isDead());
     }
     
     @Test
     public void testMoveUP() {
-        c.moveUP();
+        c.moveUP(1);
         assertEquals(c.getCircle().getTranslateY(),-1,0.01);
     }
     
     @Test
     public void testMoveDOWN() {
-        c.moveDOWN();
+        c.moveDOWN(1);
         assertEquals(c.getCircle().getTranslateY(),1,0.01);
     }
     
     @Test
     public void testMoveRIGHT() {
-        c.moveRIGHT();
+        c.moveRIGHT(1);
         assertEquals(c.getCircle().getTranslateX(),1,0.01);
     }
     
     @Test
     public void testMoveLEFT() {
-        c.moveLEFT();
+        c.moveLEFT(1);
         assertEquals(c.getCircle().getTranslateX(),-1,0.01);
     }
     
@@ -230,10 +229,10 @@ public class MainCharaTest {
     
     @Test
     public void testResetChara() {
-        c.moveDOWN();
-        c.moveDOWN();
-        c.moveLEFT();
-        c.moveLEFT();
+        c.moveDOWN(1);
+        c.moveDOWN(1);
+        c.moveLEFT(1);
+        c.moveLEFT(1);
         c.reset();
         assertEquals(c.getCircle().getTranslateX(),0,0.01);
         assertEquals(c.getCircle().getTranslateY(),0,0.01);

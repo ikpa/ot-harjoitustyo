@@ -7,7 +7,7 @@ package labyrintti.logic.level;
 
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
-import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.freemovers.MainChara;
 /**
  * Maali, johon pelihahmon on pyrittävä. Vie seuraavaan kenttään.
  * @author ikpa

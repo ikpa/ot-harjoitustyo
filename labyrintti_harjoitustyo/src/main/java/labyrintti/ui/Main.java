@@ -5,7 +5,7 @@
  */
 package labyrintti.ui;
 
-import labyrintti.logic.chars.MainChara;
+import labyrintti.logic.freemovers.MainChara;
 import labyrintti.logic.level.LvlConstructor;
 import labyrintti.logic.level.Level;
 import labyrintti.dao.HighScoreDao;
@@ -31,7 +31,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        c = new MainChara(0, 0, 10, 1, 1);
+        c = new MainChara(0, 0, 10, 1);
         s = new HighScoreDao();
         
         Button start = new Button("Aloita peli");
