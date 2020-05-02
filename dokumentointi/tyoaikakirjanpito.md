@@ -17,5 +17,6 @@
 | 26.4  | 3          | Kolmas taso valmis, valikkoja hiottu |
 | 27.4  | 3          | Dokumentointi, JavaDocin aloitus     |
 | 1.5   | 2          | Rakenteen refaktorointi, lisäyksiä JavaDocciin, ym. hiontaa |
-| | yht. 40.5 |
+| 2.5   | 1.5        | Refaktorointia, uuden vihollisluokan aloitus |
+| | yht. 42 |
 
