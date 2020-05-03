@@ -5,7 +5,6 @@
  */
 package labyrintti.ui;
 
-import java.util.*;
 /**
  *
  * @author ikpa
