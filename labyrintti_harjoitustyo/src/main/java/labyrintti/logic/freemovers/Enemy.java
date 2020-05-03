@@ -47,9 +47,6 @@ public class Enemy extends FreeMover {
         double totdist = totalDistance(chara);
         ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
         
-        System.out.println("x " + xdist);
-        System.out.println("y " + ydist);
-        
         double sine = ydist/totdist;
         double cosine = xdist/totdist;
         
