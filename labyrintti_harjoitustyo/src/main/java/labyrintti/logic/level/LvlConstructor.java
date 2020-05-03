@@ -11,6 +11,7 @@ import labyrintti.logic.object.Spike;
 import labyrintti.logic.object.MovingSpike;
 import labyrintti.logic.object.Item;
 import labyrintti.logic.level.Goal;
+import labyrintti.logic.freemovers.Enemy;
 import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import labyrintti.logic.object.Item;
@@ -57,10 +58,12 @@ public class LvlConstructor {
         items.add(new Item(580, 405, 1));
         items.add(new Item(500, 405, 1));
         
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        
         //170, 390, 15
         Goal g = new Goal(170, 390, 15);
         
-        Level lvl = new Level(1000, 1000, 875, 390, walls, spikes, items, g);
+        Level lvl = new Level(1000, 1000, 875, 390, walls, spikes, items, enemies, g);
         return lvl;
     }
     
@@ -97,9 +100,11 @@ public class LvlConstructor {
         
         items.add(new Item(450, 490, 0));
         
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        
         Goal g = new Goal(450, 910, 15);
         
-        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes, items, g);
+        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes, items, enemies, g);
         return lvl;
     }
     
@@ -186,9 +191,11 @@ public class LvlConstructor {
         items.add(new Item(105, 900, 1));
         items.add(new Item(130, 900, 1));
         
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        
         Goal g = new Goal(50, 900, 15);
         
-        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes, items, g);
+        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes, items, enemies, g);
         return lvl;
     }
     
@@ -211,9 +218,11 @@ public class LvlConstructor {
         items.add(new Item(650, 300, 0));
         items.add(new Item(500, 100, 1));
         
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes, items, g);
+        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes, items, enemies, g);
         return lvl;
     }
     
@@ -231,9 +240,12 @@ public class LvlConstructor {
         
         ArrayList<Item> items = new ArrayList<>();
         
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(new Enemy(500, 500, 10, 0.5));
+        
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes, items, g);
+        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes, items, enemies, g);
         return lvl;
     }
     

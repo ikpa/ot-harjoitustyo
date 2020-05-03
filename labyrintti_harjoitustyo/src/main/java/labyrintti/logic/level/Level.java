@@ -7,6 +7,7 @@ package labyrintti.logic.level;
 
 import labyrintti.logic.object.Item;
 import labyrintti.logic.level.Goal;
+import labyrintti.logic.freemovers.Enemy;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -23,6 +24,7 @@ public class Level {
     private ArrayList<Rectangle> walls;
     private ArrayList<Spike> spikes;
     private ArrayList<Item> items;
+    private ArrayList<Enemy> enemies;
     private Goal goal;
     private int startx;
     private int starty;
@@ -40,7 +42,7 @@ public class Level {
      */
     public Level(int width, int height, int x, int y,
              ArrayList<Rectangle> wall, ArrayList<Spike> spi, ArrayList<Item> i,
-             Goal go) {
+             ArrayList<Enemy> ene, Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
         
@@ -60,6 +62,13 @@ public class Level {
         if (!(items.isEmpty())) {
             items.forEach(s -> {
                 stg.getChildren().add(s.getCircle());
+            });
+        }
+        
+        enemies = ene;
+        if (!(enemies.isEmpty())) {
+            enemies.forEach(e -> {
+                stg.getChildren().add(e.getCircle());
             });
         }
         
@@ -132,6 +141,12 @@ public class Level {
             ArrayList<Integer> ids = chara.checkGet(items);
             
             removeItems(ids);
+        }
+        
+        if (!(enemies.isEmpty())) {
+            enemies.forEach(e -> {
+                e.move(walls, chara, voffset);
+            });
         }
         
         spikes.forEach((s) -> {
