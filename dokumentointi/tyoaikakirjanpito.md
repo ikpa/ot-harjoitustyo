@@ -18,5 +18,6 @@
 | 27.4  | 3          | Dokumentointi, JavaDocin aloitus     |
 | 1.5   | 2          | Rakenteen refaktorointi, lisäyksiä JavaDocciin, ym. hiontaa |
 | 2.5   | 1.5        | Refaktorointia, uuden vihollisluokan aloitus |
-| | yht. 42 |
+| 3.5   | 1          | Vihollisen liikkumismetodien luonti |
+| | yht. 43 |
 
