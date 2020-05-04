@@ -144,32 +144,32 @@ public class Level {
         }
     }
     
-    /**
-     * Päivittää peliruudun
-     * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
-     * @param chara Käytettävä pelihahmo
-     * @param voffset Luku, joka vaaditaan seinien kanssa törmäysten havaitsemiseen (vain jos peliruutu sisältää infopalkin)
-     */
-    public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
-        chara.move(buttonPress, walls, voffset);
-        
+    public boolean updateSpikes(MainChara chara) {
         boolean hit = false;
         
         if (!(spikes.isEmpty())) {
-            spikes.forEach((s) -> {
+            for (Spike s: spikes) {
                 s.move();
-            });
-            
-            if (chara.checkHit(spikes) && !(hit)) {
-                hit = true;
+                
+                if (chara.collision(s.getPolygon())) {
+                    hit = true;
+                }
             }
         }
         
+        return hit;
+    }
+    
+    public void updateItems(MainChara chara) {
         if (!(items.isEmpty())) {
             ArrayList<Integer> ids = chara.checkGet(items);
             
             removeItems(ids);
         }
+    }
+    
+    public boolean updateEnemies(MainChara chara, double voffset) {
+        boolean hit = false;
         
         if (!(enemies.isEmpty())) {
             ArrayList<Integer> ids = new ArrayList<>();
@@ -184,16 +184,32 @@ public class Level {
                 if (e.checkHit(spikes)) {
                     ids.add(enemies.indexOf(e));
                 }
-            }
-            
-            if (chara.checkEnemyHit(enemies) && !(hit)) {
-                hit = true;
+                
+                if (chara.collision(e.getCircle())) {
+                    hit = true;
+                }
             }
             
             removeEnemies(ids);
         }
         
-        if (hit) {
+        return hit;
+    }
+    
+    /**
+     * Päivittää peliruudun
+     * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
+     * @param chara Käytettävä pelihahmo
+     * @param voffset Luku, joka vaaditaan seinien kanssa törmäysten havaitsemiseen (vain jos peliruutu sisältää infopalkin)
+     */
+    public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
+        chara.move(buttonPress, walls, voffset);
+        
+        boolean spikehit = updateSpikes(chara);
+        boolean enemyhit = updateEnemies(chara, voffset);
+        updateItems(chara);
+        
+        if (spikehit || enemyhit) {
             chara.excecuteHit();
             resetEnemies();
         }
