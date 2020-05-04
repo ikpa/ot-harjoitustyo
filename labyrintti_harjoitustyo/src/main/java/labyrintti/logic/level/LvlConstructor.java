@@ -242,6 +242,7 @@ public class LvlConstructor {
         
         ArrayList<Enemy> enemies = new ArrayList<>();
         enemies.add(new Enemy(500, 500, 10, 0.5));
+        enemies.add(new Enemy(580, 500, 10, 0.5));
         
         Goal g = new Goal(100, 100, 15);
 

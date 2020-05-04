@@ -90,16 +90,14 @@ public class MainCharaTest {
     public void testCheckHitWhenNotHit() {
         Spike s = new Spike(10,10);
         spikes.add(s);
-        c.excecuteHit(spikes);
-        assertEquals(c.getLives(), 3);
+        assertFalse(c.checkHit(spikes));
     }
     
     @Test
     public void testCheckHitWhenHit() {
         Spike s = new Spike(250,250);
         spikes.add(s);
-        c.excecuteHit(spikes);
-        assertEquals(c.getLives(),2);
+        assertTrue(c.checkHit(spikes));
     }
     
     @Test
@@ -109,21 +107,17 @@ public class MainCharaTest {
     
     @Test
     public void testDeadWhenHitOnce() {
-        Spike s = new Spike(250,250);
-        spikes.add(s);
-        c.excecuteHit(spikes);
+        c.excecuteHit();
         assertEquals(c.getLives(),2);
         assertFalse(c.isDead());
     }
     
     @Test
     public void testDeadWhenHitFourTimes() {
-        Spike s = new Spike(250,250);
-        spikes.add(s);
-        c.excecuteHit(spikes);
-        c.excecuteHit(spikes);
-        c.excecuteHit(spikes);
-        c.excecuteHit(spikes);
+        c.excecuteHit();
+        c.excecuteHit();
+        c.excecuteHit();
+        c.excecuteHit();
         assertTrue(c.isDead());
     }
     

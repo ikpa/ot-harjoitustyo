@@ -80,15 +80,25 @@ public class MainChara extends FreeMover{
         return sec.getBoundsInLocal().getWidth() >= 10;
     }
     
+    public boolean checkEnemyHit(ArrayList<Enemy> enemies) {
+        boolean hit = false;
+        
+        for (Enemy e: enemies) {
+            if (collision(e.getCircle())) {
+                hit = true;
+            }
+        }
+        
+        return hit;
+    }
+    
     /**
      * Tarkistaa kaikki osumat kaikkien Arrayn Hostile-olioiden kanssa ja poistaa elämän tarvittaessa. Hahmo merkitään kuolleeksi jos elämät loppuvat.
      * @param spikes Array, jossa tarkistettavat Hostile-oliot
      */
-    public void excecuteHit(ArrayList<Spike> spikes) {
-        if (checkHit(spikes)) {
-            reset();
-            removeLife();
-        }
+    public void excecuteHit() {
+        removeLife();
+        reset();
         
         if (lives < 0) {
             dead = true;
@@ -150,11 +160,5 @@ public class MainChara extends FreeMover{
         }
     }
     
-    /**
-     * Palauttaa hahmon koordinaatit ennalleen
-     */
-    public void reset() {
-        getCircle().setTranslateX(0);
-        getCircle().setTranslateY(0);
-    }
+    
 }

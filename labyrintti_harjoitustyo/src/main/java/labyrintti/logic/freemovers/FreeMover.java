@@ -16,6 +16,7 @@ import labyrintti.logic.object.Spike;
 public class FreeMover {
     private Circle circle;
     private double speed;
+    private boolean hit;
     
     public FreeMover(int x, int y, int r, double s) {
         circle = new Circle(x, y, r);
@@ -24,6 +25,14 @@ public class FreeMover {
     
     public Circle getCircle() {
         return circle;
+    }
+
+    public boolean isHit() {
+        return hit;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
     }
     
     /**
@@ -46,6 +55,7 @@ public class FreeMover {
         for (Spike s: spikes) {
             if (collision(s.getPolygon())) {
                 hit = true;
+                setHit(true);
             }
         }
         
@@ -132,4 +142,11 @@ public class FreeMover {
         circle.setTranslateX(circle.getTranslateX() - x * speed);
     }
     
+    /**
+     * Palauttaa hahmon koordinaatit ennalleen
+     */
+    public void reset() {
+        getCircle().setTranslateX(0);
+        getCircle().setTranslateY(0);
+    }
 }

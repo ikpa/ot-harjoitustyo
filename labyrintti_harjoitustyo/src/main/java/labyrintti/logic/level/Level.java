@@ -124,6 +124,26 @@ public class Level {
         }
     }
     
+    public void removeEnemies(ArrayList<Integer> ids) {
+        if (!(ids.isEmpty())) {
+            ids.forEach(i -> {
+                Enemy enemy = enemies.get(i);
+                stg.getChildren().remove(enemy.getCircle());
+            });
+        }
+    }
+    
+    public void resetEnemies() {
+        for (Enemy e: enemies) {
+            e.reset();
+            
+            if (e.isHit()) {
+                e.setHit(false);
+                stg.getChildren().add(e.getCircle());
+            }
+        }
+    }
+    
     /**
      * Päivittää peliruudun
      * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
@@ -133,8 +153,16 @@ public class Level {
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
         chara.move(buttonPress, walls, voffset);
         
+        boolean hit = false;
+        
         if (!(spikes.isEmpty())) {
-            chara.excecuteHit(spikes);
+            spikes.forEach((s) -> {
+                s.move();
+            });
+            
+            if (chara.checkHit(spikes) && !(hit)) {
+                hit = true;
+            }
         }
         
         if (!(items.isEmpty())) {
@@ -144,14 +172,32 @@ public class Level {
         }
         
         if (!(enemies.isEmpty())) {
-            enemies.forEach(e -> {
+            ArrayList<Integer> ids = new ArrayList<>();
+            
+            for (Enemy e: enemies) {
+                if (e.isHit()) {
+                    continue;
+                }
+                
                 e.move(walls, chara, voffset);
-            });
+                
+                if (e.checkHit(spikes)) {
+                    ids.add(enemies.indexOf(e));
+                }
+            }
+            
+            if (chara.checkEnemyHit(enemies) && !(hit)) {
+                hit = true;
+            }
+            
+            removeEnemies(ids);
         }
         
-        spikes.forEach((s) -> {
-            s.move();
-        });
+        if (hit) {
+            chara.excecuteHit();
+            resetEnemies();
+        }
+        
     }
      
 }
