@@ -19,5 +19,6 @@
 | 1.5   | 2          | Rakenteen refaktorointi, lisäyksiä JavaDocciin, ym. hiontaa |
 | 2.5   | 1.5        | Refaktorointia, uuden vihollisluokan aloitus |
 | 3.5   | 1          | Vihollisen liikkumismetodien luonti |
-| | yht. 43 |
+| 4.5   | 1.5        | Vihollinen reagoi nyt pelihahmoon sekä piikkiesteisiin. Kun pelihahmoon osutaan, myös viholliset palaavat lähtöpisteisiinsä |
+| | yht. 44.5 |
 
