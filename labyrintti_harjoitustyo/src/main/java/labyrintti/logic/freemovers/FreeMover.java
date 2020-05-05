@@ -5,7 +5,7 @@
  */
 package labyrintti.logic.freemovers;
 
-import java.util.ArrayList;
+import java.util.*;
 import javafx.geometry.*;
 import javafx.scene.shape.*;
 import labyrintti.logic.object.Spike;
@@ -20,7 +20,7 @@ public class FreeMover {
     
     public FreeMover(int x, int y, int r, double s) {
         circle = new Circle(x, y, r);
-        speed = s;
+        speed = s;   
     }
     
     public Circle getCircle() {
@@ -63,6 +63,20 @@ public class FreeMover {
         
     }
     
+    public double intersectXLoc(Shape shape) {
+        Shape sec = Shape.intersect(shape, circle);
+        double xloc = sec.getBoundsInLocal().getCenterX()
+                        - (circle.getTranslateX() + circle.getCenterX());
+        return xloc;
+    }
+    
+    public double intersectYLoc(Shape shape, double voffset) {
+        Shape sec = Shape.intersect(shape, circle);
+        double yloc = sec.getBoundsInLocal().getCenterY()
+                        - (circle.getTranslateY() + circle.getCenterY()) - voffset;
+        return yloc;
+    }
+    
     /**
      * Tarkistaa, mihin suuntiin pelihahmo voi liikkua seinien perusteella
      * @param walls Tarkistettavat seinät
@@ -75,38 +89,26 @@ public class FreeMover {
             dirs.add(Boolean.TRUE);
         }
         
-        Boolean up = true;
-        Boolean down = true;
-        Boolean left = true;
-        Boolean right = true;
-        
         for (Rectangle r: walls) {
             if (collision(r)) {
-                Shape sec = Shape.intersect(r, circle);
-                double xloc = sec.getBoundsInLocal().getCenterX()
-                        - (circle.getTranslateX() + circle.getCenterX());
-                double yloc = sec.getBoundsInLocal().getCenterY()
-                        - (circle.getTranslateY() + circle.getCenterY()) - voffset;
+                double xloc = intersectXLoc(r);
+                double yloc = intersectYLoc(r, voffset);
                 
                 
-                if (yloc < -8 && up) {
-                    dirs.add(0, Boolean.FALSE);
-                    up = false;
+                if (yloc < -8) {
+                    dirs.set(0, Boolean.FALSE);
                 }
                 
-                if (xloc > 1 && right) {
-                    dirs.add(1, Boolean.FALSE);
-                    right = false;
+                if (xloc > 1) {
+                    dirs.set(1, Boolean.FALSE);
                 }
                 
-                if (yloc > 6 && down) {
-                    dirs.add(2, Boolean.FALSE);
-                    down = false;
+                if (yloc > 6) {
+                    dirs.set(2, Boolean.FALSE);
                 }
                 
-                if (xloc < -7 && left) {
-                    dirs.add(3, Boolean.FALSE);
-                    left = false;
+                if (xloc < -7) {
+                    dirs.set(3, Boolean.FALSE);
                 }
             }
         }

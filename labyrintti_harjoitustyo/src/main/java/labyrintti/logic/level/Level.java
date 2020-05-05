@@ -5,13 +5,14 @@
  */
 package labyrintti.logic.level;
 
-import labyrintti.logic.object.Item;
+import labyrintti.logic.object.*;
 import labyrintti.logic.level.Goal;
 import labyrintti.logic.freemovers.Enemy;
 import javafx.scene.shape.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import java.util.*;
+import labyrintti.logic.freemovers.Enemy;
 import labyrintti.logic.object.Item;
 import labyrintti.logic.freemovers.MainChara;
 import labyrintti.logic.object.Spike;
@@ -25,6 +26,7 @@ public class Level {
     private ArrayList<Spike> spikes;
     private ArrayList<Item> items;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Door> doors;
     private Goal goal;
     private int startx;
     private int starty;
@@ -42,7 +44,7 @@ public class Level {
      */
     public Level(int width, int height, int x, int y,
              ArrayList<Rectangle> wall, ArrayList<Spike> spi, ArrayList<Item> i,
-             ArrayList<Enemy> ene, Goal go) {
+             ArrayList<Enemy> ene, ArrayList<Door> door, Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
         
@@ -72,6 +74,14 @@ public class Level {
             });
         }
         
+        doors = door;
+        if (!doors.isEmpty()) {
+            doors.forEach(d -> {
+                stg.getChildren().add(d.getDoor());
+                walls.add(d.getDoor());
+            });
+        }
+        
         startx = x;
         starty = y;
         
@@ -97,6 +107,14 @@ public class Level {
 
     public ArrayList<Spike> getSpikes() {
         return spikes;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public ArrayList<Door> getDoors() {
+        return doors;
     }
     
     /**
@@ -133,6 +151,23 @@ public class Level {
         }
     }
     
+    public void removeDoor(Door d) {
+        stg.getChildren().remove(d.getDoor());
+    }
+    
+    public void resetDoors() {
+        if (doors.isEmpty()) {
+            return;
+        }
+        
+        for (Door d: doors) {
+            if (d.isOpen()) {
+                d.setOpen(false);
+                stg.getChildren().add(d.getDoor());
+            }
+        }
+    }
+    
     public void resetEnemies() {
         for (Enemy e: enemies) {
             e.reset();
@@ -142,6 +177,11 @@ public class Level {
                 stg.getChildren().add(e.getCircle());
             }
         }
+    }
+    
+    public void resetLevel() {
+        resetDoors();
+        resetEnemies();
     }
     
     public boolean updateSpikes(MainChara chara) {
@@ -179,7 +219,7 @@ public class Level {
                     continue;
                 }
                 
-                e.move(walls, chara, voffset);
+                e.move(walls, chara, enemies, voffset);
                 
                 if (e.checkHit(spikes)) {
                     ids.add(enemies.indexOf(e));
@@ -196,6 +236,20 @@ public class Level {
         return hit;
     }
     
+    public void updateDoors() {
+        if (doors.isEmpty()) {
+            return;
+        }
+        
+        for (Door d: doors) {
+            d.executeOpen();
+            
+            if (d.isOpen()) {
+                removeDoor(d);
+            }
+        }
+    }
+    
     /**
      * Päivittää peliruudun
      * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
@@ -208,10 +262,11 @@ public class Level {
         boolean spikehit = updateSpikes(chara);
         boolean enemyhit = updateEnemies(chara, voffset);
         updateItems(chara);
+        updateDoors();
         
         if (spikehit || enemyhit) {
             chara.excecuteHit();
-            resetEnemies();
+            resetLevel();
         }
         
     }

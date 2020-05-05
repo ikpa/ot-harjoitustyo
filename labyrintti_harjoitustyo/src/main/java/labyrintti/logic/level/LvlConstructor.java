@@ -9,7 +9,7 @@ package labyrintti.logic.level;
 import labyrintti.logic.object.WallConstructor;
 import labyrintti.logic.object.Spike;
 import labyrintti.logic.object.MovingSpike;
-import labyrintti.logic.object.Item;
+import labyrintti.logic.object.*;
 import labyrintti.logic.level.Goal;
 import labyrintti.logic.freemovers.Enemy;
 import javafx.scene.shape.Rectangle;
@@ -60,10 +60,13 @@ public class LvlConstructor {
         
         ArrayList<Enemy> enemies = new ArrayList<>();
         
+        ArrayList<Door> doors = new ArrayList<>();
+        
         //170, 390, 15
         Goal g = new Goal(170, 390, 15);
         
-        Level lvl = new Level(1000, 1000, 875, 390, walls, spikes, items, enemies, g);
+        Level lvl = new Level(1000, 1000, 875, 390, walls, spikes,
+                items, enemies, doors, g);
         return lvl;
     }
     
@@ -102,9 +105,12 @@ public class LvlConstructor {
         
         ArrayList<Enemy> enemies = new ArrayList<>();
         
+        ArrayList<Door> doors = new ArrayList<>();
+        
         Goal g = new Goal(450, 910, 15);
         
-        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes, items, enemies, g);
+        Level lvl = new Level(1000, 1000, 450, 80, walls, spikes,
+                items, enemies, doors, g);
         return lvl;
     }
     
@@ -193,9 +199,12 @@ public class LvlConstructor {
         
         ArrayList<Enemy> enemies = new ArrayList<>();
         
+        ArrayList<Door> doors = new ArrayList<>();
+        
         Goal g = new Goal(50, 900, 15);
         
-        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes, items, enemies, g);
+        Level lvl = new Level(1000, 1000, 900, 100, walls, spikes,
+                items, enemies, doors, g);
         return lvl;
     }
     
@@ -205,8 +214,9 @@ public class LvlConstructor {
      */
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
-        walls.add(wallconst.hWall(600, 200, 200));
         walls.add(wallconst.vWall(795, 205, 200));
+        walls.add(wallconst.hWall(600, 200, 200));
+        
         walls.add(wallconst.vWall(600, 205, 200));
         
         ArrayList<Spike> spikes = new ArrayList<>();
@@ -220,9 +230,12 @@ public class LvlConstructor {
         
         ArrayList<Enemy> enemies = new ArrayList<>();
         
+        ArrayList<Door> doors = new ArrayList<>();
+        
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes, items, enemies, g);
+        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes,
+                items, enemies, doors, g);
         return lvl;
     }
     
@@ -244,9 +257,13 @@ public class LvlConstructor {
         enemies.add(new Enemy(500, 500, 10, 0.5));
         enemies.add(new Enemy(580, 500, 10, 0.5));
         
+        ArrayList<Door> doors = new ArrayList<>();
+        doors.add(new Door(750, 100, 50, true, enemies));
+        
         Goal g = new Goal(100, 100, 15);
 
-        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes, items, enemies, g);
+        Level lvl = new Level(1000, 1000, 200, 200, walls, spikes,
+                items, enemies, doors, g);
         return lvl;
     }
     

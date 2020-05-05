@@ -41,14 +41,51 @@ public class Enemy extends FreeMover {
         return Math.sqrt(value);
     }
     
-    public void move(ArrayList<Rectangle> walls, MainChara chara, double voffset) {
+    public ArrayList<Boolean> enemyAllowedDirections(ArrayList<Rectangle> walls, 
+            ArrayList<Enemy> enemies, double voffset) {
+        ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
+        
+        for (Enemy e: enemies) {
+            if (e.equals(this)) {
+                continue;
+            }
+            
+            if (!collision(e.getCircle())) {
+                continue;
+            }
+            
+            double xloc = intersectXLoc(e.getCircle());
+            double yloc = intersectYLoc(e.getCircle(), voffset);
+            
+            if (yloc < -8) {
+                allowed.set(0, Boolean.FALSE);
+            }
+                
+            if (xloc > 1) {
+                allowed.set(1, Boolean.FALSE);
+            }
+                
+            if (yloc > 6) {
+                allowed.set(2, Boolean.FALSE);
+            }
+                
+            if (xloc < -7) {
+                allowed.set(3, Boolean.FALSE);
+            }
+        }
+        
+        return allowed;
+    }
+    
+    public void move(ArrayList<Rectangle> walls, MainChara chara,
+            ArrayList<Enemy> enemies, double voffset) {
         double xdist = xDistance(chara);
         double ydist = yDistance(chara);
         double totdist = totalDistance(chara);
-        ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
+        ArrayList<Boolean> allowed = enemyAllowedDirections(walls, enemies, voffset);
         
-        double sine = ydist/totdist;
-        double cosine = xdist/totdist;
+        double sine = ydist / totdist;
+        double cosine = xdist / totdist;
         
         if (allowed.get(0) && ydist < 0) {
             moveUP(-sine);

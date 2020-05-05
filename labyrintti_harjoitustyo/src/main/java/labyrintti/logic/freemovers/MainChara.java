@@ -17,7 +17,7 @@ import labyrintti.logic.object.Spike;
  * Pelihahmoa kuvaava olio
  * @author ikpa
  */
-public class MainChara extends FreeMover{
+public class MainChara extends FreeMover {
     private int lives;
     private int points;
     private boolean dead;
@@ -129,6 +129,21 @@ public class MainChara extends FreeMover{
         return ids;
     }
     
+    public double rateOfMovement(Map<KeyCode, Boolean> buttonPress) {
+        int count = Collections.frequency(buttonPress.values(), Boolean.TRUE);
+        
+        if (count == 2) {
+            if (!(buttonPress.getOrDefault(KeyCode.UP, false) 
+                    && buttonPress.getOrDefault(KeyCode.DOWN, false))
+                    || !(buttonPress.getOrDefault(KeyCode.LEFT, false) 
+                    && buttonPress.getOrDefault(KeyCode.RIGHT, false))) {
+                return 1 / Math.sqrt(2);
+            }
+        }
+        
+        return 1;
+    }
+    
     /**
      * Liikuttaa hahmoa pelaajan napinpainallusten ja seinien perusteella
      * @param buttonPress Map, joka sisältää pelaajan napinpainallukset
@@ -138,25 +153,26 @@ public class MainChara extends FreeMover{
     public void move(Map<KeyCode, Boolean> buttonPress,
             ArrayList<Rectangle> walls, double voffset) {
         ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
+        double rate = rateOfMovement(buttonPress);
         
         if (buttonPress.getOrDefault(KeyCode.UP, Boolean.FALSE)
                 && allowed.get(0)) {
-            this.moveUP(1);
+            this.moveUP(rate);
         }
         
         if (buttonPress.getOrDefault(KeyCode.RIGHT, Boolean.FALSE)
                 && allowed.get(1)) {
-            this.moveRIGHT(1);
+            this.moveRIGHT(rate);
         }
         
         if (buttonPress.getOrDefault(KeyCode.DOWN, Boolean.FALSE)
                 && allowed.get(2)) {
-            this.moveDOWN(1);
+            this.moveDOWN(rate);
         }
         
         if (buttonPress.getOrDefault(KeyCode.LEFT, Boolean.FALSE)
                 && allowed.get(3)) {
-            this.moveLEFT(1);
+            this.moveLEFT(rate);
         }
     }
     

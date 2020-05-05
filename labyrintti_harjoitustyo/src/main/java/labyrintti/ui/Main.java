@@ -104,11 +104,22 @@ public class Main extends Application {
         Map<KeyCode, Boolean> buttonPress = new HashMap();
         
         lvl.setOnKeyPressed(e -> {
-            buttonPress.put(e.getCode(), Boolean.TRUE);
+            if (e.getCode().equals(KeyCode.UP) 
+                    || e.getCode().equals(KeyCode.DOWN)
+                    || e.getCode().equals(KeyCode.LEFT) 
+                    || e.getCode().equals(KeyCode.RIGHT)) {
+                buttonPress.put(e.getCode(), Boolean.TRUE);
+            }
+            
         });
         
         lvl.setOnKeyReleased(e -> {
-            buttonPress.put(e.getCode(), Boolean.FALSE);
+            if (e.getCode().equals(KeyCode.UP) 
+                    || e.getCode().equals(KeyCode.DOWN)
+                    || e.getCode().equals(KeyCode.LEFT) 
+                    || e.getCode().equals(KeyCode.RIGHT)) {
+                buttonPress.put(e.getCode(), Boolean.FALSE);
+            }
         });
         
         new AnimationTimer() {

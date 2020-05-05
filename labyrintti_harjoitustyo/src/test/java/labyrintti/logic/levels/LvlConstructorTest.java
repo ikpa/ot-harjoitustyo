@@ -92,7 +92,7 @@ public class LvlConstructorTest {
     @Test
     public void testTestlvl2() {
         Level lvl = lc.testlvl2();
-        assertEquals(lvl.getWalls().size(), 2);
+        assertEquals(lvl.getWalls().size(), 3);
         assertTrue(lvl.getItems().isEmpty());
         assertEquals(lvl.getSpikes().size(), 1);
     }
