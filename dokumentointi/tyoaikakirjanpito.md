@@ -20,5 +20,6 @@
 | 2.5   | 1.5        | Refaktorointia, uuden vihollisluokan aloitus |
 | 3.5   | 1          | Vihollisen liikkumismetodien luonti |
 | 4.5   | 1.5        | Vihollinen reagoi nyt pelihahmoon sekä piikkiesteisiin. Kun pelihahmoon osutaan, myös viholliset palaavat lähtöpisteisiinsä |
-| | yht. 44.5 |
+| 5.5   | 4          | Vihollisluokka viimeistelty, pelihahmon ohjaamista hiottu, ovet lisätty |
+| | yht. 48.5 |
 
