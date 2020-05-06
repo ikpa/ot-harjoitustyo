@@ -65,8 +65,8 @@ public class LevelTest {
     @Test
     public void testInitialise() {
         lvl.initialise(c);
-        assertEquals(c.getCircle().getCenterX(), 500, 0.01);
-        assertEquals(c.getCircle().getCenterY(), 500, 0.01);
+        assertEquals(c.getCenterX(), 500, 0.01);
+        assertEquals(c.getCenterY(), 500, 0.01);
     }
     
     @Test
@@ -88,8 +88,7 @@ public class LevelTest {
     @Test
     public void updateWhenCharaGetsItem() {
         lvl.initialise(c);
-        c.getCircle().setCenterX(650);
-        c.getCircle().setCenterY(300);
+        c.setLocation(650, 300);
         lvl.update(map, c, 0);
         assertEquals(c.getLives(), 4);
     }

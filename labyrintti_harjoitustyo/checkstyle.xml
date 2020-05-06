@@ -7,10 +7,10 @@
     <property name="localeLanguage" value="en"/>
 
     <module name='TreeWalker'>
-
+        
         <property name='tabWidth' value='4' />
 
-        <!-- Block Checks -->
+        <!-- Block Checks -->        
 
         <module name='EmptyBlock' />
         <module name='LeftCurly' />
@@ -88,6 +88,6 @@
     <module name="SuppressionFilter">
         <property name="file" value="skipped_files.xml" />
     </module>
-
+    
 
 </module>

@@ -8,24 +8,52 @@ package labyrintti.logic.freemovers;
 import java.util.*;
 import javafx.geometry.*;
 import javafx.scene.shape.*;
+import javafx.scene.paint.*;
 import labyrintti.logic.object.Spike;
 /**
  *
  * @author ikpa
  */
 public class FreeMover {
-    private Circle circle;
+    private Shape area;
+    private Color color;
     private double speed;
+    private double radius;
     private boolean hit;
     
-    public FreeMover(int x, int y, int r, double s) {
-        circle = new Circle(x, y, r);
-        speed = s;   
+    public FreeMover(double x, double y, double r, double s, Color c) {
+        area = new Circle(x, y, r);
+        area.setFill(c);
+        color = c;
+        speed = s;
+        radius = r;
     }
     
-    public Circle getCircle() {
-        return circle;
+    public Shape getArea() {
+        return area;
     }
+
+    public void setArea(Shape area) {
+        this.area = area;
+    }
+    
+    public double getCenterX() {
+        return area.getBoundsInLocal().getCenterX();
+    }
+    
+    public double getCenterY() {
+        return area.getBoundsInLocal().getCenterY();
+    }
+    
+    public void setLocation(double x, double y) {
+        area = new Circle(x, y, radius);
+        area.setFill(color);
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+    
 
     public boolean isHit() {
         return hit;
@@ -41,7 +69,7 @@ public class FreeMover {
      * @return true jos osuu, false jos ei osu
      */
     public boolean collision(Shape s) {
-        Shape sec = Shape.intersect(s, circle);
+        Shape sec = Shape.intersect(s, area);
         return sec.getBoundsInLocal().getWidth() > 1;
     }
     
@@ -64,16 +92,16 @@ public class FreeMover {
     }
     
     public double intersectXLoc(Shape shape) {
-        Shape sec = Shape.intersect(shape, circle);
+        Shape sec = Shape.intersect(shape, area);
         double xloc = sec.getBoundsInLocal().getCenterX()
-                        - (circle.getTranslateX() + circle.getCenterX());
+                        - (area.getTranslateX() + getCenterX());
         return xloc;
     }
     
     public double intersectYLoc(Shape shape, double voffset) {
-        Shape sec = Shape.intersect(shape, circle);
+        Shape sec = Shape.intersect(shape, area);
         double yloc = sec.getBoundsInLocal().getCenterY()
-                        - (circle.getTranslateY() + circle.getCenterY()) - voffset;
+                        - (area.getTranslateY() + getCenterY()) - voffset;
         return yloc;
     }
     
@@ -92,14 +120,13 @@ public class FreeMover {
         for (Rectangle r: walls) {
             if (collision(r)) {
                 double xloc = intersectXLoc(r);
-                double yloc = intersectYLoc(r, voffset);
-                
+                double yloc = intersectYLoc(r, voffset);   
                 
                 if (yloc < -8) {
                     dirs.set(0, Boolean.FALSE);
                 }
                 
-                if (xloc > 1) {
+                if (xloc > 4) {
                     dirs.set(1, Boolean.FALSE);
                 }
                 
@@ -120,35 +147,35 @@ public class FreeMover {
      * Liikuttaa hahmoa ylös
      */
     public void moveUP(double x) {
-        circle.setTranslateY(circle.getTranslateY() - x * speed);
+        area.setTranslateY(area.getTranslateY() - x * speed);
     }
     
     /**
      * Liikuttaa hahmoa alas
      */
     public void moveDOWN(double x) {
-        circle.setTranslateY(circle.getTranslateY() + x * speed);
+        area.setTranslateY(area.getTranslateY() + x * speed);
     }
     
     /**
      * Liikuttaa hahmoa oikealle
      */
     public void moveRIGHT(double x) {
-        circle.setTranslateX(circle.getTranslateX() + x * speed);
+        area.setTranslateX(area.getTranslateX() + x * speed);
     }
     
     /**
      * Liikuttaa hahmoa vasemmalle
      */
     public void moveLEFT(double x) {
-        circle.setTranslateX(circle.getTranslateX() - x * speed);
+        area.setTranslateX(area.getTranslateX() - x * speed);
     }
     
     /**
      * Palauttaa hahmon koordinaatit ennalleen
      */
     public void reset() {
-        getCircle().setTranslateX(0);
-        getCircle().setTranslateY(0);
+        getArea().setTranslateX(0);
+        getArea().setTranslateY(0);
     }
 }

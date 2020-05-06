@@ -30,8 +30,7 @@ public class MainChara extends FreeMover {
      * @param s Hahmon nopeus
      */
     public MainChara(int x, int y, int r, int s) {
-        super(x, y, r, s);
-        getCircle().setFill(Color.PURPLE);
+        super(x, y, r, s, Color.PURPLE);
         lives = 3;
         dead = false;
     }
@@ -76,20 +75,8 @@ public class MainChara extends FreeMover {
      * @return true jos voi kerätä, false jos ei voi
      */
     public boolean get(Item i) {
-        Shape sec = Shape.intersect(getCircle(), i.getCircle());
+        Shape sec = Shape.intersect(getArea(), i.getCircle());
         return sec.getBoundsInLocal().getWidth() >= 10;
-    }
-    
-    public boolean checkEnemyHit(ArrayList<Enemy> enemies) {
-        boolean hit = false;
-        
-        for (Enemy e: enemies) {
-            if (collision(e.getCircle())) {
-                hit = true;
-            }
-        }
-        
-        return hit;
     }
     
     /**
@@ -133,12 +120,7 @@ public class MainChara extends FreeMover {
         int count = Collections.frequency(buttonPress.values(), Boolean.TRUE);
         
         if (count == 2) {
-            if (!(buttonPress.getOrDefault(KeyCode.UP, false) 
-                    && buttonPress.getOrDefault(KeyCode.DOWN, false))
-                    || !(buttonPress.getOrDefault(KeyCode.LEFT, false) 
-                    && buttonPress.getOrDefault(KeyCode.RIGHT, false))) {
-                return 1 / Math.sqrt(2);
-            }
+            return 1 / Math.sqrt(2);
         }
         
         return 1;

@@ -13,22 +13,66 @@ import javafx.scene.shape.*;
  * @author ikpa
  */
 public class Enemy extends FreeMover {
+    private double aggrorange;
     
-    public Enemy(int x, int y, int r, double s) {
-        super(x, y, r, s);
-        getCircle().setFill(Color.RED);
+    public Enemy(double x, double y, int r, double aggro, double s) {
+        super(x, y, r, s, Color.RED);
+        
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[] {
+            x, y - (3 * r / 5),
+            x + r, y - r,
+            x + (3 * r / 5), y,
+            x + r, y + r,
+            x, y + (3 * r / 5),
+            x - r, y + r,
+            x - (3 * r / 5), y,
+            x - r, y - r
+        });
+        
+        Shape newshape = Shape.union(polygon, getArea());
+        newshape.setFill(Color.RED);
+        
+        setArea(newshape);
+        
+        aggrorange = aggro;
     }
     
+    @Override
+    public void setLocation(double x, double y) {
+        double r = getRadius();
+        
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[] {
+            x, y - (3 * r / 5),
+            x + r, y - r,
+            x + (3 * r / 5), y,
+            x + r, y + r,
+            x, y + (3 * r / 5),
+            x - r, y + r,
+            x - (3 * r / 5), y,
+            x - r, y - r
+        });
+        
+        Circle newcircle = new Circle(x, y, r);
+        
+        Shape newshape = Shape.union(polygon, newcircle);
+        newshape.setFill(Color.RED);
+        
+        setArea(newshape);
+    }
+   
+    
     public double xDistance(MainChara chara) {
-        double enemyx = getCircle().getCenterX() + getCircle().getTranslateX();
-        double charax = chara.getCircle().getCenterX() + chara.getCircle().getTranslateX();
+        double enemyx = getCenterX() + getArea().getTranslateX();
+        double charax = chara.getCenterX() + chara.getArea().getTranslateX();
         
         return charax - enemyx;
     }
     
     public double yDistance(MainChara chara) {
-        double enemyy = getCircle().getCenterY() + getCircle().getTranslateY();
-        double charay = chara.getCircle().getCenterY() + chara.getCircle().getTranslateY();
+        double enemyy = getCenterY() + getArea().getTranslateY();
+        double charay = chara.getCenterY() + chara.getArea().getTranslateY();
         
         return charay - enemyy;
     }
@@ -46,16 +90,16 @@ public class Enemy extends FreeMover {
         ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
         
         for (Enemy e: enemies) {
-            if (e.equals(this)) {
+            if (e.equals(this) || e.isHit()) {
                 continue;
             }
             
-            if (!collision(e.getCircle())) {
+            if (!collision(e.getArea())) {
                 continue;
             }
             
-            double xloc = intersectXLoc(e.getCircle());
-            double yloc = intersectYLoc(e.getCircle(), voffset);
+            double xloc = intersectXLoc(e.getArea());
+            double yloc = intersectYLoc(e.getArea(), voffset);
             
             if (yloc < -8) {
                 allowed.set(0, Boolean.FALSE);
@@ -82,6 +126,11 @@ public class Enemy extends FreeMover {
         double xdist = xDistance(chara);
         double ydist = yDistance(chara);
         double totdist = totalDistance(chara);
+        
+        if (totdist > aggrorange) {
+            return;
+        }
+        
         ArrayList<Boolean> allowed = enemyAllowedDirections(walls, enemies, voffset);
         
         double sine = ydist / totdist;

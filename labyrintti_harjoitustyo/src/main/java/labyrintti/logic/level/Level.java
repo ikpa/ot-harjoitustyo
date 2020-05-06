@@ -70,7 +70,7 @@ public class Level {
         enemies = ene;
         if (!(enemies.isEmpty())) {
             enemies.forEach(e -> {
-                stg.getChildren().add(e.getCircle());
+                stg.getChildren().add(e.getArea());
             });
         }
         
@@ -123,9 +123,8 @@ public class Level {
      */
     public void initialise(MainChara chara) {
         chara.reset();
-        chara.getCircle().setCenterX(startx);
-        chara.getCircle().setCenterY(starty);
-        stg.getChildren().add(chara.getCircle());
+        chara.setLocation(startx, starty);
+        stg.getChildren().add(chara.getArea());
     }
     
     /**
@@ -146,12 +145,13 @@ public class Level {
         if (!(ids.isEmpty())) {
             ids.forEach(i -> {
                 Enemy enemy = enemies.get(i);
-                stg.getChildren().remove(enemy.getCircle());
+                stg.getChildren().remove(enemy.getArea());
             });
         }
     }
     
     public void removeDoor(Door d) {
+        walls.remove(d.getDoor());
         stg.getChildren().remove(d.getDoor());
     }
     
@@ -164,6 +164,7 @@ public class Level {
             if (d.isOpen()) {
                 d.setOpen(false);
                 stg.getChildren().add(d.getDoor());
+                walls.add(d.getDoor());
             }
         }
     }
@@ -174,7 +175,7 @@ public class Level {
             
             if (e.isHit()) {
                 e.setHit(false);
-                stg.getChildren().add(e.getCircle());
+                stg.getChildren().add(e.getArea());
             }
         }
     }
@@ -225,7 +226,7 @@ public class Level {
                     ids.add(enemies.indexOf(e));
                 }
                 
-                if (chara.collision(e.getCircle())) {
+                if (chara.collision(e.getArea())) {
                     hit = true;
                 }
             }

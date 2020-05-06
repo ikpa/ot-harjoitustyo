@@ -31,10 +31,10 @@ public class Goal {
      * @return true jos olio on maalin sisällä, false jos ei
      */
     public boolean inGoal(MainChara chara) {
-        Shape sec = Shape.intersect(area, chara.getCircle());
+        Shape sec = Shape.intersect(area, chara.getArea());
         double x = sec.getBoundsInLocal().getWidth();
         
-        return x >= chara.getCircle().getRadius() * 2;
+        return x >= chara.getRadius() * 2;
     }
 
     public Circle getArea() {

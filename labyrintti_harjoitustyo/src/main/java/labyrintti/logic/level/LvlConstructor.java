@@ -36,7 +36,9 @@ public class LvlConstructor {
      *
      * @return
      */
+    //CHECKSTYLE.OFF: MethodLength
     public Level level1() {
+    //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wallconst.hWall(200, 300, 700));
         walls.add(wallconst.vWall(900, 300, 180));
@@ -74,7 +76,9 @@ public class LvlConstructor {
      *
      * @return
      */
+    //CHECKSTYLE.OFF: MethodLength
     public Level level2() {
+    //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wallconst.hWall(250, 50, 400));
         walls.add(wallconst.vWall(645, 55, 900));
@@ -118,7 +122,9 @@ public class LvlConstructor {
      *
      * @return
      */
+    //CHECKSTYLE.OFF: MethodLength
     public Level level3() {
+    //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
         
         walls.add(wallconst.hWall(155, 80, 285));
@@ -208,6 +214,49 @@ public class LvlConstructor {
         return lvl;
     }
     
+    //CHECKSTYLE.OFF: MethodLength
+    public Level level4() {
+    //CHECKSTYLE.ON: MethodLength
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        walls.addAll(wallconst.rightPocket(410, 770, 570, 60));
+        walls.addAll(wallconst.downPocket(290, 835, 120, 115));
+        walls.add(wallconst.vWall(285, 685, 150));
+        walls.add(wallconst.vWall(410, 685, 80));
+        
+        walls.addAll(wallconst.leftPocket(290, 160, 265, 520));
+        walls.addAll(wallconst.upPocket(290, 155, 120, 120));
+        walls.addAll(wallconst.rightPocket(410, 160, 570, 520));
+        
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new Spike(305, 850));
+        spikes.add(new Spike(395, 850));
+        spikes.add(new Spike(350, 900));
+        
+        spikes.add(new Spike(530, 230));
+        spikes.add(new Spike(530, 420));
+        spikes.add(new Spike(530, 610));
+        
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item(315, 940, 1));
+        items.add(new Item(350, 940, 1));
+        items.add(new Item(385, 940, 1));
+        items.add(new Item(350, 920, 1));
+        
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(new Enemy(880, 320, 10, 250, 0.5));
+        enemies.add(new Enemy(880, 420, 10, 250, 0.5));
+        enemies.add(new Enemy(880, 520, 10, 250, 0.5));
+        
+        ArrayList<Door> doors = new ArrayList<>();
+        doors.add(new Door(290, 155, 120, false, enemies));
+        
+        Goal g = new Goal(350, 100, 15);
+        
+        Level lvl = new Level(1000, 1000, 950, 800, walls, spikes,
+                items, enemies, doors, g);
+        return lvl;
+    }
+    
     /**
      *
      * @return
@@ -254,8 +303,8 @@ public class LvlConstructor {
         ArrayList<Item> items = new ArrayList<>();
         
         ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new Enemy(500, 500, 10, 0.5));
-        enemies.add(new Enemy(580, 500, 10, 0.5));
+        enemies.add(new Enemy(500, 500, 10, 250, 0.5));
+        enemies.add(new Enemy(580, 500, 10, 250, 0.5));
         
         ArrayList<Door> doors = new ArrayList<>();
         doors.add(new Door(750, 100, 50, true, enemies));
@@ -279,6 +328,7 @@ public class LvlConstructor {
         arr.add(level1());
         arr.add(level2());
         arr.add(level3());
+        arr.add(level4());
         
         return arr;
     }
