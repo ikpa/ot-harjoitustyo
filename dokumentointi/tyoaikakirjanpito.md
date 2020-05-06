@@ -21,5 +21,6 @@
 | 3.5   | 1          | Vihollisen liikkumismetodien luonti |
 | 4.5   | 1.5        | Vihollinen reagoi nyt pelihahmoon sekä piikkiesteisiin. Kun pelihahmoon osutaan, myös viholliset palaavat lähtöpisteisiinsä |
 | 5.5   | 4          | Vihollisluokka viimeistelty, pelihahmon ohjaamista hiottu, ovet lisätty |
-| | yht. 48.5 |
+| 6.5   | 5          | Vihollisen muotoa muokattu, neljäs taso lisätty, testejä |
+| | yht. 53.5 |
 
