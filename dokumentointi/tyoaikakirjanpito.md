@@ -23,5 +23,5 @@
 | 5.5   | 4          | Vihollisluokka viimeistelty, pelihahmon ohjaamista hiottu, ovet lisätty |
 | 6.5   | 5          | Vihollisen muotoa muokattu, neljäs taso lisätty, testejä |
 | 7.5   | 7          | Viides kentä luotu, JavaDoc viimeistelty |
-| | yht. 53.5 |
+| | yht. 60.5 |
 
