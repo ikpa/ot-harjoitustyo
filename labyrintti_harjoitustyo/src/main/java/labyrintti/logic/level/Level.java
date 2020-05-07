@@ -40,11 +40,13 @@ public class Level {
      * @param wall Array, joka sisältää kaikki tason seinät (Rectangle-olioina)
      * @param spi Array, joka sisältää kaikki tason piikit
      * @param i Array, joka sisältää kaikki tason kerättävät esineet
+     * @param enemy Array, joka sisältää kaikki tason viholliset
+     * @param door Array, joka sisältää kaikki tason ovet
      * @param go Tason maali
      */
     public Level(int width, int height, int x, int y,
              ArrayList<Rectangle> wall, ArrayList<Spike> spi, ArrayList<Item> i,
-             ArrayList<Enemy> ene, ArrayList<Door> door, Goal go) {
+             ArrayList<Enemy> enemy, ArrayList<Door> door, Goal go) {
         stg = new Pane();
         stg.setPrefSize(width, height);
         
@@ -67,7 +69,7 @@ public class Level {
             });
         }
         
-        enemies = ene;
+        enemies = enemy;
         if (!(enemies.isEmpty())) {
             enemies.forEach(e -> {
                 stg.getChildren().add(e.getArea());
@@ -128,7 +130,7 @@ public class Level {
     }
     
     /**
-     * Poistaa tasosta kaikki esineet, joiden indeksi löytyy Arraysta
+     * Poistaa tasosta kaikki esineet kentältä, joiden indeksi löytyy Arraysta
      * @param ids Array, jossa poistettavien esineiden indeksit
      */
     public void removeItems(ArrayList<Integer> ids) {
@@ -141,6 +143,10 @@ public class Level {
         }
     }
     
+    /**
+     * Poistaa kaikki viholliset kentältä, joiden indeksi löytyy Arraysta
+     * @param ids Array, jossa poistettavien vihollisten indeksit
+     */
     public void removeEnemies(ArrayList<Integer> ids) {
         if (!(ids.isEmpty())) {
             ids.forEach(i -> {
@@ -150,25 +156,18 @@ public class Level {
         }
     }
     
+    /**
+     * Poistaa kentältä kyseisen oven
+     * @param d Poistettava ovi
+     */
     public void removeDoor(Door d) {
         walls.remove(d.getDoor());
         stg.getChildren().remove(d.getDoor());
     }
     
-    public void resetDoors() {
-        if (doors.isEmpty()) {
-            return;
-        }
-        
-        for (Door d: doors) {
-            if (d.isOpen()) {
-                d.setOpen(false);
-                stg.getChildren().add(d.getDoor());
-                walls.add(d.getDoor());
-            }
-        }
-    }
-    
+    /**
+     * Palauttaa kaikki vihollisoliot alokupaikoilleen
+     */
     public void resetEnemies() {
         for (Enemy e: enemies) {
             e.reset();
@@ -180,11 +179,11 @@ public class Level {
         }
     }
     
-    public void resetLevel() {
-        resetDoors();
-        resetEnemies();
-    }
-    
+    /**
+     * Päivittää kaikki kentän piikit (tarkastaa osumat, liikuttaa)
+     * @param chara Pelihahmo
+     * @return true, jos pelihahmoon on osunut, false jos ei
+     */
     public boolean updateSpikes(MainChara chara) {
         boolean hit = false;
         
@@ -201,6 +200,10 @@ public class Level {
         return hit;
     }
     
+    /**
+     * Päivittää kaikki kentän esineet (tarkistaa, onko ne kerätty)
+     * @param chara Pelihahmo
+     */
     public void updateItems(MainChara chara) {
         if (!(items.isEmpty())) {
             ArrayList<Integer> ids = chara.checkGet(items);
@@ -209,6 +212,13 @@ public class Level {
         }
     }
     
+    /**
+     * Päivittää kaikki kentän viholliset (liikuttaa, tarkistaa osumat piikkien
+     * ja pelihahmon kanssa)
+     * @param chara Pelihahmo
+     * @param voffset Koordinaattien korjauskerroin
+     * @return true, jos pelihahmoon on osunut, false jos ei
+     */
     public boolean updateEnemies(MainChara chara, double voffset) {
         boolean hit = false;
         
@@ -237,6 +247,9 @@ public class Level {
         return hit;
     }
     
+    /**
+     * Päivittää kaikki kentän ovet (avaa jos tarpeellista)
+     */
     public void updateDoors() {
         if (doors.isEmpty()) {
             return;
@@ -267,7 +280,7 @@ public class Level {
         
         if (spikehit || enemyhit) {
             chara.excecuteHit();
-            resetLevel();
+            resetEnemies();
         }
         
     }

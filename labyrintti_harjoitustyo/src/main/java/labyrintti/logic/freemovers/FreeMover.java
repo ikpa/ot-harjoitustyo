@@ -11,7 +11,7 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import labyrintti.logic.object.Spike;
 /**
- *
+ * Tämä luokka kuvaa vapaasti liikkuvaa, seinien kanssa vuorovaikuttavaa oliota
  * @author ikpa
  */
 public class FreeMover {
@@ -21,12 +21,20 @@ public class FreeMover {
     private double radius;
     private boolean hit;
     
-    public FreeMover(double x, double y, double r, double s, Color c) {
-        area = new Circle(x, y, r);
+    /**
+     * Luo uuden FreeMover-olion
+     * @param x Olion alku-x-koordinaatti
+     * @param y Olion alku-y-koordinaatti
+     * @param radius Olion säde
+     * @param speed Olion liikkumisnopeus
+     * @param c Olion väri
+     */
+    public FreeMover(double x, double y, double radius, double speed, Color c) {
+        area = new Circle(x, y, radius);
         area.setFill(c);
         color = c;
-        speed = s;
-        radius = r;
+        this.speed = speed;
+        this.radius = radius;
     }
     
     public Shape getArea() {
@@ -37,14 +45,27 @@ public class FreeMover {
         this.area = area;
     }
     
+    /**
+     * Palauttaa olion CenterX ominaisuuden
+     * @return x-koordinaatti
+     */
     public double getCenterX() {
         return area.getBoundsInLocal().getCenterX();
     }
     
+    /**
+     * Palauttaa olion CenterY ominaisuuden
+     * @return y-koordinaatti
+     */
     public double getCenterY() {
         return area.getBoundsInLocal().getCenterY();
     }
     
+    /**
+     * Asettaa oliolle uuden paikan
+     * @param x Uusi x-koordinaatti
+     * @param y Uusi y-koordinaatti
+     */
     public void setLocation(double x, double y) {
         area = new Circle(x, y, radius);
         area.setFill(color);
@@ -64,7 +85,7 @@ public class FreeMover {
     }
     
     /**
-     * Tarkistaa, onko pelihahmo osunut tiettyyn Shape-olioon
+     * Tarkistaa, onko olio osunut tiettyyn Shape-olioon
      * @param s Shape, joka tarkistetaan
      * @return true jos osuu, false jos ei osu
      */
@@ -74,8 +95,9 @@ public class FreeMover {
     }
     
     /**
-     * Tarkistaa kaikki osumat kaikkien Arrayn Hostile-olioiden kanssa ja poistaa elämän tarvittaessa. Hahmo merkitään kuolleeksi jos elämät loppuvat.
+     * Tarkistaa kaikki osumat kaikkien Arrayn Spike-olioiden kanssa ja asettaa olion Hit-parametrin todeksi tarvittaessa
      * @param spikes Array, jossa tarkistettavat Spike-oliot
+     * @return true jos osuma, false jos ei
      */
     public boolean checkHit(ArrayList<Spike> spikes) {
         boolean hit = false;
@@ -91,6 +113,11 @@ public class FreeMover {
         
     }
     
+    /**
+     * Palauttaa FreeMover-olion, ja annetun Shape olion leikkauskuvion keskipisteen x-koordinaatin
+     * @param shape Tarkasteltava Shape-olio
+     * @return Leikkauskuvion x-koordinaatti
+     */
     public double intersectXLoc(Shape shape) {
         Shape sec = Shape.intersect(shape, area);
         double xloc = sec.getBoundsInLocal().getCenterX()
@@ -98,6 +125,14 @@ public class FreeMover {
         return xloc;
     }
     
+    /**
+     * Palauttaa FreeMover-olion, ja annetun Shape olion leikkauskuvion keskipisteen 
+     * y-koordinaatin. Vaatii voffset- muttujan korjaamaan mahdollisesta infopalkista
+     * johtuva koordinaattien vääristys
+     * @param shape Tutkittava Shape-olio
+     * @param voffset Koordinaattien korjaustermi
+     * @return
+     */
     public double intersectYLoc(Shape shape, double voffset) {
         Shape sec = Shape.intersect(shape, area);
         double yloc = sec.getBoundsInLocal().getCenterY()
@@ -106,66 +141,89 @@ public class FreeMover {
     }
     
     /**
-     * Tarkistaa, mihin suuntiin pelihahmo voi liikkua seinien perusteella
+     * Tarkistaa törmäyksen kyseisen Shape-olion kanssa, ja muokkaa sallitut
+     * kulkusuunnat sisältävää arrayta dirs tarvittaessa. Vaatii koordinaattien
+     * korjaustermin
+     * @param dirs Sallitut kulkusuunnat sisältävä array. Indeksi 0 on ylös,
+     * 1 oikealle, 2 alas ja 3 vasemmalle. True jos sallittu kulkusuunta,
+     * false jos ei
+     * @param s Tarkistettava Shape-olio
+     * @param voffset Koordinaattien korjaustermi
+     */
+    public void allowedDirections(ArrayList<Boolean> dirs, 
+            Shape s, double voffset) {
+        
+        if (!collision(s)) {
+            return;
+        }
+        
+        double xloc = intersectXLoc(s);
+        double yloc = intersectYLoc(s, voffset);
+                
+        if (yloc < -8) {
+            dirs.set(0, Boolean.FALSE);
+        }
+                
+        if (xloc > 4) {
+            dirs.set(1, Boolean.FALSE);
+        }
+                
+        if (yloc > 2.5) {
+            dirs.set(2, Boolean.FALSE);
+        }
+                
+        if (xloc < -6) {
+            dirs.set(3, Boolean.FALSE);
+        }
+    }
+    
+    
+    /**
+     * Tarkistaa, mihin suuntiin olio voi liikkua kaikkien seinien perusteella
      * @param walls Tarkistettavat seinät
      * @param voffset Vaaditaan koordinaattien korjaamiseen, jos peliruudussa on infopalkki
      * @return Array, joka sisältää sallitut suunnat. Indeksi 0 ylös, 1 oikea, 2 alas, 3 vasen; true sallittu suunta, false kielletty suunta.
      */
-    public ArrayList<Boolean> allowedDirections(ArrayList<Rectangle> walls, double voffset) {
+    public ArrayList<Boolean> allowedDirectionsForAll(ArrayList<Rectangle> walls, double voffset) {
         ArrayList<Boolean> dirs = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             dirs.add(Boolean.TRUE);
         }
         
         for (Rectangle r: walls) {
-            if (collision(r)) {
-                double xloc = intersectXLoc(r);
-                double yloc = intersectYLoc(r, voffset);   
-                
-                if (yloc < -8) {
-                    dirs.set(0, Boolean.FALSE);
-                }
-                
-                if (xloc > 4) {
-                    dirs.set(1, Boolean.FALSE);
-                }
-                
-                if (yloc > 6) {
-                    dirs.set(2, Boolean.FALSE);
-                }
-                
-                if (xloc < -7) {
-                    dirs.set(3, Boolean.FALSE);
-                }
-            }
+            allowedDirections(dirs, r, voffset);
         }
         
         return dirs;
     }
     
     /**
-     * Liikuttaa hahmoa ylös
+     * Liikuttaa hahmoa ylös nopeuden ja x-kertoimen perusteella
+     * @param x Kerroin, jolla nopeus kerrotaan
      */
     public void moveUP(double x) {
         area.setTranslateY(area.getTranslateY() - x * speed);
     }
     
     /**
-     * Liikuttaa hahmoa alas
+     * Liikuttaa hahmoa alas opeuden ja x-kertoimen perusteella
+     * @param x Kerroin, jolla nopeus kerrotaan
      */
     public void moveDOWN(double x) {
         area.setTranslateY(area.getTranslateY() + x * speed);
     }
     
     /**
-     * Liikuttaa hahmoa oikealle
+     * Liikuttaa hahmoa oikealle nopeuden ja x-kertoimen perusteella
+     * @param x Kerroin, jolla nopeus kerrotaan
      */
     public void moveRIGHT(double x) {
         area.setTranslateX(area.getTranslateX() + x * speed);
     }
     
     /**
-     * Liikuttaa hahmoa vasemmalle
+     * Liikuttaa hahmoa vasemmalle nopeuden ja x-kertoimen perusteella
+     * @param x Kerroin, jolla nopeus kerrotaan
      */
     public void moveLEFT(double x) {
         area.setTranslateX(area.getTranslateX() - x * speed);

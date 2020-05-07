@@ -111,7 +111,7 @@ public class FreeMoverTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle up = new Rectangle(95,87,10,5);
         arr.add(up);
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertFalse(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -123,7 +123,7 @@ public class FreeMoverTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle right = new Rectangle(107,95,5,10);
         arr.add(right);
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertTrue(bool.get(0));
         assertFalse(bool.get(1));
         assertTrue(bool.get(2));
@@ -135,7 +135,7 @@ public class FreeMoverTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle down = new Rectangle(95,107,10,5);
         arr.add(down);
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertFalse(bool.get(2));
@@ -147,7 +147,7 @@ public class FreeMoverTest {
         ArrayList<Rectangle> arr = new ArrayList<>();
         Rectangle left = new Rectangle(88,95,5,10);
         arr.add(left);
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));
@@ -165,7 +165,7 @@ public class FreeMoverTest {
         arr.add(right);
         arr.add(down);
         arr.add(left);
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertFalse(bool.get(0));
         assertFalse(bool.get(1));
         assertFalse(bool.get(2));
@@ -175,7 +175,7 @@ public class FreeMoverTest {
     @Test
     public void testAllowedDirsWhenNotBlocked() {
         ArrayList<Rectangle> arr = new ArrayList<>();
-        ArrayList<Boolean> bool = f.allowedDirections(arr, 0);
+        ArrayList<Boolean> bool = f.allowedDirectionsForAll(arr, 0);
         assertTrue(bool.get(0));
         assertTrue(bool.get(1));
         assertTrue(bool.get(2));

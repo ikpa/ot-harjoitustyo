@@ -54,11 +54,13 @@ public class Main extends Application {
         Button test2 = new Button("Testikenttä 2");
         Button lvl3 = new Button("Taso 3");
         Button lvl4 = new Button("Taso 4");
+        Button lvl5 = new Button("Taso 5");
         VBox lvlbuttons = new VBox();
         lvlbuttons.getChildren().add(test);
         lvlbuttons.getChildren().add(test2);
         lvlbuttons.getChildren().add(lvl3);
         lvlbuttons.getChildren().add(lvl4);
+        lvlbuttons.getChildren().add(lvl5);
         slct.setCenter(lvlbuttons);
         
         BorderPane lvlset = new BorderPane();
@@ -69,6 +71,8 @@ public class Main extends Application {
         infodisp.getChildren().add(lives);
         Label points = new Label("0 pistettä");
         infodisp.getChildren().add(points);
+        Label coor = new Label("x: y:");
+        infodisp.getChildren().add(coor);
         lvlset.setTop(infodisp);
         infodisp.setSpacing(10);
         
@@ -166,6 +170,8 @@ public class Main extends Application {
                 
                 lives.setText("" + c.getLives() + " elämää");
                 points.setText("" + c.getPoints() + " pistettä");
+                coor.setText("x: " + (c.getCenterX() + c.getArea().getTranslateX())
+                + " y: " + (c.getCenterY() + c.getArea().getTranslateY()));
             }
         }.start();
         
@@ -203,6 +209,13 @@ public class Main extends Application {
             lvlset.setCenter(lvls.get(5).getStg());
             stage.setScene(lvl);
             i = 5;
+            select = true;
+        });
+        lvl5.setOnAction(e -> {
+            lvls.get(6).initialise(c);
+            lvlset.setCenter(lvls.get(6).getStg());
+            stage.setScene(lvl);
+            i = 6;
             select = true;
         });
         high.setOnAction(e -> {

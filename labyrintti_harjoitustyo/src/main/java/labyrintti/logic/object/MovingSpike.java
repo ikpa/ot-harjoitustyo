@@ -27,7 +27,7 @@ public class MovingSpike extends Spike {
      * @param s Piikin nopeus
      * @param endcoordinate Koordinaatti, jossa piikki vaihtaa suuntaa
      */
-    public MovingSpike(int x, int y, Boolean ver, int s, int endcoordinate) {
+    public MovingSpike(int x, int y, Boolean ver, double s, int endcoordinate) {
         super(x, y);
         vert = ver;
         diffcoordinate2 = endcoordinate;

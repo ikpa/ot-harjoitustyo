@@ -11,7 +11,8 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import java.util.*;
 /**
- *
+ * Ovea kuvaava luokka. Ovi avautuu kun kaikki siihen liittyvät viholliset
+ * ovat kuolleet
  * @author ikpa
  */
 public class Door {
@@ -19,6 +20,14 @@ public class Door {
     private ArrayList<Enemy> enemies;
     private Boolean open;
     
+    /**
+     * Luo uuden Door-olion
+     * @param x Oven vasemman yläkulman x-koordinaatti
+     * @param y Oven vasemman yläkulman y-koordinaatti
+     * @param l Oven pituus
+     * @param vert true, jos ovi pystysuunnassa, false jos vaakatasossa
+     * @param en Viholliset, jotka ovelle kuuluvat
+     */
     public Door(int x, int y, int l, boolean vert, ArrayList<Enemy> en) {
         WallConstructor wc = new WallConstructor();
         
@@ -32,6 +41,19 @@ public class Door {
         
         enemies = en;
         open = false;
+    }
+    
+    /**
+     * Vaihtoehtoinen konstruktori, jossa usean vihollisen sijasta ovella on 
+     * vain yksi vihollinen
+     * @param x Oven vasemman yläkulman x-koordinaatti
+     * @param y Oven vasemman yläkulman y-koordinaatti
+     * @param l Oven pituus
+     * @param vert true, jos ovi pystysuunnassa, false jos vaakatasossa
+     * @param e Oveen liittyvä vihollinen
+     */
+    public Door(int x, int y, int l, boolean vert, Enemy e) {
+        this(x, y, l, vert, new ArrayList<Enemy>(Arrays.asList(e)));
     }
 
     public Boolean isOpen() {
@@ -50,6 +72,9 @@ public class Door {
         door.setFill(c);
     }
     
+    /**
+     * Asettaa oven avatuksi, jos kaikki sen viholliset ovat kuolleet
+     */
     public void executeOpen() {
         int number = 0;
         for (Enemy e: enemies) {

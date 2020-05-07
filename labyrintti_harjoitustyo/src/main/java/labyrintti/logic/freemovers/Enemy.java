@@ -9,25 +9,34 @@ import javafx.scene.paint.*;
 import java.util.*;
 import javafx.scene.shape.*;
 /**
- *
+ * Pelihahmoa seuraavaa vihollista kuvaava luokka
  * @author ikpa
  */
 public class Enemy extends FreeMover {
     private double aggrorange;
     
-    public Enemy(double x, double y, int r, double aggro, double s) {
-        super(x, y, r, s, Color.RED);
+    /**
+     * Luo uuden Enemy-olion
+     * @param x Olion alku-x-koordinaatti
+     * @param y Olion alku-y-koordinaatti
+     * @param radius Olion säde
+     * @param aggro Pelihahmon joutuessa tämän säteen sisälle vihollinen ryhtyy
+     * liikkumaan
+     * @param speed Vihollisen nopeus
+     */
+    public Enemy(double x, double y, int radius, double aggro, double speed) {
+        super(x, y, radius, speed, Color.RED);
         
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[] {
-            x, y - (3 * r / 5),
-            x + r, y - r,
-            x + (3 * r / 5), y,
-            x + r, y + r,
-            x, y + (3 * r / 5),
-            x - r, y + r,
-            x - (3 * r / 5), y,
-            x - r, y - r
+            x, y - (3 * radius / 5),
+            x + radius, y - radius,
+            x + (3 * radius / 5), y,
+            x + radius, y + radius,
+            x, y + (3 * radius / 5),
+            x - radius, y + radius,
+            x - (3 * radius / 5), y,
+            x - radius, y - radius
         });
         
         Shape newshape = Shape.union(polygon, getArea());
@@ -38,6 +47,11 @@ public class Enemy extends FreeMover {
         aggrorange = aggro;
     }
     
+    /**
+     * Asettaa oliolle uuden paikan
+     * @param x Uusi x-koordinaatti
+     * @param y Uusi-y-koordinaatti
+     */
     @Override
     public void setLocation(double x, double y) {
         double r = getRadius();
@@ -62,7 +76,11 @@ public class Enemy extends FreeMover {
         setArea(newshape);
     }
    
-    
+    /**
+     * Laskee x-akselin suuntaisen etäisyyden tiettyyn MainChara-olioon
+     * @param chara Tutkittava pelihahmo
+     * @return X-akselin suuntainen etäisyys
+     */
     public double xDistance(MainChara chara) {
         double enemyx = getCenterX() + getArea().getTranslateX();
         double charax = chara.getCenterX() + chara.getArea().getTranslateX();
@@ -70,6 +88,11 @@ public class Enemy extends FreeMover {
         return charax - enemyx;
     }
     
+    /**
+     * Laskee y-akselin suuntaisen etäisyyden tiettyyn MainChara-olioon
+     * @param chara Tutkittava pelihahmo
+     * @return Y-akselin suuntainen etäisyys
+     */
     public double yDistance(MainChara chara) {
         double enemyy = getCenterY() + getArea().getTranslateY();
         double charay = chara.getCenterY() + chara.getArea().getTranslateY();
@@ -77,6 +100,11 @@ public class Enemy extends FreeMover {
         return charay - enemyy;
     }
     
+    /**
+     * Laskee kokonaisetäisyyden tiettyyn MainChara-olioon
+     * @param chara Tutkittava pelihahmo
+     * @return Kokonaisetäisyys
+     */
     public double totalDistance(MainChara chara) {
         double xdistance = xDistance(chara);
         double ydistance = yDistance(chara);
@@ -85,9 +113,17 @@ public class Enemy extends FreeMover {
         return Math.sqrt(value);
     }
     
+    /**
+     * Tarkistaa kaikki arrayiden seinät ja viholliset, ja palauttaa sallitut
+     * kulkusuunnat (ks. allowedDirections ja allowedDirectionsForAll)
+     * @param walls Tarkistettavat seinät
+     * @param enemies Tarkistettavat muut viholliset
+     * @param voffset Koordinaattien korjaustermi
+     * @return ks. allowedDirections ja allowedDirectionsForAll
+     */
     public ArrayList<Boolean> enemyAllowedDirections(ArrayList<Rectangle> walls, 
             ArrayList<Enemy> enemies, double voffset) {
-        ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
+        ArrayList<Boolean> dirs = allowedDirectionsForAll(walls, voffset);
         
         for (Enemy e: enemies) {
             if (e.equals(this) || e.isHit()) {
@@ -98,29 +134,20 @@ public class Enemy extends FreeMover {
                 continue;
             }
             
-            double xloc = intersectXLoc(e.getArea());
-            double yloc = intersectYLoc(e.getArea(), voffset);
-            
-            if (yloc < -8) {
-                allowed.set(0, Boolean.FALSE);
-            }
-                
-            if (xloc > 1) {
-                allowed.set(1, Boolean.FALSE);
-            }
-                
-            if (yloc > 6) {
-                allowed.set(2, Boolean.FALSE);
-            }
-                
-            if (xloc < -7) {
-                allowed.set(3, Boolean.FALSE);
-            }
+            allowedDirections(dirs, e.getArea(), voffset);
         }
         
-        return allowed;
+        return dirs;
     }
     
+    /**
+     * Liikuttaa vihollishahmoa seinien, pelihahmon sekä muiden vihollisten 
+     * perusteella
+     * @param walls Tutkittavat seinät
+     * @param chara Tutkittava pelihahmo
+     * @param enemies Tutkittavat viholliset
+     * @param voffset Koordinaattien korjaustermi
+     */
     public void move(ArrayList<Rectangle> walls, MainChara chara,
             ArrayList<Enemy> enemies, double voffset) {
         double xdist = xDistance(chara);

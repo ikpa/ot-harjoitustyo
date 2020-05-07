@@ -19,22 +19,22 @@ import labyrintti.logic.object.MovingSpike;
 import labyrintti.logic.object.Spike;
 import labyrintti.logic.object.WallConstructor;
 /**
- *
+ * Taso-olioiden luontiin tarkoitettu luokka
  * @author ikpa
  */
 public class LvlConstructor {
     private WallConstructor wallconst;
     
     /**
-     *
+     * Luo uuden LvlConstructor-olion
      */
     public LvlConstructor() {
         wallconst = new WallConstructor();
     }
     
     /**
-     *
-     * @return
+     * Palauttaa ensimmäisen tason
+     * @return Level-olio
      */
     //CHECKSTYLE.OFF: MethodLength
     public Level level1() {
@@ -73,8 +73,8 @@ public class LvlConstructor {
     }
     
     /**
-     *
-     * @return
+     * Palauttaa toisen tason
+     * @return Level-olio
      */
     //CHECKSTYLE.OFF: MethodLength
     public Level level2() {
@@ -119,8 +119,8 @@ public class LvlConstructor {
     }
     
     /**
-     *
-     * @return
+     * Palauttaa kolmannen tason
+     * @return Level-olio
      */
     //CHECKSTYLE.OFF: MethodLength
     public Level level3() {
@@ -215,6 +215,11 @@ public class LvlConstructor {
     }
     
     //CHECKSTYLE.OFF: MethodLength
+
+    /**
+     * Palauttaa neljännen tason
+     * @return Level-olio
+     */
     public Level level4() {
     //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
@@ -258,8 +263,71 @@ public class LvlConstructor {
     }
     
     /**
-     *
-     * @return
+     * Palauttaa viidennen tason
+     * @return Level-olio
+     */
+    public Level level5() {
+        ArrayList<Rectangle> walls = new ArrayList<>();
+        walls.addAll(wallconst.rightPocket(1450, 440, 200, 120));
+        walls.add(wallconst.hWall(800, 435, 580));
+        walls.add(wallconst.hWall(250, 560, 1200));
+        walls.addAll(wallconst.leftPocket(180, 440, 170, 120));
+        walls.add(wallconst.hWall(180, 435, 550));
+        
+        walls.addAll(wallconst.upPocket(1180, 435, 470, 405));
+        
+        walls.add(wallconst.vWall(725, 380, 55));
+        walls.add(wallconst.vWall(800, 380, 55));
+        walls.addAll(wallconst.upPocket(230, 380, 570, 310));
+        walls.add(wallconst.hWall(225, 380, 500));
+        walls.add(wallconst.vWall(550, 110, 270));
+        
+        walls.addAll(wallconst.downPocket(180, 560, 1470, 335));
+        walls.add(wallconst.vWall(1500, 565, 167));
+        
+        ArrayList<Spike> spikes = new ArrayList<>();
+        spikes.add(new MovingSpike(1195, 385, false, 2, 1635));
+        spikes.add(new MovingSpike(1195, 360, false, 2.5, 1635));
+        spikes.add(new MovingSpike(1195, 335, false, 3, 1635));
+        
+        spikes.add(new Spike(765, 420));
+        
+        spikes.add(new MovingSpike(525, 580, true, 2, 880));
+        
+        ArrayList<Item> items = new ArrayList<>();
+        items.add(new Item(1415, 40, 0));
+        items.add(new Item(260, 360, 0));
+        items.add(new Item(260, 320, 1));
+        items.add(new Item(260, 300, 1));
+        items.add(new Item(260, 280, 1));
+        
+        items.add(new Item(1515, 575, 1));
+        items.add(new Item(1515, 595, 1));
+        items.add(new Item(1515, 615, 1));
+        
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        Enemy e1 = new Enemy(1415, 75, 10, 150, 0.5);
+        Enemy e2 = new Enemy(310, 340, 10, 65, 0.7);
+        Enemy e3 = new Enemy(1600, 574.5, 10, 2000, 4.5);
+        enemies.add(e1);
+        enemies.add(e2);
+        enemies.add(e3);
+        
+        ArrayList<Door> doors = new ArrayList<>();
+        doors.add(new Door(1100, 440, 120, true, e1));
+        doors.add(new Door(485, 440, 120, true, e2));
+        doors.add(new Door(125, 440, 120, true, e3));
+        
+        Goal g = new Goal(60, 500, 15);
+        
+        Level lvl = new Level(1700, 1000, 1600, 500, walls, spikes,
+                items, enemies, doors, g);
+        return lvl;
+    }
+    
+    /**
+     * Palauttaa ensimmäisen testikentän
+     * @return Level-olio
      */
     public Level testlvl() {
         ArrayList<Rectangle> walls = new ArrayList<>();
@@ -281,16 +349,16 @@ public class LvlConstructor {
         
         ArrayList<Door> doors = new ArrayList<>();
         
-        Goal g = new Goal(100, 100, 15);
+        Goal g = new Goal(60, 500, 15);
 
-        Level lvl = new Level(1000, 1000, 500, 500, walls, spikes,
+        Level lvl = new Level(1000, 1000, 940, 500, walls, spikes,
                 items, enemies, doors, g);
         return lvl;
     }
     
     /**
-     *
-     * @return
+     * Palauttaa toisen testitason
+     * @return Level-olio
      */
     public Level testlvl2() {
         ArrayList<Rectangle> walls = new ArrayList<>();
@@ -303,8 +371,8 @@ public class LvlConstructor {
         ArrayList<Item> items = new ArrayList<>();
         
         ArrayList<Enemy> enemies = new ArrayList<>();
-        enemies.add(new Enemy(500, 500, 10, 250, 0.5));
-        enemies.add(new Enemy(580, 500, 10, 250, 0.5));
+        enemies.add(new Enemy(500, 500, 10, 0, 0.5));
+        enemies.add(new Enemy(580, 500, 10, 0, 0.5));
         
         ArrayList<Door> doors = new ArrayList<>();
         doors.add(new Door(750, 100, 50, true, enemies));
@@ -317,8 +385,8 @@ public class LvlConstructor {
     }
     
     /**
-     *
-     * @return
+     * Palauttaa kaikki tasot arrayssa
+     * @return Level-oliot sisältävä ArrayList
      */
     public ArrayList<Level> allLvls() {
         ArrayList<Level> arr = new ArrayList<>();
@@ -329,6 +397,7 @@ public class LvlConstructor {
         arr.add(level2());
         arr.add(level3());
         arr.add(level4());
+        arr.add(level5());
         
         return arr;
     }

@@ -26,11 +26,11 @@ public class MainChara extends FreeMover {
      * Luo uuden MainChara-olion
      * @param x Alku-x-koordinaatti
      * @param y Alku-y-koordinaatti
-     * @param r Säde
-     * @param s Hahmon nopeus
+     * @param radius Säde
+     * @param speed Hahmon nopeus
      */
-    public MainChara(int x, int y, int r, int s) {
-        super(x, y, r, s, Color.PURPLE);
+    public MainChara(int x, int y, int radius, int speed) {
+        super(x, y, radius, speed, Color.PURPLE);
         lives = 3;
         dead = false;
     }
@@ -80,8 +80,8 @@ public class MainChara extends FreeMover {
     }
     
     /**
-     * Tarkistaa kaikki osumat kaikkien Arrayn Hostile-olioiden kanssa ja poistaa elämän tarvittaessa. Hahmo merkitään kuolleeksi jos elämät loppuvat.
-     * @param spikes Array, jossa tarkistettavat Hostile-oliot
+     * Poistaa hahmolta elämän, ja palauttaa sen alkukoordinaatteihinsa.
+     * Mikäli hahmon elämät ovat loppu, hahmo merkitään kuolleeksi
      */
     public void excecuteHit() {
         removeLife();
@@ -93,7 +93,9 @@ public class MainChara extends FreeMover {
     }
     
     /**
-     * Tarkistaa kaikki Arrayn esineet, ja kerää ne tarvittaessa. Lisää kyseisille esineille ominaiset vaikutukset hahmolle, ja palauttaa kerättyjen esineiden indeksit.
+     * Tarkistaa kaikki Arrayn esineet, ja kerää ne tarvittaessa. 
+     * Lisää kyseisille esineille ominaiset vaikutukset hahmolle,
+     * ja palauttaa kerättyjen esineiden indeksit.
      * @param items Array, jossa tarkistettavat esineet
      * @return Array, jossa kerättyjen esineiden indeksit
      */
@@ -116,6 +118,13 @@ public class MainChara extends FreeMover {
         return ids;
     }
     
+    /**
+     * Palauttaa nopeuskertoimen pelaajan napinpainallusten perusteella
+     * siten, että diagonaalisessakaan liikkeessä nopeus ei ylitä 
+     * pelihahmolle asetettua maksiminopeutta
+     * @param buttonPress Napinpainallukset sisältävä Map
+     * @return Nopeuskerroin
+     */
     public double rateOfMovement(Map<KeyCode, Boolean> buttonPress) {
         int count = Collections.frequency(buttonPress.values(), Boolean.TRUE);
         
@@ -134,7 +143,7 @@ public class MainChara extends FreeMover {
      */
     public void move(Map<KeyCode, Boolean> buttonPress,
             ArrayList<Rectangle> walls, double voffset) {
-        ArrayList<Boolean> allowed = allowedDirections(walls, voffset);
+        ArrayList<Boolean> allowed = allowedDirectionsForAll(walls, voffset);
         double rate = rateOfMovement(buttonPress);
         
         if (buttonPress.getOrDefault(KeyCode.UP, Boolean.FALSE)
