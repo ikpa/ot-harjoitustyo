@@ -22,6 +22,7 @@
 | 4.5   | 1.5        | Vihollinen reagoi nyt pelihahmoon sekä piikkiesteisiin. Kun pelihahmoon osutaan, myös viholliset palaavat lähtöpisteisiinsä |
 | 5.5   | 4          | Vihollisluokka viimeistelty, pelihahmon ohjaamista hiottu, ovet lisätty |
 | 6.5   | 5          | Vihollisen muotoa muokattu, neljäs taso lisätty, testejä |
-| 7.5   | 7          | Viides kentä luotu, JavaDoc viimeistelty |
-| | yht. 60.5 |
+| 7.5   | 7          | Viides kenttä luotu, JavaDoc viimeistelty |
+| 8.5   | 5          | Ohjelma viimeistelty, loput testit luotu, HighScoreDao-luokka uusittu |
+| | yht. 65.5 |
 
