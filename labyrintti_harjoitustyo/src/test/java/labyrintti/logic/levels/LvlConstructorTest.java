@@ -70,9 +70,22 @@ public class LvlConstructorTest {
     @Test
     public void testLevel3() {
         Level lvl = lc.level3();
+        assertEquals(lvl.getWalls().size(), 18);
+        assertEquals(lvl.getItems().size(), 4);
+        assertEquals(lvl.getSpikes().size(), 6);
+    }
+    
+    @Test
+    public void testLevel4() {
+        Level lvl = lc.level4();
+        assertEquals(lvl.getDoors().size(), 3);
+        assertEquals(lvl.getEnemies().size(), 3);
+    }
+    
+    @Test
+    public void testLevel5() {
+        Level lvl = lc.level5();
         assertEquals(lvl.getWalls().size(), 73);
-        assertEquals(lvl.getItems().size(), 12);
-        assertEquals(lvl.getSpikes().size(), 7);
     }
 
     /**
@@ -103,7 +116,8 @@ public class LvlConstructorTest {
     @Test
     public void testAllLvls() {
         ArrayList<Level> lvls = lc.allLvls();
-        assertEquals(lvls.get(4).getWalls().size(), 73);
+        assertEquals(lvls.size(), 7);
+        assertEquals(lvls.get(4).getWalls().size(), 18);
     }
     
 }

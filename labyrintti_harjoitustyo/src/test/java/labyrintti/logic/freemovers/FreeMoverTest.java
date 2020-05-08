@@ -183,7 +183,7 @@ public class FreeMoverTest {
     }
     
     @Test
-    public void testResetChara() {
+    public void testReset() {
         f.moveDOWN(1);
         f.moveDOWN(1);
         f.moveLEFT(1);

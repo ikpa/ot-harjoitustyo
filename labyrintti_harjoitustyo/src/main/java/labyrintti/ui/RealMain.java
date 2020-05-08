@@ -5,6 +5,8 @@
  */
 package labyrintti.ui;
 
+import labyrintti.dao.*;
+import java.util.*;
 /**
  *
  * @author ikpa
@@ -12,6 +14,5 @@ package labyrintti.ui;
 public class RealMain {
     public static void main(String[] args) {
         Main.main(args);
-        
     }
 }

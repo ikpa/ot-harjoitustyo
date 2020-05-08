@@ -5,74 +5,80 @@
  */
 package labyrintti.dao;
 
+import java.sql.*;
 import java.io.*;
 import java.util.*;
 /**
- *
+ * Luokka pisteiden säilömiseen ja lukemiseen
  * @author ikpa
  */
 public class HighScoreDao {
-    private File f;
+    private String filename;
+    private Connection con;
+    private Statement statement;
     
-    public HighScoreDao() {
-        f = new File("high_score.txt");
+    /**
+     * Luo uuden HighSchoolDao-olion. Luokka sidotaan tiettyyn tiedostoon
+     * @param filename Tiedoston nimi, jota luetaan ja johon kirjoitetaan
+     */
+    public HighScoreDao(String filename) {
+        this.filename = filename;
+        
+        try {
+            con = DriverManager.getConnection("jdbc:sqlite:" + filename);
+            statement = con.createStatement();
+            statement.execute("CREATE TABLE IF NOT EXISTS Pisteet (id INTEGER PRIMARY KEY, nimi TEXT, pisteet INTEGER)");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
+    /**
+     * Kirjoittaa halutun nimen ja pistemäärän tiedostoon csv-formaatissa
+     * @param name Pelaajan nimi
+     * @param score Pistemäärä
+     */
     public void writeScore(String name, int score) {
         try {
-            FileWriter fw = new FileWriter("high_score.txt", true);
-            fw.write(name + "," + score + "\n");
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Virhe tiedostoa lukiessa");
+            PreparedStatement p = con.prepareStatement("INSERT INTO Pisteet (nimi, pisteet) VALUES (?, ?)");
+            p.setString(1, name);
+            p.setInt(2, score);
+            p.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
+    /**
+     * Palauttaa Arrayn, joka sisältää kaikki tiedoston pistetilastot
+     * formaatissa "[nimi], [pisteet] pistettä"
+     * @return Array, joka sisältää pistetilastot
+     */
+    public ArrayList<String> neatScores() {
+        ArrayList<String> results = new ArrayList<>();
+        try {
+            ResultSet r = statement.executeQuery("SELECT * FROM Pisteet ORDER BY pisteet DESC, nimi");
+            
+            while (r.next()) {
+                results.add(r.getString("nimi") + ", " + r.getInt("pisteet") 
+                        + " pistettä");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return results;
+    }
+    
+    /**
+     * Poistaa kaikki tilastot tiedostosta.
+     */
     public void clear() {
         try {
-            f.delete();
-            f.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Virhe tiedostoa puhdistettaessa");
+            statement.execute("DELETE FROM Pisteet");
+            statement.execute("VACUUM");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    
-    public ArrayList<String> readScore() {
-        ArrayList<String> arr = new ArrayList<>();
-        
-        try {
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                arr.add(s.nextLine());
-            }
-            s.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Virhe tiedostoa lukiessa");
-            e.printStackTrace();
-        }
-        
-        arr.sort((s1, s2) -> {
-            String[] s1a = s1.split(",");
-            String[] s2a = s2.split(",");
-            Integer x = Integer.valueOf(s2a[1]) - Integer.valueOf(s1a[1]);
-            return x;
-        });
-        
-        return arr;
-    }
-    
-    public ArrayList<String> neatScores() {
-        ArrayList<String> scores = readScore();
-        ArrayList<String> newscore = new ArrayList<>();
-        
-        for (int i = 0; i < scores.size(); i++) {
-            String[] s = scores.get(i).split(",");
-            String newS = s[0] + ": " + s[1] + " pistettä";
-            newscore.add(i, newS);
-        }
-        
-        return newscore;
     }
 }

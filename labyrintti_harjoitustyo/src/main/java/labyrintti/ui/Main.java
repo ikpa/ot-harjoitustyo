@@ -27,12 +27,13 @@ public class Main extends Application {
     private MainChara c;
     private boolean select = false;
     private boolean over = false;
+    private boolean fix = true;
     private HighScoreDao s;
 
     @Override
     public void start(Stage stage) {
         c = new MainChara(0, 0, 10, 1);
-        s = new HighScoreDao();
+        s = new HighScoreDao("high_score.db");
         
         Button start = new Button("Aloita peli");
         Button exit = new Button("Poistu");
@@ -52,12 +53,17 @@ public class Main extends Application {
         BorderPane slct = new BorderPane();
         Button test = new Button("Testikenttä");
         Button test2 = new Button("Testikenttä 2");
+        Button lvl1 = new Button("Taso 1");
+        Button lvl2 = new Button("Taso 2");
         Button lvl3 = new Button("Taso 3");
         Button lvl4 = new Button("Taso 4");
         Button lvl5 = new Button("Taso 5");
+        Button back = new Button("Takaisin");
         VBox lvlbuttons = new VBox();
         lvlbuttons.getChildren().add(test);
         lvlbuttons.getChildren().add(test2);
+        lvlbuttons.getChildren().add(lvl1);
+        lvlbuttons.getChildren().add(lvl2);
         lvlbuttons.getChildren().add(lvl3);
         lvlbuttons.getChildren().add(lvl4);
         lvlbuttons.getChildren().add(lvl5);
@@ -71,21 +77,18 @@ public class Main extends Application {
         infodisp.getChildren().add(lives);
         Label points = new Label("0 pistettä");
         infodisp.getChildren().add(points);
-        Label coor = new Label("x: y:");
-        infodisp.getChildren().add(coor);
         lvlset.setTop(infodisp);
         infodisp.setSpacing(10);
         
         BorderPane highs = new BorderPane();
         VBox list = new VBox();
         list.setSpacing(10);
+        list.getChildren().add(new Label("Pistetilastot: "));
         highs.setCenter(list);
         VBox highbuttons = new VBox();
         highbuttons.setSpacing(10);
-        Button back = new Button("Takaisin");
         Button clear = new Button("Poista pistetilastot");
         highbuttons.getChildren().add(clear);
-        highbuttons.getChildren().add(back);
         highs.setBottom(highbuttons);
         
         BorderPane endscreen = new BorderPane();
@@ -157,6 +160,8 @@ public class Main extends Application {
                             }
                             
                             stage.setScene(end);
+                            stage.setWidth(250);
+                            stage.setHeight(75);
                             over = true;
                             return;
                         }
@@ -165,13 +170,16 @@ public class Main extends Application {
                     
                         lvls.get(i).initialise(c);
                         lvlset.setCenter(lvls.get(i).getStg());
+                        
+                        if (fix && i == 5) {
+                            stage.setWidth(1700);
+                            fix = false;
+                        }
                     }
                 }
                 
                 lives.setText("" + c.getLives() + " elämää");
                 points.setText("" + c.getPoints() + " pistettä");
-                coor.setText("x: " + (c.getCenterX() + c.getArea().getTranslateX())
-                + " y: " + (c.getCenterY() + c.getArea().getTranslateY()));
             }
         }.start();
         
@@ -182,7 +190,12 @@ public class Main extends Application {
             stage.setScene(lvl);
             i = 2;
         });
-        lvlslct.setOnAction(e -> stage.setScene(lvlselect));
+        lvlslct.setOnAction(e -> {
+            if (!lvlbuttons.getChildren().contains(back)) {
+                lvlbuttons.getChildren().add(back);
+            }
+            stage.setScene(lvlselect);
+        });
         test.setOnAction(e -> {
             lvls.get(0).initialise(c);
             lvlset.setCenter(lvls.get(0).getStg());
@@ -195,6 +208,20 @@ public class Main extends Application {
             lvlset.setCenter(lvls.get(1).getStg());
             stage.setScene(lvl);
             i = 1;
+            select = true;
+        });
+        lvl1.setOnAction(e -> {
+            lvls.get(2).initialise(c);
+            lvlset.setCenter(lvls.get(2).getStg());
+            stage.setScene(lvl);
+            i = 2;
+            select = true;
+        });
+        lvl2.setOnAction(e -> {
+            lvls.get(3).initialise(c);
+            lvlset.setCenter(lvls.get(3).getStg());
+            stage.setScene(lvl);
+            i = 3;
             select = true;
         });
         lvl3.setOnAction(e -> {
@@ -219,11 +246,17 @@ public class Main extends Application {
             select = true;
         });
         high.setOnAction(e -> {
-            ArrayList<String> scores = s.neatScores();
+            if (!highbuttons.getChildren().contains(back)) {
+                highbuttons.getChildren().add(back);
+            }
             
-            for (String v: scores) {
-                Label h = new Label(v);
-                list.getChildren().add(h);
+            if (list.getChildren().size() == 1) {
+                ArrayList<String> scores = s.neatScores();
+            
+                for (String v: scores) {
+                    Label h = new Label(v);
+                    list.getChildren().add(h);
+                }
             }
             
             stage.setScene(score);
@@ -244,6 +277,8 @@ public class Main extends Application {
             endscreen.setTop(null);
             endscreen.setCenter(null);
             VBox newlist = new VBox();
+            newlist.setSpacing(10);
+            newlist.getChildren().add(new Label("Pistetilastot: "));
             
             ArrayList<String> scores = s.neatScores();
 
@@ -254,7 +289,7 @@ public class Main extends Application {
             
             newlist.getChildren().add(exit);
             endscreen.setCenter(newlist);
-            stage.setHeight(scores.size() * 20 + 60);
+            stage.setHeight(scores.size() * 35 + 70);
             stage.setWidth(newlist.getWidth());
         });
         
