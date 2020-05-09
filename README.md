@@ -18,7 +18,8 @@ etsien aarteita.
 [Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
 [Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)  
 [Käyttöohje](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)  
-[Arkkitehtuuri](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/arkitehtuuri.md)
+[Arkkitehtuuri](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/arkitehtuuri.md)  
+[Testausdokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/testausdokumentti.md)
 ## Releaset
 [Viikko 5](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v1.0)  
 [Viikko 6](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v2.0)
