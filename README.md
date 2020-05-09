@@ -20,7 +20,8 @@ etsien aarteita.
 [Käyttöohje](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)  
 [Arkkitehtuuri](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/arkitehtuuri.md)
 ## Releaset
-[Viikko 5](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v1.0)
+[Viikko 5](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v1.0)  
+[Viikko 6](https://github.com/ikpa/ot-harjoitustyo/releases/tag/v2.0)
 ## Komentorivikomennot
 Kaikki maven-komentorivikomennot tehdään polussa `/ot-harjoitustyo/labyrintti_harjoitustyo/`.
 ### Ohjelman ajaminen
