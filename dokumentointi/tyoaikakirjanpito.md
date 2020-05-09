@@ -24,5 +24,6 @@
 | 6.5   | 5          | Vihollisen muotoa muokattu, neljäs taso lisätty, testejä |
 | 7.5   | 7          | Viides kenttä luotu, JavaDoc viimeistelty |
 | 8.5   | 5          | Ohjelma viimeistelty, loput testit luotu, HighScoreDao-luokka uusittu |
-| | yht. 65.5 |
+| 9.5   | 0.5        | Testausdokumentti viimeistelty |
+| | yht. 66 |
 
