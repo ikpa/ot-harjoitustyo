@@ -87,7 +87,7 @@ Iteroinnin jälkeen metodi poistaa pelikentältä kaikki viholliset jotka osuiva
 ##### Level.updateItems()
 Tutkitaan seuraavaksi tilannetta, jossa pelihahmo kerää kentän ainoan esineen, joka on elämä.
 
-<img src="https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/updateSpikes_sekvenssi.png" width="500">
+<img src="https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/updateItems_sekvenssi.png" width="500">
 
 Ensin metodi kutsuu MainChara-olion checkGet()-metodia, joka tarkistaa kaikki parametrina annetun listan esineet. Mikäli pelihahmo peittää esineen kokonaan, tarkistaa se esineen tyypin ja suorittaa sen tarjoamat positiiviset vaikutukset (tässä tapauksessa hahmolle annetaan yksi elämä). Metodi checkGet() palauttaa lisäksi ArrayListin, joka sisältää kerättyjen esineiden indeksit.
 
@@ -101,3 +101,9 @@ Tutkitaan tilannetta, jossa kentän ainoa ovi avautuu. Kyseiseen oveen liittyy v
 Ensin metodi suorittaa Door-luokan executeOpen()-metodin, joka tarkistaa kaikki oveen liittyvät vihollisoliot. Mikäli kaikkiin vihollisiin on osuttu, asetetaan oven open-parametri arvoon true.
 
 Lopuksi kyseinen Door-olio poistetaan kentältä, mikäli oven open-parametri on true.
+
+### Tiedon tallentaminen
+Pelin pistetilastot on tallennettu SQL-tietokantaa käyttämällä HighScoreDao-luokkan avulla. Mikäli ohjelman kanssa samassa kansiossa ei löydy tietokantatiedostoa `high_score.db`, sellainen luodaan ohjelma käynnistettäessä. Tiedon tallennusta toteuttaessa on pyritty mukailemaan DAO-suunnittelumallia, jossa tiedon tallennusmetodia voi muuttaa muokkaamatta itse pääohjelman toteutusta.
+
+## Ohjelman rakenteeseen jääneet heikkoudet
+Itse käyyöliittymän koodi on erittäin sekavaa minkä vuoksi sen toimintaa olisi voinut jakaa eri metodeihin tai jopa luokkiin. Lisäksi MovingSpike ja FreeMover-luokkien välillä on toisteista koodia eri liikkumismetodien välillä minkä olisi saanut korjattua, jos javassa olisi mahdollista yhden luokan periä enemmän kuin yksi luokka.
