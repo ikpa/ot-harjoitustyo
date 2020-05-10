@@ -106,4 +106,4 @@ Lopuksi kyseinen Door-olio poistetaan kentältä, mikäli oven open-parametri on
 Pelin pistetilastot on tallennettu SQL-tietokantaa käyttämällä HighScoreDao-luokkan avulla. Mikäli ohjelman kanssa samassa kansiossa ei löydy tietokantatiedostoa `high_score.db`, sellainen luodaan ohjelma käynnistettäessä. Tiedon tallennusta toteuttaessa on pyritty mukailemaan DAO-suunnittelumallia, jossa tiedon tallennusmetodia voi muuttaa muokkaamatta itse pääohjelman toteutusta.
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
-Itse käyyöliittymän koodi on erittäin sekavaa minkä vuoksi sen toimintaa olisi voinut jakaa eri metodeihin tai jopa luokkiin. Lisäksi MovingSpike ja FreeMover-luokkien välillä on toisteista koodia eri liikkumismetodien välillä minkä olisi saanut korjattua, jos javassa olisi mahdollista yhden luokan periä enemmän kuin yksi luokka.
+Itse käyyöliittymän koodi on erittäin sekavaa minkä vuoksi sen toimintaa olisi voinut jakaa eri metodeihin tai jopa luokkiin. Lisäksi MovingSpike ja FreeMover-luokkien välillä on toisteista koodia eri liikkumismetodien välillä minkä olisi saanut korjattua, jos javassa olisi mahdollista tietyn luokan periä enemmän kuin yksi luokka.
