@@ -1,4 +1,4 @@
-# Alustava määrittelydokumentti
+# Määrittelydokumentti
 ## Sovelluksen tarkoitus
 Sovellus on 2D peli, jossa pelaajan on tarkoitus selvitä kunkin tason loppuun vältellen 
 vihollisia ja esteitä. Pelihahmoa kuvataan ylhäältäpäin, ja tasot ovat seinien rajaamia alueita jotka pelaaja joutuu navigoimaan. Tasoista löytyy aarteita, jotka korottavat pelaajan pistemäärää. 
