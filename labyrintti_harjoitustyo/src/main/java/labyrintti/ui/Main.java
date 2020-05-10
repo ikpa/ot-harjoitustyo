@@ -29,6 +29,7 @@ public class Main extends Application {
     private boolean over = false;
     private boolean fix = true;
     private HighScoreDao s;
+    private LvlConstructor lc;
 
     @Override
     public void start(Stage stage) {
@@ -100,7 +101,7 @@ public class Main extends Application {
         endscreen.setCenter(fields);
         endscreen.setTop(new Label("Kirjoita nimesi ja paina 'Valmis'"));
         
-        LvlConstructor lc = new LvlConstructor();
+        lc = new LvlConstructor();
         ArrayList<Level> lvls = lc.allLvls();
         int max = lvls.size();
         

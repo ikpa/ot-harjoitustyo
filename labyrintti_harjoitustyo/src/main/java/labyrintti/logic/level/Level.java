@@ -272,7 +272,6 @@ public class Level {
      */
     public void update(Map<KeyCode, Boolean> buttonPress, MainChara chara, double voffset) {
         chara.move(buttonPress, walls, voffset);
-        
         boolean spikehit = updateSpikes(chara);
         boolean enemyhit = updateEnemies(chara, voffset);
         updateItems(chara);
