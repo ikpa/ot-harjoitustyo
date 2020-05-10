@@ -13,7 +13,10 @@ etsien aarteita.
 - Peli sisältää 5 oikeaa tasoa. 
 - Tasovalikko lisätty valikkoon. 
 - Valikosta ja pelin päättyessä voi tarkastella myös pistetilastoja. 
-- Pelihahmo saa nyt 200 pistettä jokaisesta läpäistystä kentästä, ja pelin päätyttyä 50 pistettä jokaisesta jäljelläolevasta elämästä.
+- Pelihahmo saa nyt 200 pistettä jokaisesta läpäistystä kentästä, ja pelin päätyttyä 50 pistettä jokaisesta jäljelläolevasta elämästä.  
+## Tunnetut bugit ja virheet
+- Tietyissä olosuhteissa (esim. kerran kuoltua) neljännessä kentässä maaliin pääseminen ei vie seuraavaan kenttään. Bugin syy ei ole tiedossa, eikä sen korjaamiseen ole loppupalautukseen mennessä tarpeeksi aikaa.  
+- Omalla koneellani (fuksiläppärillä) Netbeans antaa HighScoreDao-luokassa virheen "package java.sql is not visible" java.sql-pakettia importatessa. Uusin SQL-versio on kuitenkin ladattu ja ohjelman voi ajaa, eikä virheviesti aiheuta mitään ongelmia ohjelman toiminnassa.
 ## Dokumentointi
 [Määrittelydokumentti](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)  
 [Työaikakirjanpito](https://github.com/ikpa/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)  
