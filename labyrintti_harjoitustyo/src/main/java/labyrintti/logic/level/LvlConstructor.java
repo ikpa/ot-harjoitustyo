@@ -36,9 +36,7 @@ public class LvlConstructor {
      * Palauttaa ensimmäisen tason
      * @return Level-olio
      */
-    //CHECKSTYLE.OFF: MethodLength
     public Level level1() {
-    //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wallconst.hWall(200, 300, 700));
         walls.add(wallconst.vWall(900, 300, 180));
@@ -64,7 +62,6 @@ public class LvlConstructor {
         
         ArrayList<Door> doors = new ArrayList<>();
         
-        //170, 390, 15
         Goal g = new Goal(170, 390, 15);
         
         Level lvl = new Level(1000, 1000, 875, 390, walls, spikes,
@@ -76,9 +73,7 @@ public class LvlConstructor {
      * Palauttaa toisen tason
      * @return Level-olio
      */
-    //CHECKSTYLE.OFF: MethodLength
     public Level level2() {
-    //CHECKSTYLE.ON: MethodLength
         ArrayList<Rectangle> walls = new ArrayList<>();
         walls.add(wallconst.hWall(250, 50, 400));
         walls.add(wallconst.vWall(645, 55, 900));
