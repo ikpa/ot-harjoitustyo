@@ -25,5 +25,6 @@
 | 7.5   | 7          | Viides kenttä luotu, JavaDoc viimeistelty |
 | 8.5   | 5          | Ohjelma viimeistelty, loput testit luotu, HighScoreDao-luokka uusittu |
 | 9.5   | 0.5        | Testausdokumentti viimeistelty |
-| | yht. 66 |
+| 10.5  | 4          | Dokumentointi viimeistelty |
+| | yht. 70 |
 
